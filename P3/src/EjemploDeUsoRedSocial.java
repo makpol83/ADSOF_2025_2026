@@ -1,0 +1,80 @@
+package src;
+import java.io.IOException;
+
+import src.app.Enlace;
+import src.app.Mensaje;
+import src.app.RedSocial;
+import src.app.Usuario;
+
+public class EjemploDeUsoRedSocial {
+    public static void main(String[] args){
+        RedSocial s;
+        try {
+            s = new RedSocial("txt/USUARIOS.txt", "txt/ENLACES.txt", "txt/MENSAJE.txt");
+            //s = new RedSocial(".txt/USUARIOS.txt", ".txt/ENLACES.txt", ".txt/MENSAJE2.txt");
+        } catch (IOException e) {
+            System.out.println("Error en archivos");
+            return;
+        }
+
+        System.out.println("Mostramos los usuarios de la red social: ");
+        System.out.println(s.getUsuarios());
+
+        System.out.println("Mostramos los enlaces de la red social: ");
+        System.out.println(s.getEnlaces());
+
+        System.out.println("Mostramos los mensajes de la red social: ");
+        System.out.println(s.getMensajes());
+
+        System.out.println("Añadimos un usuario a la red social: ");
+        Usuario user = new Usuario("Alberto", 10);
+        s.addUsuario(user);
+        System.out.println(s.getUsuarios());
+
+        System.out.println("Añadimos un enlace a la red social con el nuevo usuario a Ana (Posición 0): ");
+        Enlace link = new Enlace(user, s.getUsuarios().get(0), 27);
+        s.addEnlace(link);
+        System.out.println(s.getEnlaces());
+
+        System.out.println("Añadimos un mensaje a la red social para el nuevo usuario: ");
+        Mensaje message = new Mensaje("Hola,soyelnuevomensaje.", 100, user);
+        s.addMensaje(message);
+        System.out.println(s.getMensajes());
+
+        System.out.println("Difundimos el mensaje a ver si se difunde por el enlace nuevo a Ana: ");
+        s.difundirMensaje(message, s.getUsuarios().get(0));
+        System.out.println(s.getMensajes());
+
+        System.out.println("Vemos si el guardado en ficheros funciona: ");
+        try {
+            s.saveToLocal("txt/usuarios_guardados.txt", "txt/enlaces_guardados.txt", "txt/mensaje_guardado");
+        } catch (IOException e){
+            System.out.println("Error al guardar en ficheros.");
+            return;
+        }
+        System.out.println("Se han guardado los ficheros correctamente.");
+        
+        System.out.println("Ahora volvemos a cargarlo de esos ficheros para ver si volvemos a tener la misma red social: ");
+        RedSocial d;
+        try {
+            d = new RedSocial("txt/usuarios_guardados.txt", "txt/enlaces_guardados.txt", "txt/mensaje_guardado1.txt", "txt/mensaje_guardado2.txt");
+        } catch (IOException e){
+            System.out.println("Se ha producido un error al cargar los fichero nuevos guardados.");
+            return;
+        }
+        System.out.println("Vemos si son iguales las dos redes sociales: ");
+        System.out.println("Usuarios: ");
+        System.out.println("Red social original: " + s.getUsuarios());
+        System.out.println("Red social cargada: " + d.getUsuarios());
+
+        System.out.println("Enlaces: ");
+        System.out.println("Red social original: " + s.getEnlaces());
+        System.out.println("Red social cargada: " + d.getEnlaces());
+
+        System.out.println("Mensajes: ");
+        System.out.println("Red social original: " + s.getMensajes());
+        System.out.println("Red social cargada: " + d.getMensajes());
+        
+        return;
+    }
+}

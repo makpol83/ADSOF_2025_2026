@@ -1,3 +1,4 @@
+package src.app;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.io.File;
@@ -15,23 +16,36 @@ public class RedSocial {
 
     public RedSocial(String pathArchivoUsuarios, String pathArchivoEnlaces, 
         String... pathArchivoMensaje) throws IOException {
-            try {
-                this.usuarios = readUsuarios(pathArchivoUsuarios);
-            } catch (IOException e) {
-                throw new IOException();
-            }
+        try {
+            this.usuarios = readUsuarios(pathArchivoUsuarios);
+        } catch (IOException e) {
+            throw new IOException();
+        }
 
-            try {
-                this.enlaces = readEnlaces(pathArchivoEnlaces, this.usuarios);
-            } catch (IOException e) {
-                throw new IOException();
-            }
+        try {
+            this.enlaces = readEnlaces(pathArchivoEnlaces, this.usuarios);
+        } catch (IOException e) {
+            throw new IOException();
+        }
 
-            try {
-                this.mensajes = readMensaje(this.usuarios, pathArchivoMensaje);
-            } catch (IOException e) {
-                throw new IOException();
-            }
+        try {
+            this.mensajes = readMensaje(this.usuarios, pathArchivoMensaje);
+        } catch (IOException e) {
+            throw new IOException();
+        }
+    }
+
+    public boolean saveToLocal(String pathArchivoUsuarios, String pathArchivoEnlaces,
+        String pathBaseMensaje) throws IOException{
+        try{
+            this.writeUsuarios(pathArchivoUsuarios);
+            this.writeEnlace(pathArchivoEnlaces);
+            this.writeMensajes(pathBaseMensaje);
+        } catch (IOException e){
+            throw new IOException();
+        }
+
+        return true;
     }
 
     private List<Usuario> readUsuarios(String pathArchivoUsuarios) throws IOException{
@@ -42,7 +56,9 @@ public class RedSocial {
         int capacidadAmplificacion = 0;
 
         try(Scanner lector = new Scanner(file)){
-            while(lector.hasNextLine() == true) {
+            //El lector.hasNext es para ver si hay un token
+            while(lector.hasNextLine() == true && lector.hasNext()) {
+
                 nombreUsuario = lector.next();
                 capacidadAmplificacion = Integer.parseInt(lector.next());
 
@@ -74,7 +90,7 @@ public class RedSocial {
         int coste = -1;
 
         try(Scanner lector = new Scanner(file)){
-            while(lector.hasNextLine() == true) {
+            while(lector.hasNextLine() == true && lector.hasNext()) {
                 origen = lector.next();
                 destino = lector.next();
                 coste = Integer.parseInt(lector.next());
@@ -121,14 +137,13 @@ public class RedSocial {
         int alcance=0;
 
         Mensaje mensaje = null;
-        Pattern entreComillas = Pattern.compile("\"[^\"]*\""); // [^\"] = cualquier caracter menos comillas --> "....."
-
         for(String path : pathArchivoMensaje){
-            
+            mensaje = null;
             File file = new File(path);
-
+            //Ahora mismo no se leen espacios si los tiene el mensaje --> ARREGLAR
             try(Scanner lector = new Scanner(file)){
-            if(lector.hasNextLine() == true) {
+            if(lector.hasNextLine() == true && lector.hasNext()) {
+                Pattern entreComillas = Pattern.compile("\"[^\"]*\""); // [^\"] = cualquier caracter menos comillas --> "....."
                 str_mensaje = lector.next(entreComillas);
                 str_mensaje = str_mensaje.substring(1, str_mensaje.length() - 1); //quita comilla inicial y final
                 alcance = Integer.parseInt(lector.next());
@@ -137,6 +152,7 @@ public class RedSocial {
                 for(Usuario u : usuarios){
                     if(u.getNombre().equalsIgnoreCase(autor)){
                         mensaje = new Mensaje(str_mensaje, alcance, u);
+                        msgList.add(mensaje);
                         break;
                     }
                 }
@@ -144,8 +160,8 @@ public class RedSocial {
                 if(mensaje == null)
                         throw new IOException();
                 
-
-                while (lector.hasNextLine() == true) {
+                //Se añade el lector.hasNext para ver si hay usuarios a los que mandar el mensaje
+                while (lector.hasNextLine() == true && lector.hasNext()) {
                     destino_aux = lector.next();
                     for(Usuario u : usuarios){
                         if(u.getNombre().equalsIgnoreCase(destino_aux)){
@@ -176,7 +192,7 @@ public class RedSocial {
         try {
             FileWriter myWriter = new FileWriter(pathArchivoUsuario);
             for(Usuario user : this.usuarios){
-                String output = new String(user.getNombre() + " " + user.getCapacidadAmplificacion());
+                String output = new String(user.getNombre() + " " + user.getCapacidadAmplificacion() + "\n");
                 myWriter.write(output);
             }
             myWriter.close();
@@ -192,7 +208,7 @@ public class RedSocial {
             for(Enlace enlace : this.enlaces){
                 String nombre_origen = enlace.getUsuarioOrigen().getNombre();
                 String nombre_destino = enlace.getUsuarioDestino().getNombre();
-                String output = new String(nombre_origen + " " + nombre_destino + " " + enlace.getCoste());
+                String output = new String(nombre_origen + " " + nombre_destino + " " + enlace.getCoste() + "\n");
                 myWriter.write(output);
             }
             myWriter.close();
@@ -207,7 +223,7 @@ public class RedSocial {
         for(Mensaje mensaje : this.mensajes){
             try {
             FileWriter myWriter = new FileWriter(pathBaseArchivoMensaje + indice_mensaje + ".txt");
-            myWriter.write("\"" + mensaje.getMensaje() + "\" " + mensaje.getAlcance() + " " + mensaje.getAutor().getNombre());
+            myWriter.write("\"" + mensaje.getMensaje() + "\" " + mensaje.getAlcance() + " " + mensaje.getAutor().getNombre() + "\n");
             myWriter.close();
         } catch (IOException e) {
             throw new IOException();
@@ -234,7 +250,6 @@ public class RedSocial {
     }
 
     public Boolean addEnlace(Enlace link){
-        boolean alreadyExists = false;
         Usuario usuarioOrigen = null;
         Usuario userOrigen = link.getUsuarioOrigen();
         for(Usuario user : this.usuarios){

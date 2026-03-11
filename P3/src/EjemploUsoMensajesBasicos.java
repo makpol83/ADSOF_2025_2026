@@ -1,3 +1,9 @@
+package src;
+
+import src.app.Enlace;
+import src.app.Mensaje;
+import src.app.Usuario;
+
 public class EjemploUsoMensajesBasicos {
     public static void main(String[] args){
 
