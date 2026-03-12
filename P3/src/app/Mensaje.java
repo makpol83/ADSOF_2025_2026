@@ -1,4 +1,8 @@
 package src.app;
+
+import java.util.Random;
+import java.util.random.RandomGenerator;
+
 public class Mensaje {
     private String mensaje;
     private int alcance;
@@ -45,6 +49,11 @@ public class Mensaje {
         
         if(e.equals(usuarioActual.containsDestino(e.getUsuarioDestino())) == false)
             return false;
+
+        //apartado 6
+        if(e.getProbRetornoObligado() > Math.random())
+            return false;
+
         
         this.usuarioActual = e.getUsuarioDestino();
         this.alcance -= e.costeReal();

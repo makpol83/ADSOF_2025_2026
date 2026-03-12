@@ -6,16 +6,25 @@ public class Usuario {
     private String nombre;
     private int capacidadAmplificacion;
     private List<Enlace> enlaces;
+    private Exposicion exposicion;
+    private List<Mensaje> historial;
 
     public Usuario(String nombre) {
         this.nombre = nombre;
         this.capacidadAmplificacion = 2;
         this.enlaces = new ArrayList<Enlace>();
+        this.exposicion = Exposicion.ALTA;
+        this.historial = new ArrayList<>();
     }
 
     public Usuario(String nombre, int capacidadAmplificacion) {
         this(nombre);
         this.capacidadAmplificacion = capacidadAmplificacion;
+    }
+
+    public Usuario(String nombre, int capacidadAmplificacion, Exposicion exposicion) {
+        this(nombre, capacidadAmplificacion);
+        this.exposicion = exposicion;
     }
 
     public boolean addEnlace(Enlace e) {
@@ -46,6 +55,40 @@ public class Usuario {
         return null;
     }
 
+    void cambiarExposicion(Exposicion e){ this.exposicion = e; }
+
+    public boolean añadirMensaje(Mensaje mensaje){
+
+        if(this.historial.contains(mensaje))
+            return false;
+
+        int alcancePromedio=0;
+        for(Mensaje m : this.historial){
+            alcancePromedio += m.getAlcance();
+        }
+        alcancePromedio /= this.historial.size();
+
+        if(mensaje.getAlcance() > alcancePromedio && this.exposicion.compareTo(Exposicion.VIRAL) < 0){
+            switch (this.exposicion){
+                case Exposicion.ALTA -> this.exposicion = Exposicion.VIRAL;
+                case Exposicion.MEDIA -> this.exposicion = Exposicion.ALTA;
+                case Exposicion.BAJA -> this.exposicion = Exposicion.MEDIA;
+                case Exposicion.OCULTA -> this.exposicion = Exposicion.BAJA;
+            }
+        } else if(mensaje.getAlcance() < alcancePromedio && this.exposicion.compareTo(Exposicion.OCULTA) > 0){
+            switch (this.exposicion){
+                case Exposicion.VIRAL -> this.exposicion = Exposicion.ALTA;
+                case Exposicion.ALTA -> this.exposicion = Exposicion.MEDIA;
+                case Exposicion.MEDIA -> this.exposicion = Exposicion.BAJA;
+                case Exposicion.BAJA -> this.exposicion = Exposicion.OCULTA;
+
+            }
+        }
+
+        this.historial.add(mensaje);
+        return true;
+    }
+
     public String getNombre(){
         return this.nombre;
     }
@@ -64,6 +107,10 @@ public class Usuario {
 
     public Enlace getEnlace(Usuario destino) {
         return this.containsDestino(destino);
+    }
+
+    public Exposicion getExposicion(){
+        return this.exposicion;
     }
 
     @Override

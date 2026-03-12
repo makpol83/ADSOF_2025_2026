@@ -190,7 +190,7 @@ public class RedSocial {
         return msgList;
     }
     
-    private Boolean writeUsuarios(String pathArchivoUsuario) throws IOException{
+    private boolean writeUsuarios(String pathArchivoUsuario) throws IOException{
         try {
             FileWriter myWriter = new FileWriter(pathArchivoUsuario);
             for(Usuario user : this.usuarios){
@@ -204,7 +204,7 @@ public class RedSocial {
         
         return true;
     }
-    private Boolean writeEnlace(String pathArchivoEnlace) throws IOException{
+    private boolean writeEnlace(String pathArchivoEnlace) throws IOException{
         try {
             FileWriter myWriter = new FileWriter(pathArchivoEnlace);
             for(Enlace enlace : this.enlaces){
@@ -220,7 +220,7 @@ public class RedSocial {
         
         return true;
     }
-    private Boolean writeMensajes(String pathBaseArchivoMensaje) throws IOException{
+    private boolean writeMensajes(String pathBaseArchivoMensaje) throws IOException{
         int indice_mensaje = 1;
         for(Mensaje mensaje : this.mensajes){
             try {
@@ -237,7 +237,7 @@ public class RedSocial {
         return true;
     }
 
-    public Boolean addUsuario(Usuario user){
+    public boolean addUsuario(Usuario user){
         boolean alreadyExists = false;
         for(Usuario user_app : this.usuarios){
             if(user_app.getNombre().equalsIgnoreCase(user.getNombre()) == true){
@@ -251,7 +251,7 @@ public class RedSocial {
         return this.usuarios.add(user);
     }
 
-    public Boolean addEnlace(Enlace link){
+    public boolean addEnlace(Enlace link){
         Usuario usuarioOrigen = null;
         Usuario userOrigen = link.getUsuarioOrigen();
         for(Usuario user : this.usuarios){
@@ -279,7 +279,7 @@ public class RedSocial {
         return this.enlaces.add(link);
     }
 
-    public Boolean addMensaje(Mensaje msg){
+    public boolean addMensaje(Mensaje msg){
         if(this.usuarios.contains(msg.getAutor()) == false ||
             this.usuarios.contains(msg.getUsuarioActual()) == false){
             return false;
@@ -287,8 +287,8 @@ public class RedSocial {
         return this.mensajes.add(msg);
     }
 
-    public Boolean difundirMensaje(Mensaje msg, Usuario ... usuarios){
-        Boolean difundido = true;
+    public boolean difundirMensaje(Mensaje msg, Usuario ... usuarios){
+        boolean difundido = true;
 
         if(this.mensajes.contains(msg) == false)
             this.addMensaje(msg);

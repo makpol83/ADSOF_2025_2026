@@ -42,6 +42,8 @@ public class Enlace {
         return 0;
     }
 
+    public double getProbRetornoObligado(){ return 0; }
+
     public int costeReal(){
         return this.costeEspecial() + this.coste;
     }
