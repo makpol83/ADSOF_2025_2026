@@ -1,1 +1,1 @@
-"Hola,soyelnuevomensaje." 76 Alberto
+"Hola, soy el nuevo mensaje." 76 Alberto

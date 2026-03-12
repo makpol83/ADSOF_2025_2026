@@ -142,10 +142,12 @@ public class RedSocial {
             File file = new File(path);
             //Ahora mismo no se leen espacios si los tiene el mensaje --> ARREGLAR
             try(Scanner lector = new Scanner(file)){
-            if(lector.hasNextLine() == true && lector.hasNext()) {
-                Pattern entreComillas = Pattern.compile("\"[^\"]*\""); // [^\"] = cualquier caracter menos comillas --> "....."
-                str_mensaje = lector.next(entreComillas);
-                str_mensaje = str_mensaje.substring(1, str_mensaje.length() - 1); //quita comilla inicial y final
+            if(lector.hasNextLine() == true) {
+                lector.useDelimiter("\"");
+                str_mensaje = lector.next();
+                lector.reset();
+                lector.next();
+
                 alcance = Integer.parseInt(lector.next());
                 autor = lector.next();
 

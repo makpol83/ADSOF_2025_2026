@@ -1,4 +1,5 @@
 package src;
+
 import java.io.IOException;
 
 import src.app.Enlace;
@@ -10,7 +11,8 @@ public class EjemploDeUsoRedSocial {
     public static void main(String[] args){
         RedSocial s;
         try {
-            s = new RedSocial("txt/USUARIOS.txt", "txt/ENLACES.txt", "txt/MENSAJE.txt");
+            s = new RedSocial(
+                    "txt/USUARIOS.txt", "txt/ENLACES.txt", "txt/MENSAJE.txt");
             //s = new RedSocial(".txt/USUARIOS.txt", ".txt/ENLACES.txt", ".txt/MENSAJE2.txt");
         } catch (IOException e) {
             System.out.println("Error en archivos");
@@ -18,32 +20,39 @@ public class EjemploDeUsoRedSocial {
         }
 
         System.out.println("Mostramos los usuarios de la red social: ");
-        System.out.println(s.getUsuarios());
+        for(Usuario i : s.getUsuarios())
+            System.out.println(i);
 
         System.out.println("Mostramos los enlaces de la red social: ");
-        System.out.println(s.getEnlaces());
+        for(Enlace i : s.getEnlaces())
+            System.out.println(i);
 
         System.out.println("Mostramos los mensajes de la red social: ");
-        System.out.println(s.getMensajes());
+        for(Mensaje i : s.getMensajes())
+            System.out.println(i);
 
         System.out.println("Añadimos un usuario a la red social: ");
         Usuario user = new Usuario("Alberto", 10);
         s.addUsuario(user);
-        System.out.println(s.getUsuarios());
+        for(Usuario i : s.getUsuarios())
+            System.out.println(i);
 
         System.out.println("Añadimos un enlace a la red social con el nuevo usuario a Ana (Posición 0): ");
         Enlace link = new Enlace(user, s.getUsuarios().get(0), 27);
         s.addEnlace(link);
-        System.out.println(s.getEnlaces());
+        for(Enlace i : s.getEnlaces())
+            System.out.println(i);
 
         System.out.println("Añadimos un mensaje a la red social para el nuevo usuario: ");
-        Mensaje message = new Mensaje("Hola,soyelnuevomensaje.", 100, user);
+        Mensaje message = new Mensaje("Hola, soy el nuevo mensaje.", 100, user);
         s.addMensaje(message);
-        System.out.println(s.getMensajes());
+        for(Mensaje i : s.getMensajes())
+            System.out.println(i);
 
         System.out.println("Difundimos el mensaje a ver si se difunde por el enlace nuevo a Ana: ");
         s.difundirMensaje(message, s.getUsuarios().get(0));
-        System.out.println(s.getMensajes());
+        for(Mensaje i : s.getMensajes())
+            System.out.println(i);
 
         System.out.println("Vemos si el guardado en ficheros funciona: ");
         try {
@@ -63,17 +72,32 @@ public class EjemploDeUsoRedSocial {
             return;
         }
         System.out.println("Vemos si son iguales las dos redes sociales: ");
+        System.out.println();
         System.out.println("Usuarios: ");
-        System.out.println("Red social original: " + s.getUsuarios());
-        System.out.println("Red social cargada: " + d.getUsuarios());
+        System.out.println("Red social original:");
+        for(Usuario i : s.getUsuarios())
+            System.out.println(i);
+        System.out.println("Red social cargada: ");
+        for(Usuario i : d.getUsuarios())
+            System.out.println(i);
 
+        System.out.println();
         System.out.println("Enlaces: ");
-        System.out.println("Red social original: " + s.getEnlaces());
-        System.out.println("Red social cargada: " + d.getEnlaces());
+        System.out.println("Red social original: ");
+        for(Enlace i : s.getEnlaces())
+            System.out.println(i);
+        System.out.println("Red social cargada: ");
+        for(Enlace i : d.getEnlaces())
+            System.out.println(i);
 
+        System.out.println();
         System.out.println("Mensajes: ");
-        System.out.println("Red social original: " + s.getMensajes());
-        System.out.println("Red social cargada: " + d.getMensajes());
+        System.out.println("Red social original: ");
+        for(Mensaje i : s.getMensajes())
+            System.out.println(i);
+        System.out.println("Red social cargada: ");
+        for(Mensaje i : d.getMensajes())
+            System.out.println(i);
         
         return;
     }
