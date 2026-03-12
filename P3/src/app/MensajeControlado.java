@@ -17,7 +17,12 @@ public class MensajeControlado extends Mensaje{
 
     @Override
     public boolean puedeDifundirPor(Enlace e){
-        return e.esSeñuelo();
+        if(e.esSeñuelo())
+            return false;
+        else if (this.getAlcance() >= e.costeReal())
+            return true;
+        else
+            return false;
     }
 
     @Override
