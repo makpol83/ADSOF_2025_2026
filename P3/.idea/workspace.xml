@@ -2,28 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a73b3a4-71ab-4b70-843f-e0b9f8496bbe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/EjemploDeUsoRedSocial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/EjemploDeUsoRedSocial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/P3/src/EjemploUsoMensajesBasicos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/EjemploUsoMensajesBasicos.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Enlace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Enlace.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/RedSocial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/RedSocial.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/MENSAJE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/MENSAJE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/usuarios_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EjemploDeUsoRedSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploDeUsoRedSocial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/RedSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/RedSocial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/MENSAJE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/MENSAJE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/usuarios_guardados.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EjemploUsoMensajesBasicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoMensajesBasicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Enlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Enlace.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +28,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.EjemploDeUsoRedSocial.executor": "Run",
+    "Application.EjemploUsoMensajesBasicos.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",

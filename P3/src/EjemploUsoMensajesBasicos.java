@@ -77,9 +77,8 @@ public class EjemploUsoMensajesBasicos {
 
         
 
-        // Comprobamos si el método toString de enlace coincide con el pedido:
-
-        if(enlace5.toString() != "@juan--10-->@daniel)")
+        // Comprobamos si el method toString de enlace coincide con el pedido:
+        if(enlace5.toString().compareTo("(@juan--10-->@daniel)") != 0)
             System.out.println("Test 2 - No se imprime el toString de enlace 5 correctamente.");
 
         /**Test 2 - Fin */

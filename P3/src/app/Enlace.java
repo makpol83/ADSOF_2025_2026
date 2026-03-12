@@ -60,6 +60,6 @@ public class Enlace {
 
     @Override
     public String toString(){
-        return "(@" + usuarioOrigen.getNombre() + "--" + this.coste + "--@" + usuarioDestino.getNombre() + ")";
+        return "(@" + usuarioOrigen.getNombre() + "--" + this.coste + "-->@" + usuarioDestino.getNombre() + ")";
     }
 }   
