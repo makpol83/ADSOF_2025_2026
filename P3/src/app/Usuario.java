@@ -101,6 +101,10 @@ public class Usuario {
         return this.enlaces.get(i);
     }
 
+    public List<Enlace> getEnlaces(){
+        return this.enlaces;
+    }
+
     public int getNumEnlaces() {
         return this.enlaces.size();
     }

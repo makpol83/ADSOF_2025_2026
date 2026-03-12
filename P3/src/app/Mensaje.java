@@ -47,7 +47,7 @@ public class Mensaje {
         if(this.puedeDifundirPor(e) == false || aceptadoPor(e.getUsuarioDestino()) == false)
             return false;
         
-        if(e.equals(usuarioActual.containsDestino(e.getUsuarioDestino())) == false)
+        if(e.equals(usuarioActual.getEnlace(e.getUsuarioDestino())) == false)
             return false;
 
         //apartado 6
@@ -61,10 +61,14 @@ public class Mensaje {
         return true;
     }
 
+    public int getRigidez(){
+        return 0;
+    }
+
     public boolean difunde(Usuario... usuarios){
         boolean difundido = true;
         for(Usuario usuario : usuarios){
-            Enlace e = usuarioActual.containsDestino(usuario);
+            Enlace e = usuarioActual.getEnlace(usuario);
             if(e != null){
                 if(this.difunde(e) == false)
                     difundido = false;
