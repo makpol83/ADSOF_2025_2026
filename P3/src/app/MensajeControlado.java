@@ -1,5 +1,7 @@
 package src.app;
 
+import javax.management.ObjectInstance;
+
 public class MensajeControlado extends Mensaje{
     private int rigidez;
 
@@ -15,11 +17,23 @@ public class MensajeControlado extends Mensaje{
 
     @Override
     public boolean puedeDifundirPor(Enlace e){
-        return e.costeEspecial() != 0;
+        return e.esSeñuelo();
     }
 
     @Override
     public boolean aceptadoPor(Usuario u) {
-        return super.aceptadoPor(u);
+        int requerimiento = 0;
+        boolean aceptado = false;
+        switch (u.getExposicion()){
+            case Exposicion.OCULTA -> requerimiento = 0;
+            case Exposicion.BAJA -> requerimiento = 5;
+            case Exposicion.MEDIA -> requerimiento = 10;
+            case Exposicion.ALTA -> requerimiento = 20;
+            case Exposicion.VIRAL -> requerimiento = 50;
+        }
+
+        aceptado = (this.rigidez >= requerimiento) ? true : false;
+
+        return aceptado;
     }
 }

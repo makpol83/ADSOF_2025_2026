@@ -30,4 +30,10 @@ public class EnlaceSeñuelo extends Enlace{
     public int costeEspecial(){
         return this.getCoste() * this.factorCosteExtra;
     }
+
+    @Override
+    public boolean esSeñuelo(){
+        return true;
+    }
+
 }

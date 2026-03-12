@@ -60,6 +60,10 @@ public class Enlace {
         }
     }
 
+    public boolean esSeñuelo(){
+        return false;
+    }
+
     @Override
     public String toString(){
         return "(@" + usuarioOrigen.getNombre() + "--" + this.coste + "-->@" + usuarioDestino.getNombre() + ")";
