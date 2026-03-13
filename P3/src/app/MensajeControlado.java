@@ -1,34 +1,34 @@
 package src.app;
 
-import javax.management.ObjectInstance;
-
+/**
+ * Clase MensajeControlado, implementa la funcionalidad de mensajes que no pueden ser
+ * mandados si no se cumple el requisito de rigidez, tan sólo se sobreescribe el método
+ * aceptadoPor de Mensaje.
+ */
 public class MensajeControlado extends Mensaje{
+    /** Rigidez asociada al mensaje >= 0*/
     private int rigidez;
 
+    /**
+     * Constructur MensajeControlado, añade un argumento de rigidez.
+     * @param mensaje Mensaje que guarda
+     * @param alcanceInicial Alcance inicial del mensasje
+     * @param autor Autor del mensaje
+     * @param rigidez Rigidez del mensaje
+     */
     MensajeControlado(String mensaje, int alcanceInicial, Usuario autor, int rigidez){
         super(mensaje, alcanceInicial, autor);
         this.rigidez = rigidez;
     }
 
     @Override
-    public int getRigidez(){
-        return this.rigidez;
-    }
-
-    @Override
+    /**
+     * Indica si el mensaje es aceptado por el usuario especificado, en esta clase
+     * se considera la rigidez del mensaje.
+     * @param u Usuario en el que se comprueba si el usuario puede llegar.
+     * @return
+     */
     public boolean aceptadoPor(Usuario u) {
-        int requerimiento = 0;
-        boolean aceptado = false;
-        switch (u.getExposicion()){
-            case Exposicion.OCULTA -> requerimiento = 0;
-            case Exposicion.BAJA -> requerimiento = 5;
-            case Exposicion.MEDIA -> requerimiento = 10;
-            case Exposicion.ALTA -> requerimiento = 20;
-            case Exposicion.VIRAL -> requerimiento = 50;
-        }
-
-        aceptado = (this.rigidez >= requerimiento) ? true : false;
-
-        return aceptado;
+        return this.rigidez >= u.getExposicion().getRigidez();
     }
 }

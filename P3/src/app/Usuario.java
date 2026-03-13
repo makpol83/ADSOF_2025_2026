@@ -56,6 +56,16 @@ public class Usuario {
     }
 
     /**
+     * Construye y retorna un usuario dada un nombre y una exposición.
+     * @param nombre nombre del usuario
+     * @param exposicion exposición del usuario
+     */
+    public Usuario(String nombre, Exposicion exposicion) {
+        this(nombre);
+        this.exposicion = exposicion;
+    }
+
+    /**
      * Añade un enlace a este objeto. Este objeto debe ser el usuario de origen del enlace y no puede ser el usuario
      * destino. Además, no puede tener otro enlace con el mismo destino.
      * @param e enlace a añadir
@@ -197,6 +207,20 @@ public class Usuario {
      */
     public Enlace getEnlace(Usuario destino) {
         return this.containsDestino(destino);
+    }
+
+    /**
+     * Retorna el primer enlace cuya exposición sea al menos la indicada en el
+     * argumento exposicion. Si no hay devuelve null.
+     * @param exposicion Nivel de exposición a buscar en los enlaces
+     * @return Enlace si se ha encontrado uno válido, null si no se ha encontrado
+     */
+    public Enlace getEnlaceExposicion(Exposicion exposicion) {
+        for(Enlace e : this.enlaces){
+            if(e.getUsuarioDestino().exposicion.compareTo(exposicion) >= 0)
+                return e;
+        }
+        return null;
     }
 
     /**

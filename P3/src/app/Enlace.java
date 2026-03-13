@@ -82,23 +82,23 @@ public class Enlace {
      * lo sobreescriban para poseer un comportamiento distinto.
      * @return int 0
      */
-    public int costeEspecial(){
+    public int getCosteEspecial(){
         return 0;
     }
 
     /**
-     * Retorna la probabilidad de que un mensaje no se transmita correctamente a traves de este objeto. Este metodo
-     * siempre retorna 0, pues se espera que sea sobreescrito en subclases.
-     * @return double 0
+     * Retorna true si el mensaje que intenta pasar por este enlace debe quedarse en el emisario.
+     * False si logra pasar correctamente
+     * @return true si no pasa, false si pasa
      */
-    public double getProbRetornoObligado(){ return 0; }
+    public boolean esRetornoObligado(){ return false; }
 
     /**
      * Retorna el coste real de este objeto, calculado como el coste mas el coste especial
      * @return int coste real
      */
     public int costeReal(){
-        return this.costeEspecial() + this.coste;
+        return this.getCosteEspecial() + this.coste;
     }
 
     /**
@@ -121,7 +121,7 @@ public class Enlace {
     /**
      * Retorna un booleano que indica si el enlace es seguro o no. La finalidad de este metodo es aportar informacion
      * sobre como manejar el enlace. (Concretamente, un MensajeControlado, no se podra enviar por un EnlaceSeñuelo,
-     * que no es seguro. En esta clase siempre retornara true
+     * que no es seguro.
      * @return true
      */
     public boolean esSeguro(){

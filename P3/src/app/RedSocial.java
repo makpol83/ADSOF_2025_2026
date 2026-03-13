@@ -9,11 +9,39 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 
+/**
+ * Clase RedSocial, almacena un conjunto de usuarios, sus enlaces y los mensajes dentro de la red social.
+ * Se crea mediante paths a los archivos que contienen los datos a leer. Nótese que los path deben empezar
+ * desde la carpeta del proyecto. Por ejemplo: "txt/USUARIOS.txt".
+ *
+ * Implementa métodos para añadir usuarios, enlaces y mensajes, a parte de difundirlos.
+ * Implementa métodos para guardar los datos en ficheros.
+ */
 public class RedSocial {
+    /** Lista de usuarios */
     private List<Usuario> usuarios;
+    /** Lista de enlaces de los usuarios */
     private List<Enlace> enlaces;
+    /** Lista de mensajes de la aplicación */
     private List<Mensaje> mensajes;
 
+    /**
+     * Constructor RedSocial, recibe los paths a los archivos de los que se va a leer para cargar la RedSocial.
+     * Los path deben empezar desde la carpeta anterior a src. Por ejemplo : "txt/USUARIOS.txt".
+     * @param pathArchivoUsuarios Path al fichero con los usuarios en formato: "nombre capacidadAmplificacion"
+     * @param pathArchivoEnlaces Path al fichero con los enlaces en formato: "nombreOrigen nombreDestino coste"
+     * @param pathArchivoMensaje Paths a los ficheros con los distintos mensajes de la app, se deben introducir
+     *       separados por comas, por ejemplo: {"txt/mensaje_guardado1.txt", "txt/mensaje_guardado2.txt"}.
+     *       El formato de los ficheros debe ser:
+     *                           \"Mensaje\" alcanceInicial nombreAutor
+     *                           destino1
+     *                           destino2
+     *                           ...
+     *                           destinoN
+     *       Destino1, destino2, destino... Son los nombres de los usuarios a los que secuencialmente se les
+     *       irá mandando el mensaje si es posible.
+     * @throws IOException Si ha fallado la lectura o el formato es inválido.
+     */
     public RedSocial(String pathArchivoUsuarios, String pathArchivoEnlaces, 
         String... pathArchivoMensaje) throws IOException {
         try {
@@ -35,6 +63,21 @@ public class RedSocial {
         }
     }
 
+    /**
+     * Guarda en ficheros con los paths indicados toda la información de la RedSocial.
+     * Se sobreescriben los ficheros si ya existen al guardarse.
+     * @param pathArchivoUsuarios path al fichero con los usuarios
+     * @param pathArchivoEnlaces path al fichero con los enlaces de los usuarios
+     * @param pathBaseMensaje path base con los mensajes:
+     *           Por ejemplo, si la RedSocial tiene 3 mensajes y
+     *           el pathBaseMensaje = "txt/mensaje_guardado",
+     *           los ficheros creados serán:
+     *              "txt/mensaje_guardado1.txt"
+     *              "txt/mensaje_guardado2.txt"
+     *              "txt/mensaje_guardado3.txt"
+     * @return true si se ha guardado correctamente, false si ha fallado algo
+     * @throws IOException Si se ha producido un error al escribir o usar algún fichero.
+     */
     public boolean saveToLocal(String pathArchivoUsuarios, String pathArchivoEnlaces,
         String pathBaseMensaje) throws IOException{
         try{
@@ -48,6 +91,12 @@ public class RedSocial {
         return true;
     }
 
+    /**
+     * Método privado para leer los usuarios.
+     * @param pathArchivoUsuarios Path a los usuarios
+     * @return List<Usuario> Con los usuarios de la RedSocial
+     * @throws IOException Si ha fallado la lectura
+     */
     private List<Usuario> readUsuarios(String pathArchivoUsuarios) throws IOException{
         File file = new File(pathArchivoUsuarios);
         List<Usuario> usuarios = new ArrayList<Usuario>();
@@ -81,6 +130,13 @@ public class RedSocial {
         return usuarios;
     }
 
+    /**
+     * Método privado para leer los enlaces.
+     * @param pathArchivoEnlaces Path a los enlaces
+     * @param usuarios Lista con los usuarios de la RedSocial
+     * @return List<Enlace> Con los enlaces de la RedSocial
+     * @throws IOException Si ha fallado la lectura
+     */
     private List<Enlace> readEnlaces(String pathArchivoEnlaces, List<Usuario> usuarios) throws IOException {
         File file = new File(pathArchivoEnlaces);
         List<Enlace> enlaces = new ArrayList<Enlace>();
@@ -128,6 +184,13 @@ public class RedSocial {
         return enlaces;
     }
 
+    /**
+     * Método privado para leer los mensajes. Los manda a través de los usuarios si tiene algún usuarioDestino.
+     * @param pathArchivoMensaje Paths separados por comas, uno por cada mensaje
+     * @param usuarios Lista con los usuarios de la RedSocial
+     * @return List<Mensaje> Con los mensajes de la RedSocial
+     * @throws IOException Si ha fallado la lectura
+     */
     private List<Mensaje> readMensaje(List<Usuario> usuarios, String ... pathArchivoMensaje) throws IOException {
         List<Mensaje> msgList = new ArrayList<>();
         
@@ -189,7 +252,13 @@ public class RedSocial {
 
         return msgList;
     }
-    
+
+    /**
+     * Escribe los usuarios en el path recibido.
+     * @param pathArchivoUsuario Path en el que guardar los usuarios
+     * @return true si se ha guardado correctamente, false si ha fallado
+     * @throws IOException Si se ha producido un error al escribir
+     */
     private boolean writeUsuarios(String pathArchivoUsuario) throws IOException{
         try {
             FileWriter myWriter = new FileWriter(pathArchivoUsuario);
@@ -204,6 +273,13 @@ public class RedSocial {
         
         return true;
     }
+
+    /**
+     * Escribe los enlaces en el path recibido.
+     * @param pathArchivoEnlace Path en el que guardar los enlaces
+     * @return true si se ha guardado correctamente, false si ha fallado
+     * @throws IOException Si se ha producido un error al escribir
+     */
     private boolean writeEnlace(String pathArchivoEnlace) throws IOException{
         try {
             FileWriter myWriter = new FileWriter(pathArchivoEnlace);
@@ -220,6 +296,13 @@ public class RedSocial {
         
         return true;
     }
+
+    /**
+     * Escribe los usuarios en el path base recibido + número de mensaje + ".txt"
+     * @param pathBaseArchivoMensaje Path base para guardar los mensajes
+     * @return true si se ha guardado correctamente, false si ha fallado
+     * @throws IOException Si se ha producido un error al escribir
+     */
     private boolean writeMensajes(String pathBaseArchivoMensaje) throws IOException{
         int indice_mensaje = 1;
         for(Mensaje mensaje : this.mensajes){
@@ -237,6 +320,12 @@ public class RedSocial {
         return true;
     }
 
+    /**
+     * Método para añadir un Usuario a la RedSocial, no debería tener enlaces
+     * asignados.
+     * @param user Usuario a añadir
+     * @return true si se ha añadido, false si ya existía
+     */
     public boolean addUsuario(Usuario user){
         boolean alreadyExists = false;
         for(Usuario user_app : this.usuarios){
@@ -251,6 +340,11 @@ public class RedSocial {
         return this.usuarios.add(user);
     }
 
+    /**
+     * Añade un enlace a la RedSocial, los usuarios deberían estar almacenados en la RedSocial
+     * @param link Enlace a añadir
+     * @return true si se ha añadido o false si ya existía un enlace al usuarioDestino
+     */
     public boolean addEnlace(Enlace link){
         Usuario usuarioOrigen = null;
         Usuario userOrigen = link.getUsuarioOrigen();
@@ -279,6 +373,11 @@ public class RedSocial {
         return this.enlaces.add(link);
     }
 
+    /**
+     * Añade un mensaje a la RedSocial, el autor y el usuario actual deben estar incluidos.
+     * @param msg Mensaje a incluir
+     * @return true si se ha añadido, false si el autor no existe o el usuarioActual no existe
+     */
     public boolean addMensaje(Mensaje msg){
         if(this.usuarios.contains(msg.getAutor()) == false ||
             this.usuarios.contains(msg.getUsuarioActual()) == false){
@@ -287,6 +386,13 @@ public class RedSocial {
         return this.mensajes.add(msg);
     }
 
+    /**
+     * Difunde un mensaje por los usuarios a lo largo de la RedSocial, nótese que el mensaje debe estar
+     * incluido en la RedSocial, al igual que los usuarios.
+     * @param msg
+     * @param usuarios
+     * @return
+     */
     public boolean difundirMensaje(Mensaje msg, Usuario ... usuarios){
         boolean difundido = true;
 
@@ -303,12 +409,26 @@ public class RedSocial {
         return difundido;
     }
 
+    /**
+     * Getter de los usuarios
+     * @return List<Usuario> de la RedSocial
+     */
     public List<Usuario> getUsuarios(){
         return this.usuarios;
     }
+
+    /**
+     * Getter de los Mensajes
+     * @return List<Mensaje> de la RedSocial
+     */
     public List<Mensaje> getMensajes(){
         return this.mensajes;
     }
+
+    /**
+     * Getter de los Enlaces
+     * @return List<Enlace> de la RedSocial
+     */
     public List<Enlace> getEnlaces(){ 
         return this.enlaces;
     }

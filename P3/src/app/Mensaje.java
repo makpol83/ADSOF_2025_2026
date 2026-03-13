@@ -70,6 +70,7 @@ public class Mensaje {
      * @return boolean true si es posible o false
      */
     public boolean puedeDifundirPor(Enlace e){
+        // Comprueba si el enlace es Señuelo o no.
         if(e.esSeguro() == false)
             return false;
 
@@ -102,7 +103,7 @@ public class Mensaje {
         if(e.equals(this.usuarioActual.getEnlace(e.getUsuarioDestino())) == false)
             return false;
 
-        if(e.getProbRetornoObligado() > Math.random())
+        if(e.esRetornoObligado() == true)
             return false;
         
         this.usuarioActual = e.getUsuarioDestino();
