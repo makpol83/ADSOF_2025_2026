@@ -19,8 +19,12 @@ public class UsuarioInteresado extends Usuario{
 
     @Override
     public Enlace getEnlace(Usuario destino){
+        //enlace cuyo destino es el usuario especificado
         Enlace eNormal = null;
-        for(Enlace e : this.getEnlaces()){
+        //iterador de enlace para comprobar si existe un usuario con exposición ALTA al que transmitir el mensaje
+        Enlace e = null;
+        for(int i = 0; i < this.getNumEnlaces(); i++){
+             e = this.getEnlace(i);
             if(e.getUsuarioDestino().getExposicion().compareTo(Exposicion.ALTA) >= 0)
                 return e;
             else if (e.getUsuarioDestino() == destino) {
