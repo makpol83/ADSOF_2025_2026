@@ -16,22 +16,6 @@ public class MensajeControlado extends Mensaje{
     }
 
     @Override
-    public boolean puedeDifundirPor(Enlace e){
-
-        //TODO reconocer si un enlace es señuelo y retornar false en ese caso
-
-        //if(e.costeEspecial() == 0) un enlace señuelo puede tener coseEspecial = 0?
-        //            return false;
-        //if(e.esSeñuelo() == true) ....
-        //if(e instanceof EnlaceSeñuelo) xd
-        else if (this.getAlcance() >= e.costeReal())
-            return true;
-        else
-            return false;
-    }
-
-
-    @Override
     public boolean aceptadoPor(Usuario u) {
         int requerimiento = 0;
         boolean aceptado = false;

@@ -33,6 +33,9 @@ public class Mensaje {
     }
 
     public boolean puedeDifundirPor(Enlace e){
+        if(e.esSeguro() == false)
+            return false;
+
         if(this.alcance >= e.costeReal())
             return true;
         else

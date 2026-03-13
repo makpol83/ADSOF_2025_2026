@@ -60,8 +60,14 @@ public class Enlace {
         }
     }
 
-    public boolean esSeñuelo(){
-        return false;
+    /**
+     * Retorna un booleano que indica si el enlace es seguro o no. La finalidad de este método es aportar informacion
+     * sobre como manejar el enlace. (Concretamente, un MensajeControlado, no se podra enviar por un EnlaceSeñuelo,
+     * que no es seguro.
+     * @return
+     */
+    public boolean esSeguro(){
+        return true;
     }
 
     @Override

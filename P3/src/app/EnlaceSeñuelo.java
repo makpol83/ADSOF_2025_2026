@@ -4,14 +4,7 @@ public class EnlaceSeñuelo extends Enlace{
     private int factorCosteExtra;
     private double probRetornoObligado;
 
-    /**
-     *
-     * @param usuarioOrigen
-     * @param usuarioDestino
-     * @param coste
-     * @param factorCosteExtra entre (0,1) ?
-     * @param probRetornoObligado
-     */
+
     public EnlaceSeñuelo(Usuario usuarioOrigen, Usuario usuarioDestino, int coste, int factorCosteExtra, double probRetornoObligado){
         super(usuarioOrigen, usuarioDestino, coste);
         this.factorCosteExtra = factorCosteExtra;
@@ -24,6 +17,7 @@ public class EnlaceSeñuelo extends Enlace{
 
     @Override
     public double getProbRetornoObligado(){ return probRetornoObligado; }
+
     public int getFactorCosteExtra(){ return factorCosteExtra; }
 
     @Override
@@ -32,8 +26,8 @@ public class EnlaceSeñuelo extends Enlace{
     }
 
     @Override
-    public boolean esSeñuelo(){
-        return true;
+    public boolean esSeguro(){
+        return false;
     }
 
 }
