@@ -5,29 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a73b3a4-71ab-4b70-843f-e0b9f8496bbe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/EjemploDeUsoFachadaRedSocial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/temp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tmpaaron.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/P3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/EjemploDeUsoRedSocial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/EjemploDeUsoRedSocial.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Enlace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Enlace.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/RedSocial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/RedSocial.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/usuarios_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EjemploUsoMensajesBasicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoMensajesBasicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Mensaje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/MensajeControlado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/MensajeControlado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/RedSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/RedSocial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/usuarios_guardados.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +48,8 @@
     "Application.EjemploDeUsoFachadaRedSocial.executor": "Run",
     "Application.EjemploDeUsoRedSocial.executor": "Run",
     "Application.EjemploUsoMensajesBasicos.executor": "Run",
-    "Application.temp.executor": "Run",
+    "Application.EjemploUsoNuevasFuncionalidades.executor": "Run",
+    "Application.temp.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -88,7 +72,7 @@
       <recent name="src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.temp">
+  <component name="RunManager">
     <configuration name="EjemploDeUsoFachadaRedSocial" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.EjemploDeUsoFachadaRedSocial" />
       <module name="P3" />
@@ -159,11 +143,16 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/temp.java</url>
           <line>6</line>
-          <properties class="src.EjemploUsoNuevasFuncionalidades" method="main">
+          <properties class="src.temp" method="main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

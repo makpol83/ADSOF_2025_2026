@@ -106,9 +106,10 @@ public class Mensaje {
             return false;
         
         this.usuarioActual = e.getUsuarioDestino();
+        //se añade antes de modificar el alcance para ver la subida o bajada de Exposicion
+        this.usuarioActual.añadirMensaje(this);
         this.alcance -= e.costeReal();
         this.alcance += e.getUsuarioDestino().getCapacidadAmplificacion();
-        this.usuarioActual.añadirMensaje(this);
         return true;
     }
 
