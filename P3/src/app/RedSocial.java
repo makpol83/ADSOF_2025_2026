@@ -322,9 +322,10 @@ public class RedSocial {
 
     /**
      * Método para añadir un Usuario a la RedSocial, no debería tener enlaces
-     * asignados.
+     * asignados a usuarios que no estén en la RedSocial
      * @param user Usuario a añadir
-     * @return true si se ha añadido, false si ya existía
+     * @return true si se ha añadido, false si ya existía un usuario con ese nombre,
+     * o no se puede añadir
      */
     public boolean addUsuario(Usuario user){
         boolean alreadyExists = false;
@@ -341,9 +342,12 @@ public class RedSocial {
     }
 
     /**
-     * Añade un enlace a la RedSocial, los usuarios deberían estar almacenados en la RedSocial
+     * Añade un enlace a la RedSocial, los usuarios deberían estar almacenados en la RedSocial,
+     * se comprueba si existe el usuario origen en la RedSocial y si ya existe un enlace al
+     * usuario destino en el usuario origen.
      * @param link Enlace a añadir
-     * @return true si se ha añadido o false si ya existía un enlace al usuarioDestino
+     * @return true si se ha añadido o false si ya existía un enlace al usuarioDestino o
+     * no existe el usuario origen en la RedSocial
      */
     public boolean addEnlace(Enlace link){
         Usuario usuarioOrigen = null;
@@ -389,9 +393,10 @@ public class RedSocial {
     /**
      * Difunde un mensaje por los usuarios a lo largo de la RedSocial, nótese que el mensaje debe estar
      * incluido en la RedSocial, al igual que los usuarios.
-     * @param msg
-     * @param usuarios
-     * @return
+     * @param msg Mensaje a difundir
+     * @param usuarios Usuarios a los que secuencialmente se les va a mandar el mensaje
+     * @return true si se ha difundido al menos una vez, false si uno de los usuarios no está contenido en la
+     * RedSocial o si la difusión ha fallado.
      */
     public boolean difundirMensaje(Mensaje msg, Usuario ... usuarios){
         boolean difundido = true;
