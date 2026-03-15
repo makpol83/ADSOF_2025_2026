@@ -96,7 +96,7 @@ public class Mensaje {
      * @return true si se ha difundido o false
      */
     public boolean difunde(Enlace e){
-        if(this.puedeDifundirPor(e) == false || aceptadoPor(e.getUsuarioDestino()) == false)
+        if(this.puedeDifundirPor(e) == false || this.aceptadoPor(e.getUsuarioDestino()) == false)
             return false;
         
         if(e.equals(this.usuarioActual.getEnlace(e.getUsuarioDestino())) == false)

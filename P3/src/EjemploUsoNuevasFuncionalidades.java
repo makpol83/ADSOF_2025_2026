@@ -143,7 +143,7 @@ public class EjemploUsoNuevasFuncionalidades {
             "Este mensaje no puede pasar por enlaces señuelo.",
             100,
             juan,
-            10 // Se pone la rigidez a 30 para que la exposición mínima a mandar sea MEDIA (requiere 10 o más)
+            4 // Se pone la rigidez a 4 para que la exposición máxima a mandar sea OCULTA
         );
 
         System.out.println();
@@ -154,7 +154,7 @@ public class EjemploUsoNuevasFuncionalidades {
         
         System.out.println();
         System.out.println("Intento difundir el mensaje de juan a rodolfo por un enlace señuelo, debe fallar:");
-        mensajePresidencial.difunde(enlacePeligroso);
+        System.out.println(mensajePresidencial.difunde(enlacePeligroso));
         System.out.println("El usuario siguiente debe ser juan:");
         System.out.println(mensajePresidencial.getUsuarioActual().getNombre());
 
@@ -164,18 +164,18 @@ public class EjemploUsoNuevasFuncionalidades {
 
         System.out.println();
         System.out.println("Le añado ahora un enlace normal y cambio la exposición de rodolfo a BAJA");
-        Enlace enlaceMuyNormal = new Enlace(juan, rodolfo, 10);
+        Enlace enlaceMuyNormal = new Enlace(juan, rodolfo, 5);
         juan.addEnlace(enlaceMuyNormal);
         rodolfo.cambiarExposicion(Exposicion.BAJA);
         
         System.out.println();
         System.out.println("Intento difundir el mensajePresidencial a través del nuevo enlace, debe fallar:");
         System.out.println("Debe fallar porque la exposición de rodolfo es BAJA");
-        System.out.println("Debe ser false: " + mensajePresidencial.difunde(enlaceMuyNormal));
+        System.out.println("Debe ser false: " + mensajePresidencial.aceptadoPor(rodolfo));
 
         System.out.println();
-        System.out.println("Cambio la exposicion a MEDIA de rodolfo y veo que se difunde correctamente: ");
-        rodolfo.cambiarExposicion(Exposicion.MEDIA);
+        System.out.println("Cambio la exposicion a OCULTA de rodolfo y veo que se difunde correctamente: ");
+        rodolfo.cambiarExposicion(Exposicion.OCULTA);
         System.out.println("Debe ser true: " + mensajePresidencial.difunde(enlaceMuyNormal));
     }
 }

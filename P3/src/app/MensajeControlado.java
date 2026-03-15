@@ -41,7 +41,7 @@ public class MensajeControlado extends Mensaje{
      * Indica si el mensaje es aceptado por el usuario especificado, en esta clase
      * se considera la rigidez del mensaje.
      * @param u Usuario en el que se comprueba si el usuario puede llegar.
-     * @return
+     * @return true si el mensaje es aceptado, false si no
      */
     public boolean aceptadoPor(Usuario u) {
         return this.rigidez >= u.getExposicion().getRigidez();
