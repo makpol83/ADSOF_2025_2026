@@ -129,6 +129,22 @@ public class EjemploUsoNuevasFuncionalidades {
         System.out.println(ana.getHistorial());
         System.out.println();
 
+        System.out.println("Finalmente veremos si al llegar un mensaje cuyo alcance es igual a la media del" +
+                "historial, la exposicion no se ve modificada.");
+        System.out.println("Del historial anterior vemos que la media del alcance de los mensajes de ana es:" +
+                "51 + 101 + 3 + 3 + 3 = 161 | 161 / 5 = 32");
+        System.out.println("creamos un mensaje con alcance 32 y lo mandamos a ana." +
+                "Resultado esperado: su exposicion no cambia");
+        System.out.println("exposicion ana actual:" + ana.getExposicion());
+        Mensaje noCambiaExp = new Mensaje("noCambiaExp", 32, famoso);
+        System.out.println(noCambiaExp);
+        System.out.println("difundimos a ana");
+        noCambiaExp.difunde(ana);
+        System.out.println(noCambiaExp);
+        System.out.println("exposicion de ana: " + ana.getExposicion());
+        System.out.println("historial ana: " + ana.getHistorial());
+        System.out.println();
+
         System.out.println("FIN test UsuarioInteresardo & Exposicion & Historial");
 
         //FIN Test UsuarioInteresado & Exposicion & Historial
