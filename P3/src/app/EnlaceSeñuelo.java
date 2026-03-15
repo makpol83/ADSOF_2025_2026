@@ -53,10 +53,10 @@ public class EnlaceSeñuelo extends Enlace{
 
     @Override
     /**
-     * Sobreescritura de getCosteEspecial de Enlace para añadir el coste especial asignado a un EnlaceSeñuelo.
+     * Sobreescritura de costeEspecial de Enlace para añadir el coste especial asignado a un EnlaceSeñuelo.
      * @return Coste especial del enlace
      */
-    public int getCosteEspecial(){
+    public int costeEspecial(){
         return this.getCoste() * this.factorCosteExtra;
     }
 

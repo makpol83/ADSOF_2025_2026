@@ -27,7 +27,7 @@ public class EjemploUsoMensajesBasicos {
         // de enlace:
 
         if(carmen.getEnlace(luis).getCosteAcumulado() != (33 + 68 + 11))
-            System.out.println("Test 1 - No coincide la suma de los costes de los enlaces con el valor del atributo en en.");
+            System.out.println("Test 1 - No coincide la suma de los costes de los enlaces con el valor del atributo en Enlace.");
 
         // Test 1 - Fin
 

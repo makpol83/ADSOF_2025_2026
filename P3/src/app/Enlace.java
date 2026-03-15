@@ -82,7 +82,7 @@ public class Enlace {
      * lo sobreescriban para poseer un comportamiento distinto.
      * @return int 0
      */
-    public int getCosteEspecial(){
+    public int costeEspecial(){
         return 0;
     }
 
@@ -98,7 +98,7 @@ public class Enlace {
      * @return int coste real
      */
     public int costeReal(){
-        return this.getCosteEspecial() + this.coste;
+        return this.costeEspecial() + this.coste;
     }
 
     /**
