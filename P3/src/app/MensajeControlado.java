@@ -16,9 +16,24 @@ public class MensajeControlado extends Mensaje{
      * @param autor Autor del mensaje
      * @param rigidez Rigidez del mensaje
      */
-    MensajeControlado(String mensaje, int alcanceInicial, Usuario autor, int rigidez){
+    public MensajeControlado(String mensaje, int alcanceInicial, Usuario autor, int rigidez){
         super(mensaje, alcanceInicial, autor);
         this.rigidez = rigidez;
+    }
+
+    @Override
+    /**
+     * Sobreescribe el método para incluir que un MensajeControlado no puede ser
+     * transmitido por un enlace señuelo(no seguro)
+     * @param e Enlace a comprobar
+     * @return true si puede difundirse, false si no
+     */
+    public boolean puedeDifundirPor(Enlace e){
+        // Comprueba si el enlace es Señuelo o no.
+        if(e.esSeguro() == false)
+            return false;
+
+        return super.puedeDifundirPor(e);
     }
 
     @Override

@@ -308,7 +308,7 @@ public class RedSocial {
         for(Mensaje mensaje : this.mensajes){
             try {
             FileWriter myWriter = new FileWriter(pathBaseArchivoMensaje + indice_mensaje + ".txt");
-            myWriter.write("\"" + mensaje.getMensaje() + "\" " + mensaje.getAlcance() + " " + mensaje.getAutor().getNombre() + "\n");
+            myWriter.write("\"" + mensaje.getMensaje() + "\" " + mensaje.getAlcance() + " " + mensaje.getUsuarioActual().getNombre() + "\n");
             myWriter.close();
         } catch (IOException e) {
             throw new IOException();

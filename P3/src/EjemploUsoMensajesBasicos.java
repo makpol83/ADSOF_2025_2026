@@ -7,8 +7,8 @@ import src.app.Usuario;
 public class EjemploUsoMensajesBasicos {
     public static void main(String[] args){
 
-        /**Test 1 - Inicio */
-        /**Crea 3 usuarios, añade enlaces entre ellos con distintos constructores y difunde el mensaje entre los usuarios*/
+        // Test 1 - Inicio
+        // Crea 3 usuarios, añade enlaces entre ellos con distintos constructores y difunde el mensaje entre los usuarios
         
         Usuario ana     = new Usuario("ana", 1);
         Usuario luis    = new Usuario("luis", 5);
@@ -28,10 +28,10 @@ public class EjemploUsoMensajesBasicos {
 
         if(carmen.getEnlace(luis).getCosteAcumulado() != (33 + 68 + 11))
             System.out.println("Test 1 - No coincide la suma de los costes de los enlaces con el valor del atributo en en.");
-        
-        /**Test 1 - Fin */
 
-        /**Test 2 - Inicio */
+        // Test 1 - Fin
+
+        // Test 2 - Inicio
         Usuario juan   = new Usuario("juan", 1);
         Usuario carlos = new Usuario("carlos", 5);
 
@@ -81,9 +81,9 @@ public class EjemploUsoMensajesBasicos {
         if(enlace5.toString().compareTo("(@juan--10-->@daniel)") != 0)
             System.out.println("Test 2 - No se imprime el toString de enlace 5 correctamente.");
 
-        /**Test 2 - Fin */
-        
-        /**Test 3 - Inicio */
+        // Test 2 - Fin
+
+        // Test 3 - Inicio
         Usuario aaron = new Usuario("aaron"); //amplificacion por defecto = 2
         Usuario maksym = new Usuario("Maksym", 8);
         Usuario daniel3 = new Usuario("daniel3", 0);
@@ -134,8 +134,8 @@ public class EjemploUsoMensajesBasicos {
         if(fakeNews.difunde(maksym, daniel3, atrapaMensajes, alejandro) == true)
             System.out.println("Test 3 - Se ha difundido incorrectamente el mensaje fakeNews");
 
-        
 
-        /**Test 3 - Fin */
+
+        // Test 3 - Fin
     }
 }

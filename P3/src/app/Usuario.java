@@ -114,7 +114,7 @@ public class Usuario {
      * Modifica la exposición de este objeto
      * @param e nueva exposición del usuario
      */
-    void cambiarExposicion(Exposicion e){ this.exposicion = e; }
+    public void cambiarExposicion(Exposicion e){ this.exposicion = e; }
 
     /**
      * Añade un mensaje al historial de este objeto. Además, si el alcance del mensaje es mayor al alcance promedio
@@ -128,28 +128,29 @@ public class Usuario {
         if(this.historial.contains(mensaje))
             return false;
 
-        int alcancePromedio=0;
-        for(Mensaje m : this.historial){
-            alcancePromedio += m.getAlcance();
-        }
-        alcancePromedio /= this.historial.size();
-
-        //incrementar en uno la exposicion si se cumplen las condiciones especificadas
-        if(mensaje.getAlcance() > alcancePromedio && this.exposicion.compareTo(Exposicion.VIRAL) < 0){
-            switch (this.exposicion){
-                case Exposicion.ALTA -> this.cambiarExposicion(Exposicion.VIRAL);
-                case Exposicion.MEDIA -> this.cambiarExposicion(Exposicion.ALTA);
-                case Exposicion.BAJA -> this.cambiarExposicion(Exposicion.MEDIA);
-                case Exposicion.OCULTA -> this.cambiarExposicion(Exposicion.BAJA);
+        if(this.historial.size()>0){
+            int alcancePromedio=0;
+            for(Mensaje m : this.historial){
+                alcancePromedio += m.getAlcance();
             }
-        //decrementar en uno la exposicion si se cumplen las condiciones especificadas
-        } else if(mensaje.getAlcance() < alcancePromedio && this.exposicion.compareTo(Exposicion.OCULTA) > 0){
-            switch (this.exposicion){
-                case Exposicion.VIRAL -> this.cambiarExposicion(Exposicion.ALTA);
-                case Exposicion.ALTA -> this.cambiarExposicion(Exposicion.MEDIA);
-                case Exposicion.MEDIA -> this.cambiarExposicion(Exposicion.BAJA);
-                case Exposicion.BAJA -> this.cambiarExposicion(Exposicion.OCULTA);
+            alcancePromedio /= this.historial.size();
 
+            //incrementar en uno la exposicion si se cumplen las condiciones especificadas
+            if(mensaje.getAlcance() > alcancePromedio && this.exposicion.compareTo(Exposicion.VIRAL) < 0){
+                switch (this.exposicion){
+                    case Exposicion.ALTA -> this.cambiarExposicion(Exposicion.VIRAL);
+                    case Exposicion.MEDIA -> this.cambiarExposicion(Exposicion.ALTA);
+                    case Exposicion.BAJA -> this.cambiarExposicion(Exposicion.MEDIA);
+                    case Exposicion.OCULTA -> this.cambiarExposicion(Exposicion.BAJA);
+                }
+            //decrementar en uno la exposicion si se cumplen las condiciones especificadas
+            } else if(mensaje.getAlcance() < alcancePromedio && this.exposicion.compareTo(Exposicion.OCULTA) > 0){
+                switch (this.exposicion){
+                    case Exposicion.VIRAL -> this.cambiarExposicion(Exposicion.ALTA);
+                    case Exposicion.ALTA -> this.cambiarExposicion(Exposicion.MEDIA);
+                    case Exposicion.MEDIA -> this.cambiarExposicion(Exposicion.BAJA);
+                    case Exposicion.BAJA -> this.cambiarExposicion(Exposicion.OCULTA);
+                }
             }
         }
 
@@ -171,6 +172,12 @@ public class Usuario {
     public int getCapacidadAmplificacion(){
         return this.capacidadAmplificacion;
     }
+
+/**
+ * Retorna el historial de este objeto como una lista de mensajes. Si no ha recibido ningun mensaje, se retornara una lista vacia
+ * @return List<Mensaje> historial de mensajes
+ */
+    public List<Mensaje> getHistorial() { return this.historial; }
 
     /**
      * Retorna el enlace de indexado en la posición i de la lista de enlaces de este objeto

@@ -65,13 +65,14 @@ public class Mensaje {
     }
 
     /**
-     * Indica si este objeto se puede transmitir a traves del enlace especificado
+     * Indica si este objeto se puede transmitir a traves del enlace especificado,
+     * si el enlace tiene probabilidad de retorno obligado se comprueba si pasa
+     * o no aquí
      * @param e Enlace por el que transmitir el mensaje
      * @return boolean true si es posible o false
      */
     public boolean puedeDifundirPor(Enlace e){
-        // Comprueba si el enlace es Señuelo o no.
-        if(e.esSeguro() == false)
+        if(e.esRetornoObligado() == true)
             return false;
 
         if(this.alcance >= e.costeReal())
@@ -92,7 +93,8 @@ public class Mensaje {
 
     /**
      * Difunde este objeto a través del enlace especificado si es posible. Además, existe una probabilidad de fallo en
-     * la difusión que vendrá determinada por la probabilidad de retorno obligado del enlace
+     * la difusión que vendrá determinada por la probabilidad de retorno obligado del enlace. En caso de que el usuario
+     * destino reciba el mensaje por primera vez, será añadido a su historial de mensajes
      * @param e Enlace por el que difundir el mensaje
      * @return true si se ha difundido o false
      */
@@ -102,13 +104,11 @@ public class Mensaje {
         
         if(e.equals(this.usuarioActual.getEnlace(e.getUsuarioDestino())) == false)
             return false;
-
-        if(e.esRetornoObligado() == true)
-            return false;
         
         this.usuarioActual = e.getUsuarioDestino();
         this.alcance -= e.costeReal();
         this.alcance += e.getUsuarioDestino().getCapacidadAmplificacion();
+        this.usuarioActual.añadirMensaje(this);
         return true;
     }
 

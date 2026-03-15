@@ -1,1 +1,1 @@
-"Hola, soy el nuevo mensaje." 76 Alberto
+"Este mensaje es de la fachada" 102 ana
