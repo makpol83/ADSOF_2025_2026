@@ -48,7 +48,7 @@
     "Application.EjemploDeUsoFachadaRedSocial.executor": "Run",
     "Application.EjemploDeUsoRedSocial.executor": "Run",
     "Application.EjemploUsoMensajesBasicos.executor": "Run",
-    "Application.EjemploUsoNuevasFuncionalidades.executor": "Debug",
+    "Application.EjemploUsoNuevasFuncionalidades.executor": "Run",
     "Application.temp.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
@@ -72,7 +72,7 @@
       <recent name="src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.EjemploUsoNuevasFuncionalidades">
+  <component name="RunManager">
     <configuration name="EjemploDeUsoFachadaRedSocial" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.EjemploDeUsoFachadaRedSocial" />
       <module name="P3" />
@@ -158,6 +158,11 @@
           <url>file://$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java</url>
           <line>52</line>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
