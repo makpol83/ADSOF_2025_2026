@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a73b3a4-71ab-4b70-843f-e0b9f8496bbe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/tmpaaron.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Mensaje.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
