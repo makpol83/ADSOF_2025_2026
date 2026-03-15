@@ -13,7 +13,6 @@ public class EjemploUsoNuevasFuncionalidades {
         Mensaje m = new Mensaje("Hi!", 50, ana);
         ana.addEnlace(new Enlace(ana, luis, 68));
         ana.addEnlace(carmen,33);
-        carmen.addEnlace(new Enlace(carmen, luis, 11));
 
         System.out.println("Comprobamos si funcionan los enlaces señuelo");
         EnlaceSeñuelo sen = new EnlaceSeñuelo(carmen, ana, 5, 2, 1);
@@ -25,8 +24,9 @@ public class EjemploUsoNuevasFuncionalidades {
 
         System.out.println();
         System.out.println("Intentamos ver si la probabilidad de retorno funciona correctamente, " +
-            "debería de devolver false siempre el próximo método");
-        System.out.println(m.puedeDifundirPor(sen));
+            "debería de devolver true el próximo método");
+        System.out.println(sen.esRetornoObligado());
+
 
         System.out.println();
         System.out.println("Difundir por tanto debe fallar:");
@@ -42,13 +42,13 @@ public class EjemploUsoNuevasFuncionalidades {
         carmen.addEnlace(sen2);
 
         System.out.println();
-        System.out.println("El próximo método debe devolver true:");
-        System.out.println(m.puedeDifundirPor(sen));
+        System.out.println("El próximo método debe devolver false:");
+        System.out.println(sen2.esRetornoObligado());
 
         System.out.println();
         System.out.println("Comprobamos el alcance del mensaje antes y despúes de difundirlo por el enlace señuelo:");
-        System.out.println("El nuevo alcance debe ser: 50 - 33(Ana a Carmen) - 15(Carmen a ) = 2");
-        System.out.println("Alcance anterior" + m.getAlcance());
+        System.out.println("El nuevo alcance debe ser: 50 - 33(Ana a Carmen) + 2(amplificacion carmen) - 15(Carmen a Luis) + 5(amplifiacion luis) = 9");
+        System.out.println("Alcance anterior: " + m.getAlcance());
         m.difunde(luis);
         System.out.println("Alcance nuevo: " + m.getAlcance());
 

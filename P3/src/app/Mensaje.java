@@ -72,9 +72,6 @@ public class Mensaje {
      * @return boolean true si es posible o false
      */
     public boolean puedeDifundirPor(Enlace e){
-        if(e.esRetornoObligado() == true)
-            return false;
-
         if(this.alcance >= e.costeReal())
             return true;
         else
@@ -103,6 +100,9 @@ public class Mensaje {
             return false;
         
         if(e.equals(this.usuarioActual.getEnlace(e.getUsuarioDestino())) == false)
+            return false;
+
+        if(e.esRetornoObligado())
             return false;
         
         this.usuarioActual = e.getUsuarioDestino();

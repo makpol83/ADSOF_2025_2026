@@ -46,7 +46,10 @@ public class EnlaceSeñuelo extends Enlace{
      * @return true si se debe retornar al emisario, false si el mensaje
      * pasa correctamente.
      */
-    public boolean esRetornoObligado(){ return (Math.random() > this.probRetornoObligado);}
+    public boolean esRetornoObligado(){
+        double value = Math.random();
+        return ( value <= this.probRetornoObligado);
+    }
 
     @Override
     /**
