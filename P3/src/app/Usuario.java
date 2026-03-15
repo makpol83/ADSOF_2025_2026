@@ -208,7 +208,6 @@ public class Usuario {
 
     /**
      * Retorna el enlace de este objeto cuyo destino es el usuario especificado.
-     * Este metodo es equivalente a containsDestino(Usuario)
      * @param destino usuario de destino del enlace a buscar.
      * @return Enlace si existe o null
      */
