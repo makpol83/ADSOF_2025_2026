@@ -56,7 +56,7 @@ public class EjemploUsoNuevasFuncionalidades {
 
         //UsuarioInteresado & Exposición & historial
 
-        Usuario ana = new Usuario("ana", Exposicion.BAJA);
+        ana = new Usuario("ana", Exposicion.BAJA);
         UsuarioInteresado interesado = new UsuarioInteresado("interesado", Exposicion.MEDIA);
         Usuario famoso = new Usuario("famoso", Exposicion.VIRAL);
         interesado.addEnlace(ana, 1);
