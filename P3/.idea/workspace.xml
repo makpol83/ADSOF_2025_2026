@@ -6,20 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7a73b3a4-71ab-4b70-843f-e0b9f8496bbe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/diagramaClases.uxf" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/diagramaClases.uxf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/EjemploUsoMensajesBasicos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/EjemploUsoMensajesBasicos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Enlace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Enlace.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Mensaje.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/src/app/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/src/app/Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/mensaje_guardado2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/P3/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/P3/txt/usuarios_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tmpaaron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tmpaaron.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/usuarios_guardados.txt" afterDir="false" />
     </list>
@@ -54,37 +41,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.EjemploDeUsoFachadaRedSocial.executor&quot;: &quot;Run&quot;,
-    &quot;Application.EjemploDeUsoRedSocial.executor&quot;: &quot;Run&quot;,
-    &quot;Application.EjemploUsoMensajesBasicos.executor&quot;: &quot;Run&quot;,
-    &quot;Application.EjemploUsoNuevasFuncionalidades.executor&quot;: &quot;Run&quot;,
-    &quot;Application.temp.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.tmpaaron.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Polak/Documents/GitHub/ADSOF_2025_2026/P3&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.EjemploDeUsoFachadaRedSocial (1).executor": "Run",
+    "Application.EjemploDeUsoFachadaRedSocial.executor": "Run",
+    "Application.EjemploDeUsoRedSocial (1).executor": "Run",
+    "Application.EjemploDeUsoRedSocial.executor": "Run",
+    "Application.EjemploUsoMensajesBasicos.executor": "Run",
+    "Application.EjemploUsoNuevasFuncionalidades.executor": "Run",
+    "Application.temp.executor": "Debug",
+    "Application.tmpaaron.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Polak/Documents/GitHub/ADSOF_2025_2026/P3",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.EjemploDeUsoRedSocial (1)">
+  <component name="RunManager" selected="Application.EjemploUsoNuevasFuncionalidades (1)">
+    <configuration name="EjemploDeUsoFachadaRedSocial (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EjemploDeUsoFachadaRedSocial" />
+      <module name="P3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EjemploDeUsoFachadaRedSocial" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.EjemploDeUsoFachadaRedSocial" />
       <module name="P3" />
@@ -105,52 +101,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EjemploDeUsoRedSocial" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.EjemploDeUsoRedSocial" />
+    <configuration name="EjemploUsoMensajesBasicos" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EjemploUsoMensajesBasicos" />
       <module name="P3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EjemploUsoNuevasFuncionalidades" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.EjemploUsoNuevasFuncionalidades" />
+    <configuration name="EjemploUsoNuevasFuncionalidades (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EjemploUsoNuevasFuncionalidades" />
       <module name="P3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="temp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.temp" />
-      <module name="P3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EjemploUsoNuevasFuncionalidades (1)" />
+        <item itemvalue="Application.EjemploUsoMensajesBasicos" />
+        <item itemvalue="Application.EjemploDeUsoFachadaRedSocial (1)" />
         <item itemvalue="Application.EjemploDeUsoRedSocial (1)" />
         <item itemvalue="Application.EjemploDeUsoFachadaRedSocial" />
-        <item itemvalue="Application.EjemploUsoNuevasFuncionalidades" />
-        <item itemvalue="Application.temp" />
-        <item itemvalue="Application.EjemploDeUsoRedSocial" />
       </list>
     </recent_temporary>
   </component>
@@ -183,6 +154,11 @@
           <url>file://$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java</url>
           <line>56</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EjemploDeUsoFachadaRedSocial.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
