@@ -1,5 +1,3 @@
-package src.app;
-
 /**
  * Clase MensajeControlado, implementa la funcionalidad de mensajes que no pueden ser
  * mandados si no se cumple el requisito de rigidez, tan sólo se sobreescribe el método

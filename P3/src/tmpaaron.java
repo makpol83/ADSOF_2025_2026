@@ -1,10 +1,3 @@
-package src;
-
-import src.app.Exposicion;
-import src.app.Mensaje;
-import src.app.Usuario;
-import src.app.UsuarioInteresado;
-
 public class tmpaaron {
 
     public static void main(String[] args) {

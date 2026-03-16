@@ -1,4 +1,3 @@
-package src.app;
 
 /**
  * Esta clase proporciona la implementación básica de un mensaje que pertenecerá a una red social.

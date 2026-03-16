@@ -1,7 +1,3 @@
-package src.app;
-
-import java.util.ArrayList;
-
 /**
  * Clase UsuarioInteresado, modifica la funcionalidad al obtener enlaces
  * para difundir, priorizando los enlaces a usuarios de exposición ALTA o VIRAL,

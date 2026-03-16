@@ -1,8 +1,3 @@
-package src;
-
-
-import src.app.*;
-
 public class EjemploUsoNuevasFuncionalidades {
     public static void main(String[] args){
 

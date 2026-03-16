@@ -54,37 +54,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.EjemploDeUsoFachadaRedSocial.executor": "Run",
-    "Application.EjemploDeUsoRedSocial.executor": "Run",
-    "Application.EjemploUsoMensajesBasicos.executor": "Run",
-    "Application.EjemploUsoNuevasFuncionalidades.executor": "Run",
-    "Application.temp.executor": "Debug",
-    "Application.tmpaaron.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Polak/Documents/GitHub/ADSOF_2025_2026/P3",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.EjemploDeUsoFachadaRedSocial.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EjemploDeUsoRedSocial.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EjemploUsoMensajesBasicos.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EjemploUsoNuevasFuncionalidades.executor&quot;: &quot;Run&quot;,
+    &quot;Application.temp.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.tmpaaron.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Polak/Documents/GitHub/ADSOF_2025_2026/P3&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="src" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.EjemploDeUsoRedSocial (1)">
     <configuration name="EjemploDeUsoFachadaRedSocial" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.EjemploDeUsoFachadaRedSocial" />
       <module name="P3" />
@@ -94,6 +94,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EjemploDeUsoRedSocial (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EjemploDeUsoRedSocial" />
+      <module name="P3" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -139,6 +146,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EjemploDeUsoRedSocial (1)" />
         <item itemvalue="Application.EjemploDeUsoFachadaRedSocial" />
         <item itemvalue="Application.EjemploUsoNuevasFuncionalidades" />
         <item itemvalue="Application.temp" />

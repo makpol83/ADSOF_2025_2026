@@ -1,5 +1,3 @@
-package src.app;
-
 /**
  * Clase EnlaceSeñuelo, incluye la funcionalidad de Enlace, pero añade dos funcionalidades nuevas:
  * CosteExtra: Ahora a parte del coste original de un enlace, un enlaceSeñuelo tiene un coste especial

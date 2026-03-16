@@ -4,4 +4,4 @@ carmen 2
 diego 1
 mario 3
 fede 0
-Alberto 15
+Alberto 10

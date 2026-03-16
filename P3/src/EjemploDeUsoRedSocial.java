@@ -1,11 +1,4 @@
-package src;
-
 import java.io.IOException;
-
-import src.app.Enlace;
-import src.app.Mensaje;
-import src.app.RedSocial;
-import src.app.Usuario;
 
 public class EjemploDeUsoRedSocial {
     public static void main(String[] args){

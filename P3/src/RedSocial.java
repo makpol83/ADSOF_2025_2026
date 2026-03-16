@@ -1,4 +1,3 @@
-package src.app;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.io.File;
@@ -6,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 import java.util.ArrayList;
 
 /**

@@ -1,4 +1,3 @@
-package src.app;
 
 /**
  * Esta clase proporciona una implementación básica para un enlace perteneciente a una red social. Un enlace está

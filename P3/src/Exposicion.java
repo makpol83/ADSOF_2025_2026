@@ -1,4 +1,3 @@
-package src.app;
 
 /**
  * Enumeración para especificar los niveles de exposición asociados a un usuario.
