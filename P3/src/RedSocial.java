@@ -92,7 +92,7 @@ public class RedSocial {
     /**
      * Método privado para leer los usuarios.
      * @param pathArchivoUsuarios Path a los usuarios
-     * @return List<Usuario> Con los usuarios de la RedSocial
+     * @return Lista de Usuarios Con los usuarios de la RedSocial
      * @throws IOException Si ha fallado la lectura
      */
     private List<Usuario> readUsuarios(String pathArchivoUsuarios) throws IOException{
@@ -132,7 +132,7 @@ public class RedSocial {
      * Método privado para leer los enlaces.
      * @param pathArchivoEnlaces Path a los enlaces
      * @param usuarios Lista con los usuarios de la RedSocial
-     * @return List<Enlace> Con los enlaces de la RedSocial
+     * @return Lista de Enlace Con los enlaces de la RedSocial
      * @throws IOException Si ha fallado la lectura
      */
     private List<Enlace> readEnlaces(String pathArchivoEnlaces, List<Usuario> usuarios) throws IOException {
@@ -186,7 +186,7 @@ public class RedSocial {
      * Método privado para leer los mensajes. Los manda a través de los usuarios si tiene algún usuarioDestino.
      * @param pathArchivoMensaje Paths separados por comas, uno por cada mensaje
      * @param usuarios Lista con los usuarios de la RedSocial
-     * @return List<Mensaje> Con los mensajes de la RedSocial
+     * @return List de Mensaje Con los mensajes de la RedSocial
      * @throws IOException Si ha fallado la lectura
      */
     private List<Mensaje> readMensaje(List<Usuario> usuarios, String ... pathArchivoMensaje) throws IOException {
@@ -414,7 +414,7 @@ public class RedSocial {
 
     /**
      * Getter de los usuarios
-     * @return List<Usuario> de la RedSocial
+     * @return Lista de Usuarios de la RedSocial
      */
     public List<Usuario> getUsuarios(){
         return this.usuarios;
@@ -422,7 +422,7 @@ public class RedSocial {
 
     /**
      * Getter de los Mensajes
-     * @return List<Mensaje> de la RedSocial
+     * @return Lista de Mensajes de la RedSocial
      */
     public List<Mensaje> getMensajes(){
         return this.mensajes;
@@ -430,7 +430,7 @@ public class RedSocial {
 
     /**
      * Getter de los Enlaces
-     * @return List<Enlace> de la RedSocial
+     * @return Lista de Enlaces de la RedSocial
      */
     public List<Enlace> getEnlaces(){ 
         return this.enlaces;

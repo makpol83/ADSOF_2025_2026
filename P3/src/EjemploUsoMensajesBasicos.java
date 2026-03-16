@@ -1,4 +1,12 @@
+
+/**
+ * Clase de prueba para los primeros apartados
+ */
 public class EjemploUsoMensajesBasicos {
+    /**
+     * Main del test
+     * @param args argumentos del main (No necesarios)
+     */
     public static void main(String[] args){
 
         // Test 1 - Inicio
@@ -131,5 +139,12 @@ public class EjemploUsoMensajesBasicos {
 
 
         // Test 3 - Fin
+    }
+
+    /**
+     * Constructor para evitar warnings de javadoc
+     */
+    private EjemploUsoMensajesBasicos(){
+        //No necesario
     }
 }

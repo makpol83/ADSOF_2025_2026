@@ -1,6 +1,13 @@
 import java.io.IOException;
 
+/**
+ * Clase de prueba para la carga y descarga de ficheros de RedSocial
+ */
 public class EjemploDeUsoRedSocial {
+    /**
+     * Main del test
+     * @param args argumentos del main (No necesarios)
+     */
     public static void main(String[] args){
         RedSocial s;
         try {
@@ -93,5 +100,12 @@ public class EjemploDeUsoRedSocial {
             System.out.println(i);
         
         return;
+    }
+
+    /**
+     * Constructor para evitar warnings de javadoc
+     */
+    private EjemploDeUsoRedSocial(){
+        //No necesario
     }
 }

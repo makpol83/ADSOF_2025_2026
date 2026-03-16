@@ -1,4 +1,12 @@
+
+/**
+ * Clase de prueba para los métodos y clases del apartado 6
+ */
 public class EjemploUsoNuevasFuncionalidades {
+    /**
+     * Main del test
+     * @param args argumentos del main (No necesarios)
+     */
     public static void main(String[] args){
 
         // Test EnlaceSeñuelo
@@ -188,5 +196,12 @@ public class EjemploUsoNuevasFuncionalidades {
         System.out.println("Cambio la exposicion a OCULTA de rodolfo y veo que se difunde correctamente: ");
         rodolfo.cambiarExposicion(Exposicion.OCULTA);
         System.out.println("Debe ser true: " + mensajePresidencial.difunde(enlaceMuyNormal));
+    }
+
+    /**
+     * Constructor para evitar warnings de javadoc
+     */
+    private EjemploUsoNuevasFuncionalidades(){
+        //No necesario
     }
 }

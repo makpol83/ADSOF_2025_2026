@@ -4,10 +4,15 @@
  * Contiene la rigidez asociada a cada exposicion.
  */
 public enum Exposicion {
+    /** Exposicion OCULTA */
     OCULTA(0),
+    /** Exposicion BAJA */
     BAJA(5),
+    /** Exposicion MEDIA */
     MEDIA(10),
+    /** Exposicion ALTA */
     ALTA(20),
+    /** Exposicion VIRAL */
     VIRAL(50);
 
     /** Atributo que guarda la rigidez asociada a una exposición*/

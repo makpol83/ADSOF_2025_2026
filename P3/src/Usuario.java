@@ -174,7 +174,7 @@ public class Usuario {
 
 /**
  * Retorna el historial de este objeto como una lista de mensajes. Si no ha recibido ningun mensaje, se retornara una lista vacia
- * @return List<Mensaje> historial de mensajes
+ * @return Lista de Mensajes historial de mensajes
  */
     public List<Mensaje> getHistorial() { return this.historial; }
 
@@ -191,7 +191,7 @@ public class Usuario {
 
     /**
      * Retorna la lista de enlaces de este objeto. Si no tiene enlaces, se retornará una lista vacía.
-     * @return List<Enlace>
+     * @return Lista de Enlaces
      */
     public List<Enlace> getEnlaces(){
         return this.enlaces;

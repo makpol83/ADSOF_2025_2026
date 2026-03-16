@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a73b3a4-71ab-4b70-843f-e0b9f8496bbe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/enlaces_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/enlaces_guardados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/mensaje_guardado2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/usuarios_guardados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/usuarios_guardados.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EjemploDeUsoFachadaRedSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploDeUsoFachadaRedSocial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EjemploDeUsoRedSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploDeUsoRedSocial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EjemploUsoMensajesBasicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoMensajesBasicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exposicion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exposicion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RedSocial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedSocial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tmpaaron.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +52,7 @@
     "Application.EjemploDeUsoRedSocial (1).executor": "Run",
     "Application.EjemploDeUsoRedSocial.executor": "Run",
     "Application.EjemploUsoMensajesBasicos.executor": "Run",
+    "Application.EjemploUsoNuevasFuncionalidades (1).executor": "Run",
     "Application.EjemploUsoNuevasFuncionalidades.executor": "Run",
     "Application.temp.executor": "Debug",
     "Application.tmpaaron.executor": "Run",
@@ -147,17 +152,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java</url>
-          <line>52</line>
+          <line>60</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/EjemploUsoNuevasFuncionalidades.java</url>
-          <line>56</line>
+          <line>64</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/EjemploDeUsoFachadaRedSocial.java</url>
-          <line>25</line>
+          <line>32</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>

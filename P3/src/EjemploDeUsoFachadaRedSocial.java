@@ -1,6 +1,13 @@
 import java.io.IOException;
 
+/**
+ * Clase de prueba para los métodos de fachada de RedSocial
+ */
 public class EjemploDeUsoFachadaRedSocial {
+    /**
+     * Main del test
+     * @param args argumentos del main (No necesarios)
+     */
     public static void main(String[] args){
         RedSocial s;
         try {
@@ -110,5 +117,12 @@ public class EjemploDeUsoFachadaRedSocial {
             System.out.println(i);
 
         return;
+    }
+
+    /**
+     * Constructor para evitar warnings de javadoc
+     */
+    private EjemploDeUsoFachadaRedSocial(){
+        //No necesario
     }
 }
