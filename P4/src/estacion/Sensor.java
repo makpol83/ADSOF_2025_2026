@@ -3,7 +3,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Sensor {
+import estacion.EstrategiaMedicion;
+
+public abstract class Sensor {
     private String identificador;
     private double offset;
 
@@ -15,12 +17,21 @@ public class Sensor {
     private boolean estaCalibrado;
     private LocalDateTime tiempoCaducidad;
 
-    public Sensor(String identificador, double offset){
+    private EstrategiaMedicion estrategia;
+
+    private double probFueraRango;
+    private double rangoCercano;
+
+    public Sensor(String identificador, double offset, EstrategiaMedicion estrategia) implements Medicion {
         this.identificador = identificador;
         this.offset = offset;
         this.valorUltimaLectura = null;
         this.fechaUltimaLectura = null;
         this.fechaImplementacion = LocalDate.now();
+    }
+
+    public Sensor(String identificador, double offset, EstrategiaMedicion estrategia) implements Medicion{
+        this(identificador, )
     }
 
     private boolean estaCalibrado(){
@@ -68,4 +79,9 @@ public class Sensor {
         return this.identificador + " (desde: " + this.fechaImplementacion + "): Sensor " + this.getClass().getSimpleName() +
         " (" + valorUltLectura + ") última lectura: " + fechaUltLectura;
     }
+
+
+    public abstract void medicionAleatoria();
+    public void medicionCercana(){};
+    public abstract void medicionHistorica();
 }

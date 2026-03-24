@@ -2,7 +2,7 @@ package estacion;
 
 import estacion.medidas.MPresionAtmosferica;
 
-public class Presion extends Sensor implements Medicion {
+public class Presion extends Sensor {
     private static int nextId=1;
 
     private MPresionAtmosferica medidaEmpleada;
@@ -18,9 +18,5 @@ public class Presion extends Sensor implements Medicion {
 
         this.medidaEmpleada = medidaEmpleada;
     }
-
-    public void medicionAleatoria(){};
-    public void medicionCercana(){};
-    public void medicionHistorica(){};
     
 }
