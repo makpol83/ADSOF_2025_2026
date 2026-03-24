@@ -27,7 +27,19 @@ public class Sensor {
         if(estaCalibrado == false)
             return false;
 
-        if(fechaUltimaLectura.plus)
+        LocalDateTime expireDate = LocalDateTime.of(
+            fechaUltimaLectura.getYear() + tiempoCaducidad.getYear(),
+            fechaUltimaLectura.getMonthValue() + tiempoCaducidad.getMonthValue(),
+            fechaUltimaLectura.getDayOfMonth() + tiempoCaducidad.getDayOfMonth(),
+            fechaUltimaLectura.getHour() + tiempoCaducidad.getHour(),
+            fechaUltimaLectura.getMinute() + tiempoCaducidad.getMinute(),
+            fechaUltimaLectura.getSecond() + tiempoCaducidad.getSecond(),
+            0);
+
+        if(expireDate.isBefore(LocalDateTime.now()) == true)
+            return true;
+
+        return false;
     }
 
     public String getIdentificador(){return this.identificador;}
