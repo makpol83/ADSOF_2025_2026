@@ -19,5 +19,7 @@ public class Sensor {
     private boolean estaCalibrado(){
         return false;
     }
+
+    public String getIdentificador(){return this.identificador;}
     
 }
