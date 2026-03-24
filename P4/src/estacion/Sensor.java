@@ -42,8 +42,13 @@ public class Sensor {
         return false;
     }
 
+    public void setFechaUltimaLectura(LocalDateTime fecha){this.fechaUltimaLectura = fecha;}
+    public void setValorUltimaLectura(String valor){this.valorUltimaLectura = valor;}
+    public void lectura(){};
+
+
     public String getIdentificador(){return this.identificador;}
-    
+
     @Override
     public String toString(){
         String fechaUltLectura = this.fechaUltimaLectura.toString();
