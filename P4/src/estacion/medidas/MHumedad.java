@@ -1,15 +1,19 @@
 package estacion.medidas;
 
-public enum PresionAtmosferica {
-    hPa(300, 1100);
+public enum MHumedad {
+    Porcentaje(0,100);
 
     private double minValor;
     private double maxValor;
 
-    PresionAtmosferica(double minValor, double maxValor){
+    MHumedad(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
     }
+
+    public double getValorMinimo() { return this.minValor; }
+
+    public double getValorMaximo() { return this.maxValor; }
 
     public boolean esRangoValido(double value){
         if(value < this.minValor ||  value > this.maxValor)
