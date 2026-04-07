@@ -3,35 +3,48 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import estacion.EstrategiaMedicion;
+import estacion.estrategiasMedicion.EstrategiaMedicion;
+import estacion.estrategiasMedicion.MedicionAleatoria;
+import estacion.medidas.VariableMedida;
 
-public abstract class Sensor {
+public abstract class Sensor{
+    private static final EstrategiaMedicion estrategiaPorDefecto = new MedicionAleatoria(0.2);
+
     private String identificador;
     private double offset;
 
     private LocalDateTime fechaUltimaLectura;
-    private String valorUltimaLectura;
+    private double valorUltimaLectura;
 
     private LocalDate fechaImplementacion;
 
     private boolean estaCalibrado;
     private LocalDateTime tiempoCaducidad;
 
+    private VariableMedida variableMedida;
+
     private EstrategiaMedicion estrategia;
 
     private double probFueraRango;
     private double rangoCercano;
 
-    public Sensor(String identificador, double offset, EstrategiaMedicion estrategia) implements Medicion {
+    private double sumaMediciones;
+    private long numMediciones;
+
+    
+
+    public Sensor(String identificador, double offset, VariableMedida variableMedida, EstrategiaMedicion estrategia){
         this.identificador = identificador;
         this.offset = offset;
-        this.valorUltimaLectura = null;
+        this.valorUltimaLectura = 0;
         this.fechaUltimaLectura = null;
         this.fechaImplementacion = LocalDate.now();
+        this.sumaMediciones = 0;
+        this.numMediciones = 0;
     }
 
-    public Sensor(String identificador, double offset, EstrategiaMedicion estrategia) implements Medicion{
-        this(identificador, )
+    public Sensor(String identificador, double offset, VariableMedida variableMedida){
+        this(identificador, offset, variableMedida, estrategiaPorDefecto);
     }
 
     private boolean estaCalibrado(){
@@ -58,30 +71,39 @@ public abstract class Sensor {
         return false;
     }
 
-    public void setFechaUltimaLectura(LocalDateTime fecha){this.fechaUltimaLectura = fecha;}
-    public void setValorUltimaLectura(String valor){this.valorUltimaLectura = valor;}
-    public void lectura(){};
+    public EstrategiaMedicion getEstrategiaMedicion(){return this.estrategia;}
 
+    public void realizarMedida(){
+        double valorMinimo = this.variableMedida.getValorMinimo();
+        double valorMaximo = this.variableMedida.getValorMaximo();
+        
+        if(numMediciones == 0){
+            EstrategiaMedicion estrategiaAleatoria = new MedicionAleatoria(0);
+            this.valorUltimaLectura = estrategiaAleatoria.medir(valorMinimo, valorMaximo, 0, 0);
+        } else {
+            double mediaHistorica = this.sumaMediciones / this.numMediciones;
+            this.valorUltimaLectura = this.estrategia.medir(valorMinimo, valorMaximo, this.valorUltimaLectura, mediaHistorica);
+        }
+        sumaMediciones += valorUltimaLectura;
+        numMediciones++;
+        this.fechaUltimaLectura = LocalDateTime.now();
+    }
+    
+    public String getUnidadLectura(){
+        return this.variableMedida.name();
+    }
 
     public String getIdentificador(){return this.identificador;}
 
     @Override
     public String toString(){
         String fechaUltLectura = this.fechaUltimaLectura.toString();
-        String valorUltLectura = this.valorUltimaLectura.toString();
+        String valorUltLectura = this.valorUltimaLectura + this.getUnidadLectura();
 
         if(fechaUltLectura == null)
-            fechaUltLectura = "No hay lecturas.";
-
-        if(valorUltLectura == null)
             fechaUltLectura = "No hay lecturas.";
 
         return this.identificador + " (desde: " + this.fechaImplementacion + "): Sensor " + this.getClass().getSimpleName() +
         " (" + valorUltLectura + ") última lectura: " + fechaUltLectura;
     }
-
-
-    public abstract void medicionAleatoria();
-    public void medicionCercana(){};
-    public abstract void medicionHistorica();
 }

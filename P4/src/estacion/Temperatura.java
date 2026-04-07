@@ -1,19 +1,28 @@
 package estacion;
 
+import estacion.estrategiasMedicion.EstrategiaMedicion;
+import estacion.medidas.MPresionAtmosferica;
 import estacion.medidas.MTemperatura;
 
 public class Temperatura extends Sensor{
     private static int nextId=1;
 
-    private MTemperatura medidaEmpleada;
+    private static final MTemperatura medidaPorDefecto = MTemperatura.Celsius;
 
     public Temperatura(double offset){
-        super("TEMP-" + nextId++, offset);
-        this.medidaEmpleada = MTemperatura.Celsius;
+        this(offset, medidaPorDefecto);
     }
 
     public Temperatura(double offset, MTemperatura medidaEmpleada){
-        this(offset);
-        this.medidaEmpleada = medidaEmpleada;
+        super("TEMP-" + nextId++, offset, medidaEmpleada);
     }
+
+    public Temperatura(double offset, EstrategiaMedicion estrategiaMedicion){
+        this(offset, medidaPorDefecto, estrategiaMedicion);
+    }
+
+    public Temperatura(double offset, MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
+        super("TEMP-" + nextId++, offset, medidaEmpleada, estrategiaMedicion);
+    }
+    
 }

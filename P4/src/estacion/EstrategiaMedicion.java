@@ -1,8 +1,8 @@
 package estacion;
 
-public enum EstrategiaMedicion
-{
-    ALEATORIO,
-    CERCANO,
-    HISTORICO;
+public interface EstrategiaMedicion {
+
+    void medicionAleatoria(double probabilidadFueraRango);
+    void medicionCercana(double offsetPorcentaje);
+    void medicionHistorica(double offsetPorcentaje);
 }

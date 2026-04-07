@@ -1,6 +1,6 @@
 package estacion.medidas;
 
-public enum MPresionAtmosferica {
+public enum MPresionAtmosferica implements VariableMedida{
     hPa(300, 1100);
 
     private double minValor;

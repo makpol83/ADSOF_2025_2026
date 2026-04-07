@@ -34,9 +34,9 @@ public class EstacionMeteorologica {
         return true;
     }
 
-    public boolean lecturaManual(){
+    public void lecturaManual(){
         for(Sensor s : sensores.values()){
-            s.lectura();
+            s.realizarMedida();
         }
     }
 }

@@ -1,6 +1,6 @@
 package estacion.medidas;
 
-public enum MTemperatura{
+public enum MTemperatura implements VariableMedida{
     Celsius(-273.15, 1000),
     Fahrenheit(0,1),
     Kelvin(0, 1273.15);

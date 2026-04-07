@@ -1,6 +1,6 @@
 package estacion.medidas;
 
-public enum MHumedad {
+public enum MHumedad implements VariableMedida{
     Porcentaje(0,100);
 
     private double minValor;
