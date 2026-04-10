@@ -1,11 +1,8 @@
 package estacion;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
 import estacion.medidas.MHumedad;
-import estacion.medidas.MTemperatura;
 
 public class Humedad extends Sensor {
     private static int nextId=1;

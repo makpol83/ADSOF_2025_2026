@@ -9,6 +9,7 @@ public enum MHumedad implements VariableMedida{
     MHumedad(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
+        //TODO throw exception si no son validos
     }
 
     public double getValorMinimo() { return this.minValor; }

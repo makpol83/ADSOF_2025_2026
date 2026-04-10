@@ -1,5 +1,7 @@
 package estacion.estrategiasMedicion;
 
+import estacion.Sensor;
+
 public class MedicionAleatoria implements EstrategiaMedicion{
     private double probFueraRango;
 
@@ -7,15 +9,18 @@ public class MedicionAleatoria implements EstrategiaMedicion{
         this.probFueraRango = probFueraRango;
     }
 
-    public double medir(double valorMinimo, double valorMaximo, double ultimoValorMedido, double mediaHistorica){
+    public double medir(Sensor s){
+        double valorMin = s.getValorMinimo();
+        double valorMax = s.getValorMaximo();
+
         if(Math.random() < probFueraRango){
             if(Math.random() >= 0.5){
-                return (valorMaximo - valorMinimo)*Math.random() + valorMinimo + valorMaximo;
+                return (valorMax - valorMin)*Math.random() + valorMin + valorMax;
             } else {
-                return (valorMaximo - valorMinimo)*Math.random() - valorMaximo;
+                return (valorMax - valorMin)*Math.random() - valorMax;
             }
         } else {
-            return (valorMaximo - valorMinimo)*Math.random() + valorMinimo;
+            return (valorMax - valorMin)*Math.random() + valorMin;
         }
     }
 }

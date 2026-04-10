@@ -1,5 +1,7 @@
 package estacion.estrategiasMedicion;
 
+import estacion.Sensor;
+
 public class MedicionCercana implements EstrategiaMedicion{
     private double offsetPorcentaje;
 
@@ -7,7 +9,8 @@ public class MedicionCercana implements EstrategiaMedicion{
         this.offsetPorcentaje = offsetPorcentaje;
     }
 
-    public double medir(double valorMinimo, double valorMaximo, double ultimoValorMedido, double mediaHistorica){
+    public double medir(Sensor s){
+        double ultimoValorMedido = s.getUltimoValorMedido();
         double p = Math.random() * offsetPorcentaje/100;
         return ultimoValorMedido + ultimoValorMedido * p;
     }

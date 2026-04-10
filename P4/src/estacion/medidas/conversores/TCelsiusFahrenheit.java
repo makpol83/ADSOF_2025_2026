@@ -23,6 +23,6 @@ public class TCelsiusFahrenheit extends Conversor {
     }
 
     public double convertirUnidades(double valor){
-        
+        return -1;
     }
 }

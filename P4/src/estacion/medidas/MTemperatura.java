@@ -2,7 +2,7 @@ package estacion.medidas;
 
 public enum MTemperatura implements VariableMedida{
     Celsius(-273.15, 1000),
-    Fahrenheit(0,1),
+    Fahrenheit(-459.67,1832),
     Kelvin(0, 1273.15);
 
     private double minValor;
@@ -11,6 +11,7 @@ public enum MTemperatura implements VariableMedida{
     MTemperatura(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
+        //TODO throw exception si no son validos
     }
 
     public double getValorMinimo() { return this.minValor; }

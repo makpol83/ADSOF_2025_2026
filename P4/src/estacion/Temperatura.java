@@ -1,7 +1,6 @@
 package estacion;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
-import estacion.medidas.MPresionAtmosferica;
 import estacion.medidas.MTemperatura;
 
 public class Temperatura extends Sensor{

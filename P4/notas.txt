@@ -1,0 +1,1 @@
+-tenemos 2 interfaces "EstrategiaMedicion" (mismo nombre distintos metodos)

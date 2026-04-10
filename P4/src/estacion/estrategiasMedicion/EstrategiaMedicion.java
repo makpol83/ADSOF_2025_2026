@@ -1,5 +1,7 @@
 package estacion.estrategiasMedicion;
 
+import estacion.Sensor;
+
 public interface EstrategiaMedicion {
-    double medir(double valorMinimo, double valorMaximo, double ultimoValorMedido, double mediaHistorica);
+    double medir(Sensor s);
 }

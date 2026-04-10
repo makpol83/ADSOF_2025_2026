@@ -1,9 +1,11 @@
 package estacion.medidas.conversores;
 
+import estacion.medidas.*;
+
 public class TFahrenhieitLKelvin implements ConversorInterface {
     private static final VariableMedida variableOrigen = MTemperatura.Fahrenheit;
     private static final VariableMedida variableDestino = MTemperatura.Kelvin;
-    private static final ConversorInterface INSTANCIA = new TCelsiusFahrenheit();
+    private static final ConversorInterface INSTANCIA = new TFahrenhieitLKelvin();
 
     private TFahrenhieitLKelvin(){}
 
@@ -20,6 +22,6 @@ public class TFahrenhieitLKelvin implements ConversorInterface {
     }
 
     public double convertirUnidades(double valor){
-        
+        return -1;
     }
 }

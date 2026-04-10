@@ -1,7 +1,6 @@
 package estacion;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
 import estacion.estrategiasMedicion.MedicionAleatoria;
@@ -74,16 +73,13 @@ public abstract class Sensor{
     public EstrategiaMedicion getEstrategiaMedicion(){return this.estrategia;}
 
     public void realizarMedida(){
-        double valorMinimo = this.variableMedida.getValorMinimo();
-        double valorMaximo = this.variableMedida.getValorMaximo();
-        
         if(numMediciones == 0){
             EstrategiaMedicion estrategiaAleatoria = new MedicionAleatoria(0);
-            this.valorUltimaLectura = estrategiaAleatoria.medir(valorMinimo, valorMaximo, 0, 0);
+            this.valorUltimaLectura = estrategiaAleatoria.medir(this);
         } else {
-            double mediaHistorica = this.sumaMediciones / this.numMediciones;
-            this.valorUltimaLectura = this.estrategia.medir(valorMinimo, valorMaximo, this.valorUltimaLectura, mediaHistorica);
+            this.valorUltimaLectura = this.estrategia.medir(this);
         }
+        this.valorUltimaLectura -= this.offset;
         sumaMediciones += valorUltimaLectura;
         numMediciones++;
         this.fechaUltimaLectura = LocalDateTime.now();
@@ -94,14 +90,17 @@ public abstract class Sensor{
     }
 
     public String getIdentificador(){return this.identificador;}
+    public double getMediaHistorica() { return (numMediciones==0) ? 0 : sumaMediciones/numMediciones; }
 
     @Override
     public String toString(){
         String fechaUltLectura = this.fechaUltimaLectura.toString();
         String valorUltLectura = this.valorUltimaLectura + this.getUnidadLectura();
 
-        if(fechaUltLectura == null)
+        if(fechaUltLectura == null){
             fechaUltLectura = "No hay lecturas.";
+            valorUltLectura = "...";
+        }
 
         return this.identificador + " (desde: " + this.fechaImplementacion + "): Sensor " + this.getClass().getSimpleName() +
         " (" + valorUltLectura + ") última lectura: " + fechaUltLectura;

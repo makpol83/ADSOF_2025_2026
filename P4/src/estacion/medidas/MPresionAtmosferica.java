@@ -9,6 +9,7 @@ public enum MPresionAtmosferica implements VariableMedida{
     MPresionAtmosferica(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
+        //TODO throw exception si no son validos
     }
 
     public double getValorMinimo() { return this.minValor; }
