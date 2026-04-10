@@ -1,6 +1,6 @@
 package estacion.estrategiasMedicion;
 
-import estacion.Sensor;
+import estacion.sensores.Sensor;
 
 public interface EstrategiaMedicion {
     double medir(Sensor s);

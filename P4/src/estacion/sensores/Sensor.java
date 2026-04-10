@@ -1,4 +1,4 @@
-package estacion;
+package estacion.sensores;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

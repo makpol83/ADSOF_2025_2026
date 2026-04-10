@@ -1,6 +1,6 @@
 package estacion.estrategiasMedicion;
 
-import estacion.Sensor;
+import estacion.sensores.Sensor;
 
 public class MedicionCercana implements EstrategiaMedicion{
     private double offsetPorcentaje;

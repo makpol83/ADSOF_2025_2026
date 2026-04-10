@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import estacion.exceptions.MismoIdException;
+import estacion.sensores.Sensor;
 
 public class EstacionMeteorologica {
     private String nombre;

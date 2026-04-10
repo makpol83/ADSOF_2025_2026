@@ -1,6 +1,6 @@
 package estacion.estrategiasMedicion;
 
-import estacion.Sensor;
+import estacion.sensores.Sensor;
 
 public class MedicionHistorica implements EstrategiaMedicion{
     private double offsetPorcentaje;

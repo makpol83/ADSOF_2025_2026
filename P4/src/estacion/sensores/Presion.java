@@ -1,4 +1,4 @@
-package estacion;
+package estacion.sensores;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
 import estacion.medidas.MPresionAtmosferica;

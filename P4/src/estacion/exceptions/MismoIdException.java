@@ -1,6 +1,6 @@
 package estacion.exceptions;
 
-import estacion.Sensor;
+import estacion.sensores.Sensor;
 
 public class MismoIdException extends Exception {
     private Sensor s1;
