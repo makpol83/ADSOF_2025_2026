@@ -2,7 +2,7 @@ package estacion.sensores;
 
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
-import estacion.medidas.MHumedad;
+import estacion.unidadeslectura.MHumedad;
 
 public class Humedad extends Sensor {
     private static int nextId=1;

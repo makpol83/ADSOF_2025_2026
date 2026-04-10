@@ -1,4 +1,4 @@
-package estacion.medidas.conversores;
+package estacion.unidadeslectura.conversores;
 
 public class Conversor implements ConversorInterface{
     //AÑADIR COSAS Y METODOS COMUNES A LOS CONVERSORES

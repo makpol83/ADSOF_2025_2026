@@ -40,4 +40,9 @@ public class EstacionMeteorologica {
             s.realizarMedida();
         }
     }
+
+    @Override
+    public String toString(){
+        return "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + longitud;
+    }
 }

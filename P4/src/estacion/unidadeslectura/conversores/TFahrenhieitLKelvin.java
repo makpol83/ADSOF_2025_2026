@@ -1,10 +1,10 @@
-package estacion.medidas.conversores;
+package estacion.unidadeslectura.conversores;
 
-import estacion.medidas.*;
+import estacion.unidadeslectura.*;
 
 public class TFahrenhieitLKelvin implements ConversorInterface {
-    private static final VariableMedida variableOrigen = MTemperatura.Fahrenheit;
-    private static final VariableMedida variableDestino = MTemperatura.Kelvin;
+    private static final UnidadLectura variableOrigen = MTemperatura.Fahrenheit;
+    private static final UnidadLectura variableDestino = MTemperatura.Kelvin;
     private static final ConversorInterface INSTANCIA = new TFahrenhieitLKelvin();
 
     private TFahrenhieitLKelvin(){}
@@ -13,11 +13,11 @@ public class TFahrenhieitLKelvin implements ConversorInterface {
         return TFahrenhieitLKelvin.INSTANCIA;
     }
 
-    public VariableMedida getVariableOrigen(){
+    public UnidadLectura getVariableOrigen(){
         return TFahrenhieitLKelvin.variableOrigen;
     }
 
-    public VariableMedida getVariableDestino(){
+    public UnidadLectura getVariableDestino(){
         return TFahrenhieitLKelvin.variableDestino;
     }
 

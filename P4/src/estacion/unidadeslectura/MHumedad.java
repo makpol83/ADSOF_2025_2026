@@ -1,6 +1,6 @@
-package estacion.medidas;
+package estacion.unidadeslectura;
 
-public enum MHumedad implements VariableMedida{
+public enum MHumedad implements UnidadLectura{
     Porcentaje(0,100);
 
     private double minValor;

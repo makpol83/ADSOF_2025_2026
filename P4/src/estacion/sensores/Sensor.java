@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
 import estacion.estrategiasMedicion.MedicionAleatoria;
-import estacion.medidas.VariableMedida;
+import estacion.unidadeslectura.UnidadLectura;
 
 public abstract class Sensor{
     private static final EstrategiaMedicion estrategiaPorDefecto = new MedicionAleatoria(0.2);
@@ -20,7 +20,7 @@ public abstract class Sensor{
     private boolean estaCalibrado;
     private LocalDateTime tiempoCaducidad;
 
-    private VariableMedida variableMedida;
+    private UnidadLectura variableMedida;
 
     private EstrategiaMedicion estrategia;
 
@@ -32,7 +32,7 @@ public abstract class Sensor{
 
     
 
-    public Sensor(String identificador, double offset, VariableMedida variableMedida, EstrategiaMedicion estrategia){
+    public Sensor(String identificador, double offset, UnidadLectura variableMedida, EstrategiaMedicion estrategia){
         this.identificador = identificador;
         this.offset = offset;
         this.valorUltimaLectura = 0;
@@ -42,7 +42,7 @@ public abstract class Sensor{
         this.numMediciones = 0;
     }
 
-    public Sensor(String identificador, double offset, VariableMedida variableMedida){
+    public Sensor(String identificador, double offset, UnidadLectura variableMedida){
         this(identificador, offset, variableMedida, estrategiaPorDefecto);
     }
 

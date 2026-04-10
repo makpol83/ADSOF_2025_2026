@@ -1,7 +1,7 @@
 package estacion.sensores;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
-import estacion.medidas.MTemperatura;
+import estacion.unidadeslectura.MTemperatura;
 
 public class Temperatura extends Sensor{
     private static int nextId=1;

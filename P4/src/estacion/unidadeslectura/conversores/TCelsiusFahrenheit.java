@@ -1,11 +1,11 @@
-package estacion.medidas.conversores;
+package estacion.unidadeslectura.conversores;
 
-import estacion.medidas.MTemperatura;
-import estacion.medidas.VariableMedida;
+import estacion.unidadeslectura.MTemperatura;
+import estacion.unidadeslectura.UnidadLectura;
 
 public class TCelsiusFahrenheit extends Conversor {
-    private static final VariableMedida variableOrigen = MTemperatura.Celsius;
-    private static final VariableMedida variableDestino = MTemperatura.Fahrenheit;
+    private static final UnidadLectura variableOrigen = MTemperatura.Celsius;
+    private static final UnidadLectura variableDestino = MTemperatura.Fahrenheit;
     private static final ConversorInterface INSTANCIA = new TCelsiusFahrenheit();
 
     private TCelsiusFahrenheit(){}
@@ -14,11 +14,11 @@ public class TCelsiusFahrenheit extends Conversor {
         return TCelsiusFahrenheit.INSTANCIA;
     }
 
-    public VariableMedida getVariableOrigen(){
+    public UnidadLectura getVariableOrigen(){
         return TCelsiusFahrenheit.variableOrigen;
     }
 
-    public VariableMedida getVariableDestino(){
+    public UnidadLectura getVariableDestino(){
         return TCelsiusFahrenheit.variableDestino;
     }
 

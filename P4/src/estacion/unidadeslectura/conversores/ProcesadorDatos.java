@@ -1,15 +1,15 @@
-package estacion.medidas.conversores;
+package estacion.unidadeslectura.conversores;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import estacion.medidas.VariableMedida;
+import estacion.unidadeslectura.UnidadLectura;
 
 public class ProcesadorDatos {
-    private final VariableMedida variableMedida;
+    private final UnidadLectura variableMedida;
     private final List<ConversorInterface> conversores;
 
-    public ProcesadorDatos(VariableMedida variableMedida){
+    public ProcesadorDatos(UnidadLectura variableMedida){
         this.variableMedida = variableMedida;
         this.conversores = new ArrayList<>();
     }

@@ -1,7 +1,7 @@
 package estacion.sensores;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
-import estacion.medidas.MPresionAtmosferica;
+import estacion.unidadeslectura.MPresionAtmosferica;
 
 public class Presion extends Sensor {
     private static int nextId=1;

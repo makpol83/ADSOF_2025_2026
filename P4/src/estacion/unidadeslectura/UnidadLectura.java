@@ -1,6 +1,6 @@
-package estacion.medidas;
+package estacion.unidadeslectura;
 
-public interface VariableMedida {
+public interface UnidadLectura {
     double getValorMinimo();
     double getValorMaximo();
     boolean esRangoValido(double value);

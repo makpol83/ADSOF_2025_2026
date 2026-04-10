@@ -1,14 +1,12 @@
-package estacion.medidas;
+package estacion.unidadeslectura;
 
-public enum MTemperatura implements VariableMedida{
-    Celsius(-273.15, 1000),
-    Fahrenheit(-459.67,1832),
-    Kelvin(0, 1273.15);
+public enum MPresionAtmosferica implements UnidadLectura{
+    hPa(300, 1100);
 
     private double minValor;
     private double maxValor;
 
-    MTemperatura(double minValor, double maxValor){
+    MPresionAtmosferica(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
         //TODO throw exception si no son validos
