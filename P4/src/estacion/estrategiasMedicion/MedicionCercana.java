@@ -10,7 +10,7 @@ public class MedicionCercana implements EstrategiaMedicion{
     }
 
     public double medir(Sensor s){
-        double ultimoValorMedido = s.getUltimoValorMedido();
+        double ultimoValorMedido = s.getValorUltimaLectura();
         double p = Math.random() * offsetPorcentaje/100;
         return ultimoValorMedido + ultimoValorMedido * p;
     }

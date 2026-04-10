@@ -90,7 +90,10 @@ public abstract class Sensor{
     }
 
     public String getIdentificador(){return this.identificador;}
-    public double getMediaHistorica() { return (numMediciones==0) ? 0 : sumaMediciones/numMediciones; }
+    public double getMediaHistorica(){ return (numMediciones==0) ? 0 : sumaMediciones/numMediciones; }
+    public double getValorUltimaLectura(){ return this.valorUltimaLectura; }
+    public double getValorLecturaMinimo(){ return this.variableMedida.getValorMinimo(); }
+    public double getValorLecturaMaximo(){ return this.variableMedida.getValorMaximo(); }
 
     @Override
     public String toString(){

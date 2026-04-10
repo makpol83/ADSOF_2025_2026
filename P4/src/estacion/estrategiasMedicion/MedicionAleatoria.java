@@ -10,8 +10,8 @@ public class MedicionAleatoria implements EstrategiaMedicion{
     }
 
     public double medir(Sensor s){
-        double valorMin = s.getValorMinimo();
-        double valorMax = s.getValorMaximo();
+        double valorMin = s.getValorLecturaMinimo();
+        double valorMax = s.getValorLecturaMaximo();
 
         if(Math.random() < probFueraRango){
             if(Math.random() >= 0.5){
