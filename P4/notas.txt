@@ -1,1 +1,3 @@
--tenemos 2 interfaces "EstrategiaMedicion" (mismo nombre distintos metodos)
+-tenemos 2 interfaces "EstrategiaMedicion" (mismo nombre distintos metodos) [BORRE LA QUE NO USABAMOS]
+
+-he renombrado VariableMedida a UnidadLectura para que sea igual al enunciado, hace lo mismo.
