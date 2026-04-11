@@ -24,9 +24,6 @@ public abstract class Sensor{
 
     private EstrategiaMedicion estrategia;
 
-    private double probFueraRango;
-    private double rangoCercano;
-
     private double sumaMediciones;
     private long numMediciones;
 
