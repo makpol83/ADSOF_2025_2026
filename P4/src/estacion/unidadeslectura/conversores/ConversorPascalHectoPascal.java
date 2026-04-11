@@ -9,8 +9,7 @@ public class ConversorPascalHectoPascal extends Conversor {
         super(MPresionAtmosferica.Pa, MPresionAtmosferica.hPa);
     }
 
-    @Override
-    public Conversor getConversor(){ return INSTANCIA; }
+    public static ConversorPascalHectoPascal getConversor(){ return INSTANCIA; }
 
     @Override
     public double convertirUnidades(double valor){

@@ -9,8 +9,7 @@ public class ConversorIdentidad extends Conversor {
         super(null, null);
     }
 
-    @Override
-    public Conversor getConversor(){ return INSTANCIA; }
+    public static ConversorIdentidad getConversor(){ return INSTANCIA; }
 
     @Override
     public double convertirUnidades(double valor){

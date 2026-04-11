@@ -9,8 +9,7 @@ public class ConversorMiliBarPascal extends Conversor {
         super(MPresionAtmosferica.mbar, MPresionAtmosferica.Pa);
     }
 
-    @Override
-    public Conversor getConversor(){ return INSTANCIA; }
+    public static ConversorMiliBarPascal getConversor(){ return INSTANCIA; }
 
     @Override
     public double convertirUnidades(double valor){

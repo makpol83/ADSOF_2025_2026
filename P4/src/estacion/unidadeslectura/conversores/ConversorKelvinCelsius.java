@@ -9,8 +9,7 @@ public class ConversorKelvinCelsius extends Conversor {
         super(MTemperatura.Kelvin, MTemperatura.Celsius);
     }
 
-    @Override
-    public Conversor getConversor(){
+    public static ConversorKelvinCelsius getConversor(){
         return INSTANCIA;
     }
 

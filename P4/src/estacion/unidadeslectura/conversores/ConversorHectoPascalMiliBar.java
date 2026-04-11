@@ -9,8 +9,7 @@ public class ConversorHectoPascalMiliBar extends Conversor {
         super(MPresionAtmosferica.hPa, MPresionAtmosferica.mbar);
     }
 
-    @Override
-    public Conversor getConversor(){ return INSTANCIA; }
+    public static ConversorHectoPascalMiliBar getConversor(){ return INSTANCIA; }
 
     @Override
     public double convertirUnidades(double valor){

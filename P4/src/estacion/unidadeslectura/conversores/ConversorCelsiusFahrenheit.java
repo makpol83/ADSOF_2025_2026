@@ -9,8 +9,7 @@ public class ConversorCelsiusFahrenheit extends Conversor {
         super(MTemperatura.Celsius, MTemperatura.Fahrenheit);
     }
 
-    @Override
-    public Conversor getConversor(){
+    public static ConversorCelsiusFahrenheit getConversor(){
         return INSTANCIA;
     }
 

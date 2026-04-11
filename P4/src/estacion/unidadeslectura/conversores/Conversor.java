@@ -15,5 +15,4 @@ public abstract class Conversor {
     public UnidadLectura getUnidadOrigen(){ return this.variableOrigen; }
     public UnidadLectura getUnidadDestino(){ return this.variableDestino; }
     public abstract double convertirUnidades(double valor);
-    public abstract Conversor getConversor();
 }
