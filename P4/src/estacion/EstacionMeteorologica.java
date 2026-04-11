@@ -1,8 +1,8 @@
 package estacion;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAmount;
 import java.util.Collection;
 import java.util.Map;
 
@@ -46,24 +46,10 @@ public class EstacionMeteorologica {
         this.numLecturaAutomaticaMaxima = numLecturasMaximas;
 
         if(this.fechaUltimaLectura == null){
-            this.fechaProximaLecturaAutomatica = LocalDateTime.of(
-                LocalDateTime.now().getYear() + periodoLecturaAutomatica.getYear(),
-                LocalDateTime.now().getMonthValue() + periodoLecturaAutomatica.getMonthValue(),
-                LocalDateTime.now().getDayOfMonth() + periodoLecturaAutomatica.getDayOfMonth(),
-                LocalDateTime.now().getHour() + periodoLecturaAutomatica.getHour(),
-                LocalDateTime.now().getMinute() + periodoLecturaAutomatica.getMinute(),
-                LocalDateTime.now().getSecond() + periodoLecturaAutomatica.getSecond()    
-            );
+            this.fechaProximaLecturaAutomatica = addDates(LocalDateTime.now(), periodoLecturaAutomatica);
         }
         else{
-            this.fechaProximaLecturaAutomatica = LocalDateTime.of(
-               fechaUltimaLectura.getYear() + periodoLecturaAutomatica.getYear(),
-                fechaUltimaLectura.getMonthValue() + periodoLecturaAutomatica.getMonthValue(),
-                fechaUltimaLectura.getDayOfMonth() + periodoLecturaAutomatica.getDayOfMonth(),
-                fechaUltimaLectura.getHour() + periodoLecturaAutomatica.getHour(),
-                fechaUltimaLectura.getMinute() + periodoLecturaAutomatica.getMinute(),
-                fechaUltimaLectura.getSecond() + periodoLecturaAutomatica.getSecond()    
-            );
+            this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
         }
 
         //solo va a hacer el intento, no necesariamente se realiza la lectura
@@ -110,14 +96,15 @@ public class EstacionMeteorologica {
                 break;
             }
         }
-        if(LecturasCompletadas > 0)
+        if(LecturasCompletadas > 0){
             this.fechaUltimaLectura = LocalDateTime.now();
+            this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
+        }
     }
 
     public void lecturaAutomatica(){
-        if(fechaProximaLecturaAutomatica.isAfter(LocalDateTime.now()) == false){
+        if(fechaProximaLecturaAutomatica.isAfter(LocalDateTime.now()) == false)
             lecturaManual(this.numLecturaAutomaticaMaxima);
-        }
     }
 
     public void printEstacionMeteorologica(){
@@ -133,5 +120,17 @@ public class EstacionMeteorologica {
     @Override
     public String toString(){
         return "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + ", " + longitud;
+    }
+
+    //añado la excepcion por si alguien la quisiera capturar (la lanza LocalDateTime.of())
+    private LocalDateTime addDates(LocalDateTime date1, LocalDateTime date2) throws DateTimeException {
+        return LocalDateTime.of(
+            date1.getYear() + date2.getYear(),
+            date1.getMonthValue() + date2.getMonthValue(),
+            date1.getDayOfMonth() + date2.getDayOfMonth(),
+            date1.getHour() + date2.getHour(),
+            date1.getMinute() + date2.getMinute(),
+            date1.getSecond() + date2.getSecond()               
+        );
     }
 }

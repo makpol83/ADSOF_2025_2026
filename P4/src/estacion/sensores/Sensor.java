@@ -56,8 +56,7 @@ public abstract class Sensor{
                 fechaUltimaLectura.getDayOfMonth() + tiempoCaducidad.getDayOfMonth(),
                 fechaUltimaLectura.getHour() + tiempoCaducidad.getHour(),
                 fechaUltimaLectura.getMinute() + tiempoCaducidad.getMinute(),
-                fechaUltimaLectura.getSecond() + tiempoCaducidad.getSecond(),
-                0);
+                fechaUltimaLectura.getSecond() + tiempoCaducidad.getSecond());
         else
             return false;
 
