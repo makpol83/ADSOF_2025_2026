@@ -1,7 +1,9 @@
 package estacion.unidadeslectura;
 
 public enum MPresionAtmosferica implements UnidadLectura{
-    hPa(300, 1100);
+    hPa(300, 1100),
+    Pa(3, 11),
+    mbar(300, 1100);
 
     private double minValor;
     private double maxValor;
