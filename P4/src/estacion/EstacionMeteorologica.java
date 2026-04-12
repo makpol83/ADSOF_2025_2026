@@ -13,12 +13,13 @@ import estacion.exceptions.CalibracionCaducadaException;
 import estacion.exceptions.CambioBruscoLecturaException;
 import estacion.exceptions.MedidaFueraRangoException;
 import estacion.exceptions.MismoIdException;
+import estacion.exceptions.SensorException;
+import estacion.formateadores.IDocumento;
+import estacion.formateadores.SeccionSecundaria;
 import estacion.sensores.Medida;
 import estacion.sensores.Sensor;
-import estacion.unidadesLectura.UnidadLectura;
-import estacion.utils.Tuple;
 
-public class EstacionMeteorologica {
+public class EstacionMeteorologica implements IDocumento{
     private String nombre;
     private double longitud;
     private double latitud;
@@ -29,7 +30,7 @@ public class EstacionMeteorologica {
     private LocalDateTime periodoLecturaAutomatica;
     private int numLecturaAutomaticaMaxima;
 
-    private List<Exception> alertas;
+    private List<SensorException> alertas;
 
     private List<Sensor> sensoresDetenidos;
 
@@ -123,7 +124,7 @@ public class EstacionMeteorologica {
         }
 
         if(lecturasCompletadas > 0){
-            this.fechaUltimaLectura = LocalDateTime.now();
+            this.fechaUltimaLectura = LocalDateTime.now().withNano(0);
             if(this.periodoLecturaAutomatica != null)
                 this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
         }
@@ -166,27 +167,23 @@ public class EstacionMeteorologica {
         System.out.println(this);
         System.out.println("------------------------------------------------");
         System.out.println("Sensores instalados: " + this.sensores.size());
-        System.out.println("Última lectura: ");
+        //Sale el carácter ? si se pone tilde en última
+        System.out.println("Ultima lectura: " + (this.fechaUltimaLectura == null ? "Sin lecturas" : this.fechaUltimaLectura));
         for(Sensor s : this.sensores.values()){
-            double min = s.getProcesador().getLecturaMinima();
-            double max = s.getProcesador().getLecturaMaxima();
-            double avg = s.getProcesador().getMediaHistorica();
-
-            //insertar el historial entero pero formateando los datos para que tengan 2 decimales y solo se muestre el valor de lectura y no la fecha
-            String historial = "[";
-            for(Medida medida : s.getProcesador().getHistorial()){
-                historial = historial.concat(formatDouble(medida.getValorMedido()) + ", ");
+            //Si no está calibrado lo ignoramos
+            if(s.estaCalibrado() == false){
+                continue;
             }
-            // le quito el ", " extra que se le añadio en el bucle anterior
-            historial = historial.substring(0, historial.length()-2);
-            historial = historial.concat("]");
 
-            String conversor = (s.getProcesador().convierteUnidades()) ? "con conversor a " + s.getProcesador().getUnidadAConvertir().toString() : "";
-
-
-            System.out.println(s.getIdentificador() + " (" + s.getUnidadLectura() + ") " + conversor + ": " + historial +
-                " --" + " MIN: " + formatDouble(min) + " MAX: " + formatDouble(max) + " AVG: " + formatDouble(avg));
+            System.out.println(s.stringSensor());
         }
+
+        System.out.println("\nAlertas activas: " + this.alertas.size());
+
+        for(Exception exception : this.alertas){
+            System.out.println("- " + exception.getMessage());
+        }
+        System.out.println();
     }
 
     public boolean calibrarSensor(Sensor sensor, double nuevoOffset, int diasDuracionCalibracion){
@@ -198,6 +195,17 @@ public class EstacionMeteorologica {
             this.sensoresDetenidos.remove(sensor);
             this.lecturaPuntual(sensor);
         }
+
+        List<SensorException> excepcionesAntiguas = new ArrayList<>();
+
+        for(SensorException e : this.alertas){
+            if(e.getSensor().equals(sensor) == true){
+                excepcionesAntiguas.add(e);
+            }
+        }
+
+        this.alertas.removeAll(excepcionesAntiguas);
+
         return true;
     }
 
@@ -205,29 +213,52 @@ public class EstacionMeteorologica {
         return this.calibrarSensor(sensor, nuevoOffset, duracionDiasCalibracionPorDefecto);
     }
 
+    public String getTituloDocumento(){
+        return "Estación meteorológica " + this.nombre;
+    }
+    public String getTituloSeccionPrincipal(){
+        return this.nombre;
+    }
+    public List<String> getParrafosSeccionPrincipal(){
+        List<String> parrafos = new ArrayList<>();
+
+        parrafos.add("Ubicación: " + latitud + ", " + longitud);
+        parrafos.add("Sensores instalados: " + this.sensores.size());
+        parrafos.add("Ultima lectura: " + (this.fechaUltimaLectura == null ? "Sin lecturas" : this.fechaUltimaLectura));
+
+        return parrafos;
+    }
+    public List<SeccionSecundaria> getSeccionesSecundarias(){
+        List<SeccionSecundaria> secciones = new ArrayList<>();
+
+        if(this.sensores.size() != 0){
+            String tituloSeccion = "Sensores activos ";
+            List<String> parrafosSeccion = new ArrayList<>();
+
+            for(Sensor s : this.sensores.values()){
+                parrafosSeccion.add(s.stringSensor());
+            }
+
+            secciones.add(new SeccionSecundaria(tituloSeccion, parrafosSeccion));
+        }
+
+        if(this.alertas.size() != 0){
+            String tituloSeccion = "Alertas actuales ";
+            List<String> parrafosSeccion = new ArrayList<>();
+
+            for(SensorException e : this.alertas){
+                parrafosSeccion.add(e.getMessage());
+            }
+
+            secciones.add(new SeccionSecundaria(tituloSeccion, parrafosSeccion));
+        }
+
+        return secciones;
+    }
+
     @Override
     public String toString(){
-        String titulo = "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + ", " + longitud + "\n";
-        String separador = "--------------------------------------------------------------------------------\n";
-        String comienzoSensores = "Sensores instalados: " + this.sensores.size() + "\nÚltima lectura: " + this.fechaUltimaLectura + "\n";
-
-        String stringSensores = "";
-
-        for(Sensor sensor : this.sensores.values()){
-            if(sensor.estaCalibrado() == false)
-                continue;
-
-            stringSensores += sensor.toString() + "\n";
-        }
-
-        String tituloAlertas = "\nAlertas activas: " + this.alertas.size();
-        String alertas = "";
-
-        for(Exception exception : this.alertas){
-            alertas += exception.getMessage() + "\n";
-        }
-
-        return titulo + separador + comienzoSensores + stringSensores + tituloAlertas + alertas;
+        return "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + ", " + longitud;
     }
 
     //añado la excepcion por si alguien la quisiera capturar (la lanza LocalDateTime.of())
@@ -240,9 +271,5 @@ public class EstacionMeteorologica {
             date1.getMinute() + date2.getMinute(),
             date1.getSecond() + date2.getSecond()               
         );
-    }
-
-    private String formatDouble(double d){
-        return String.format("%.2f", d);
     }
 }

@@ -76,6 +76,10 @@ public class Procesador {
     }
 
     public UnidadLectura getUnidadAConvertir(){
+        //En caso de que sea la identidad
+        if(convierteUnidades() == false){
+            return this.variableMedida;
+        }
         return this.conversores.get(this.conversores.size()-1).getUnidadDestino();
     }
 
@@ -85,6 +89,9 @@ public class Procesador {
     }
 
     public double getLecturaMinima(){
+        if(this.historial.getNumMedidas() == 0)
+            return 0;
+
         double min = Double.MAX_VALUE;
         for(Medida medida : this.historial.values()){
             if(medida.getValorMedido() < min)
@@ -94,7 +101,10 @@ public class Procesador {
     }
 
     public double getLecturaMaxima(){
-        double max = Double.MIN_VALUE;
+        if(this.historial.getNumMedidas() == 0)
+            return 0;
+
+        double max = -Double.MAX_VALUE;
         for(Medida medida : this.historial.values()){
             if(medida.getValorMedido() > max)
                 max = medida.getValorMedido();

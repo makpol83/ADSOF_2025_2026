@@ -20,14 +20,16 @@ public class MedicionAleatoria implements EstrategiaMedicion{
     public double medir(Sensor s){
         double valorMin = s.getValorLecturaMinimo();
         double valorMax = s.getValorLecturaMaximo();
+        double rango = valorMax - valorMin;
 
         //Miramos si va a estar fuera de rango o no
-        if(Math.random() < probFueraRango){
+        if(Math.random() <= probFueraRango){
             //En caso de estar fuera de rango, vemos si está por arriba o por abajo
             if(Math.random() >= 0.5){
-                return (valorMax - valorMin)*Math.random() + valorMin + valorMax;
+                //Me aseguro de que está por encima del máximo con ese 0.1
+                return valorMax + rango*Math.random() + 0.1;
             } else {
-                return (valorMax - valorMin)*Math.random() - valorMax;
+                return valorMin - rango*Math.random() - 0.1 ;
             }
         } else {
             return (valorMax - valorMin)*Math.random() + valorMin;

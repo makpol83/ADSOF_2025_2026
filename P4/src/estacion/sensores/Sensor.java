@@ -12,6 +12,7 @@ import estacion.exceptions.MedidaFueraRangoException;
 import estacion.unidadesLectura.UnidadLectura;
 import estacion.unidadesLectura.conversores.Conversor;
 import estacion.unidadesLectura.conversores.Procesador;
+import estacion.utils.Formatter;
 
 /**
  * Describe el funcionamiento de un sensor, un sensor toma medidas mediante una estrategia de medicion
@@ -102,6 +103,7 @@ public abstract class Sensor{
     public void calibrar(int duracionCalibracionDias, double nuevoOffset){
         this.calibrado = true;
         this.fechaCaducidad = LocalDateTime.now().plusDays(duracionCalibracionDias);
+        this.offset = nuevoOffset;
     }
 
     /**
@@ -141,20 +143,20 @@ public abstract class Sensor{
         
         //Procesamos el dato
         fechaUltimaLectura = LocalDateTime.now();
-        fechaUltimaLectura = fechaUltimaLectura.minusNanos(fechaUltimaLectura.getNano());
+        fechaUltimaLectura = fechaUltimaLectura.withNano(0);
 
         //Comprobamos si la medida esta fuera de rango o tiene un cambio brusco
         Medida penultimaMedida = this.getUltimaMedida();
         Medida ultimaMedida = new Medida(valorUltimaLectura, fechaUltimaLectura);
 
-        if(this.getUnidadLectura().esRangoValido(ultimaMedida.getValorMedido()) == false)
+        if(this.getUnidadConvertida().esRangoValido(ultimaMedida.getValorMedido()) == false)
             throw new MedidaFueraRangoException(this, ultimaMedida);
 
         //A partir de aquí se puede registrar
         procesador.procesarDato(ultimaMedida);
         
         if(penultimaMedida != null){
-            if(penultimaMedida.getValorMedido() * this.porcentajeCambioBrusco > Math.abs(penultimaMedida.getValorMedido() - ultimaMedida.getValorMedido()))
+            if(Math.abs((penultimaMedida.getValorMedido() - ultimaMedida.getValorMedido())/penultimaMedida.getValorMedido()) > this.porcentajeCambioBrusco)
                 throw new CambioBruscoLecturaException(this, penultimaMedida, ultimaMedida);
         }
     }
@@ -165,6 +167,14 @@ public abstract class Sensor{
      */
     public UnidadLectura getUnidadLectura(){
         return this.variableMedida;
+    }
+
+    /**
+     * Getter unidad final a mostrar
+     * @return UnidadLectura
+     */
+    public UnidadLectura getUnidadConvertida(){
+        return this.procesador.getUnidadAConvertir();
     }
 
     /**
@@ -259,6 +269,37 @@ public abstract class Sensor{
      * Configura el sensor como descalibrado para futuras comprobaciones.
      */
     public void setDescalibrado(){ this.calibrado = false; }
+
+    /**
+     * Método que fuerza la entrada de una medida, usado mayormente para testear
+     * @param medida medida a añadir
+     */
+    public void forzarMedida(Medida medida){
+        this.procesador.procesarDato(medida);
+    }
+
+    public String stringSensor(){
+        double min = this.getProcesador().getLecturaMinima();
+        double max = this.getProcesador().getLecturaMaxima();
+        double avg = this.getProcesador().getMediaHistorica();
+
+        //insertar el historial entero pero formateando los datos para que tengan 2 decimales y solo se muestre el valor de lectura y no la fecha
+        String historial = "[";
+        for(Medida medida : this.getProcesador().getHistorial()){
+            historial = historial.concat(Formatter.formatDouble(medida.getValorMedido()) + ", ");
+        }
+        if(this.getProcesador().getHistorial().size() > 0){
+            // le quito el ", " extra que se le añadio en el bucle anterior si hay al menos una medida
+            historial = historial.substring(0, historial.length()-2);
+        }
+        //Concatenamos el ]
+        historial = historial.concat("]");
+
+        String conversor = (this.getProcesador().convierteUnidades()) ? "con conversor a " + this.getProcesador().getUnidadAConvertir().toString() : "";
+
+        return this.getIdentificador() + " (" + this.getUnidadLectura() + ") " + conversor + ": " + historial +
+            " --" + " MIN: " + Formatter.formatDouble(min) + " MAX: " + Formatter.formatDouble(max) + " AVG: " + Formatter.formatDouble(avg);
+    }
 
     @Override
     public String toString(){

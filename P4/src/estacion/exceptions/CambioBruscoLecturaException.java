@@ -8,9 +8,7 @@ import estacion.sensores.Sensor;
 /**
  * Alerta de que se ha producido un cambio brusco en porcentaje respecto de la última medida
  */
-public class CambioBruscoLecturaException extends Exception {
-    /** Sensor asociado */
-    Sensor sensor;
+public class CambioBruscoLecturaException extends SensorException {
     /** Penultima medida */
     Medida penultimaMedida;
     /** Nueva medida con cambio brusco */
@@ -23,15 +21,8 @@ public class CambioBruscoLecturaException extends Exception {
      * @param ultimaMedida ultima medida con cambio brusco
      */
     public CambioBruscoLecturaException(Sensor sensor, Medida penultimaMedida, Medida ultimaMedida){
-        super(LocalDateTime.now() + "Cambio brusco en " + sensor.getIdentificador() + ": " + ultimaMedida.getValorMedido() + sensor.getUnidadLectura() + " (anterior: " + penultimaMedida.getValorMedido() + sensor.getUnidadLectura() + ")");
-        this.sensor = sensor;
+        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Cambio brusco en " + sensor.getIdentificador() + ": " + String.format("%.2f", ultimaMedida.getValorMedido()) + sensor.getUnidadLectura() + " (anterior: " + String.format("%.2f", penultimaMedida.getValorMedido()) + sensor.getUnidadLectura() + ")");
     }
-
-    /**
-     * Getter del sensor asociado
-     * @return Sensor
-     */
-    public Sensor getSensor(){ return this.sensor; }
 
     /**
      * Getter de la penultima medida

@@ -8,23 +8,13 @@ import estacion.sensores.Sensor;
 /**
  * Alerta de que se ha realizado una medida fuera de rango
  */
-public class MedidaFueraRangoException extends Exception {
-    /** Sensor asociado */
-    Sensor sensor;
-
+public class MedidaFueraRangoException extends SensorException {
     /**
      * Constructor excepcion
      * @param sensor Sensor asociado
      * @param medidaFueraDeRango Medida fuera de rango
      */
     public MedidaFueraRangoException(Sensor sensor, Medida medidaFueraDeRango){
-        super(LocalDateTime.now() + "Lectura fuera de rango en " + sensor.getIdentificador() + ": " + medidaFueraDeRango.getValorMedido() + sensor.getUnidadLectura());
-        this.sensor = sensor;
+        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Lectura fuera de rango en " + sensor.getIdentificador() + ": " + String.format("%.2f", medidaFueraDeRango.getValorMedido()) + sensor.getUnidadLectura());
     }
-
-    /**
-     * Getter del sensor
-     * @return Sensor
-     */
-    public Sensor getSensor(){ return this.sensor; }
 }

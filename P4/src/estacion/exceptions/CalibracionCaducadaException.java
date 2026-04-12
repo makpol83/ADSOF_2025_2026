@@ -7,22 +7,12 @@ import estacion.sensores.Sensor;
 /**
  * Informa de que un sensor está caducado y necesita calibración
  */
-public class CalibracionCaducadaException extends Exception {
-    /** Sensor caducado. */
-    Sensor sensor;
-
+public class CalibracionCaducadaException extends SensorException {
     /**
      * Constructor excepcion
      * @param sensor sensor caducado
      */
     public CalibracionCaducadaException(Sensor sensor){
-        super(LocalDateTime.now() + "Sensor " + sensor.getIdentificador() + " sin calibrar (calibración caducada desde " + (sensor.getFechaCaducidad() == null ? "Nunca calibrado" : sensor.getFechaCaducidad()) + ")");
-        this.sensor = sensor;
+        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Sensor " + sensor.getIdentificador() + " sin calibrar (calibración caducada desde " + (sensor.getFechaCaducidad() == null ? "Nunca calibrado" : sensor.getFechaCaducidad()) + ")");
     }
-
-    /**
-     * Consigue el sensor caducado
-     * @return Sensor
-     */
-    public Sensor getSensor(){ return this.sensor; }
 }
