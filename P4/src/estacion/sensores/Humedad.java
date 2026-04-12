@@ -2,27 +2,41 @@ package estacion.sensores;
 
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
-import estacion.unidadeslectura.MHumedad;
+import estacion.unidadesLectura.MHumedad;
 
+/**
+ * Sensores que miden la humedad.
+ */
 public class Humedad extends Sensor {
+    /** Próxima ID a asignar al identificador */
     private static int nextId=1;
 
+    /** Medida por defecto */
     private static final MHumedad medidaPorDefecto = MHumedad.Porcentaje;
 
-    public Humedad(double offset){
-        this(offset, medidaPorDefecto);
+    /**
+     * Constructor sensor de humedad
+     * @param medidaEmpleada medida empleada
+     */
+    public Humedad(MHumedad medidaEmpleada){
+        super("HUM-" + String.format("%04d", nextId++), medidaEmpleada);
     }
 
-    public Humedad(double offset, MHumedad medidaEmpleada){
-        super("HUM-" + String.format("%04d", nextId++), offset, medidaEmpleada);
+    /**
+     * Constructor sensor de humedad
+     * @param estrategiaMedicion estrategia de medicion
+     */
+    public Humedad(EstrategiaMedicion estrategiaMedicion){
+        this(medidaPorDefecto, estrategiaMedicion);
     }
 
-    public Humedad(double offset, EstrategiaMedicion estrategiaMedicion){
-        this(offset, medidaPorDefecto, estrategiaMedicion);
-    }
-
-    public Humedad(double offset, MHumedad medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
-        super("HUM-" + String.format("%04d", nextId++), offset, medidaEmpleada, estrategiaMedicion, null);
+    /**
+     * Constructor sensor de humedad
+     * @param medidaEmpleada medida empleada
+      * @param estrategiaMedicion estrategia medicion
+     */
+    public Humedad(MHumedad medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
+        super("HUM-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion);
     }
     
 }

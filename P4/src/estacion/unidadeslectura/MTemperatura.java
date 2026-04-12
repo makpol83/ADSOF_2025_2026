@@ -1,4 +1,4 @@
-package estacion.unidadeslectura;
+package estacion.unidadesLectura;
 
 public enum MTemperatura implements UnidadLectura{
     Celsius(-273.15, 1000),
@@ -8,7 +8,7 @@ public enum MTemperatura implements UnidadLectura{
     private double minValor;
     private double maxValor;
 
-    MTemperatura(double minValor, double maxValor){
+    private MTemperatura(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
         //TODO throw exception si no son validos

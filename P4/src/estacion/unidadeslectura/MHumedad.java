@@ -1,4 +1,4 @@
-package estacion.unidadeslectura;
+package estacion.unidadesLectura;
 
 public enum MHumedad implements UnidadLectura{
     Porcentaje(0,100);
@@ -6,7 +6,7 @@ public enum MHumedad implements UnidadLectura{
     private double minValor;
     private double maxValor;
 
-    MHumedad(double minValor, double maxValor){
+    private MHumedad(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
         //TODO throw exception si no son validos

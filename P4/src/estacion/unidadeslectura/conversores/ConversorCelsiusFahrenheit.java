@@ -1,6 +1,6 @@
-package estacion.unidadeslectura.conversores;
+package estacion.unidadesLectura.conversores;
 
-import estacion.unidadeslectura.MTemperatura;
+import estacion.unidadesLectura.MTemperatura;
 
 public class ConversorCelsiusFahrenheit extends Conversor {
     private static final ConversorCelsiusFahrenheit INSTANCIA = new ConversorCelsiusFahrenheit();

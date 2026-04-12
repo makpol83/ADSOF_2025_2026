@@ -1,6 +1,6 @@
-package estacion.unidadeslectura.conversores;
+package estacion.unidadesLectura.conversores;
 
-import estacion.unidadeslectura.MTemperatura;
+import estacion.unidadesLectura.MTemperatura;
 
 public class ConversorKelvinCelsius extends Conversor {
     private static final ConversorKelvinCelsius INSTANCIA = new ConversorKelvinCelsius();

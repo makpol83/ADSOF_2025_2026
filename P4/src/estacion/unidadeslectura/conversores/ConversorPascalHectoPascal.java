@@ -1,6 +1,6 @@
-package estacion.unidadeslectura.conversores;
+package estacion.unidadesLectura.conversores;
 
-import estacion.unidadeslectura.MPresionAtmosferica;
+import estacion.unidadesLectura.MPresionAtmosferica;
 
 public class ConversorPascalHectoPascal extends Conversor {
     private static final ConversorPascalHectoPascal INSTANCIA = new ConversorPascalHectoPascal();

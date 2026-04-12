@@ -1,19 +1,20 @@
-package estacion.unidadeslectura.conversores;
+package estacion.unidadesLectura.conversores;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import estacion.utils.Tuple;
-import estacion.unidadeslectura.UnidadLectura;
+import estacion.sensores.Medicion;
+import estacion.sensores.Medida;
+import estacion.unidadesLectura.UnidadLectura;
 
 public class Procesador {
     /** Unidad inicial sobre la que procesar los datos y convertirlos a otras unidades si es posible */
     private final UnidadLectura variableMedida;
     /** Lista de conversores sobre la que se realizará la conversión de unidades. Se asume que los conversores vienen en un orden correcto. Ejemplo [(hPa -> Pa), (Pa -> mbar)] */
     private final List<Conversor> conversores;
-    private List<Tuple<Double, LocalDateTime>> historial;
+    private Medicion historial;
 
 
     public Procesador(UnidadLectura variableMedida){
@@ -21,7 +22,7 @@ public class Procesador {
     }
     public Procesador(UnidadLectura variableMedida, List<Conversor> conversores){
         this.variableMedida = variableMedida;
-        this.historial = new ArrayList<>();
+        this.historial = new Medicion();
         this.conversores = new ArrayList<>();
         this.conversores.add(ConversorIdentidad.getConversor());
         if(conversores != null)
@@ -53,15 +54,14 @@ public class Procesador {
         if(unidadFinal.equals(conversorUnidades.getUnidadOrigen())){
             this.conversores.add(conversorUnidades);
 
-            List<Tuple<Double, LocalDateTime>> nuevoHistorial = new ArrayList<>();
+            Medicion nuevoHistorial = new Medicion();
 
             //realiza la conversion de unidad del nuevo conversor a todos los datos del historial
-            for(Tuple<Double, LocalDateTime> t : this.historial){ 
-                double e1 = t.getElement1();
-                LocalDateTime e2 = t.getElement2();
-                double nuevoE1 = conversorUnidades.convertirUnidades(e1);
-                Tuple<Double, LocalDateTime> datoModificado = new Tuple<>(nuevoE1, e2);
-                nuevoHistorial.add(datoModificado);
+            for(Medida medida : this.historial.values()){ 
+                double valorMedido = conversorUnidades.convertirUnidades(medida.getValorMedido());
+                Medida datoModificado = new Medida(valorMedido, medida.getFechaMedida());
+                
+                nuevoHistorial.añadirMedida(datoModificado);
             }
 
             this.historial = nuevoHistorial;
@@ -71,9 +71,8 @@ public class Procesador {
             return false;
     }
 
-    public void procesarDato(double dato, LocalDateTime fechaDeLectura){
-        Tuple<Double, LocalDateTime> tupla = new Tuple<>(dato, fechaDeLectura);
-        this.historial.add(tupla);
+    public void procesarDato(Medida medida){
+        this.historial.añadirMedida(medida);
     }
 
     public UnidadLectura getUnidadAConvertir(){
@@ -87,35 +86,38 @@ public class Procesador {
 
     public double getLecturaMinima(){
         double min = Double.MAX_VALUE;
-        for(Tuple<Double, LocalDateTime> t : this.historial){
-            if(t.getElement1() < min)
-                min = t.getElement1();
+        for(Medida medida : this.historial.values()){
+            if(medida.getValorMedido() < min)
+                min = medida.getValorMedido();
         }
         return min;
     }
 
     public double getLecturaMaxima(){
         double max = Double.MIN_VALUE;
-        for(Tuple<Double, LocalDateTime> t : this.historial){
-            if(t.getElement1() > max)
-                max = t.getElement1();
+        for(Medida medida : this.historial.values()){
+            if(medida.getValorMedido() > max)
+                max = medida.getValorMedido();
         }
         return max;
     }
 
-    public Collection<Tuple<Double, LocalDateTime>> getHistorial(){
-        return List.copyOf(this.historial);
+    public Collection<Medida> getHistorial(){
+        return this.historial.values();
     }
 
-    public double getLecturaMedia(){
-        if(this.historial.isEmpty())
+    public Medida getMedida(int i){
+        return this.historial.getMedida(i);
+    }
+
+    public int getNumMedidas(){ return this.historial.getNumMedidas(); }
+
+    public double getMediaHistorica(){
+        if(this.historial.getNumMedidas() == 0)
             return 0;
-
-        double media = 0;
-        for(Tuple<Double, LocalDateTime> t : this.historial){
-            media += t.getElement1();
-        }
-        return media / this.historial.size();
+        
+        return this.historial.getMediaHistorica();
     }
+
 
 }

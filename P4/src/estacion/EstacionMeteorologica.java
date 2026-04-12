@@ -3,26 +3,37 @@ package estacion;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import estacion.exceptions.CalibracionCaducadaException;
+import estacion.exceptions.CambioBruscoLecturaException;
+import estacion.exceptions.MedidaFueraRangoException;
 import estacion.exceptions.MismoIdException;
+import estacion.sensores.Medida;
 import estacion.sensores.Sensor;
-import estacion.unidadeslectura.UnidadLectura;
+import estacion.unidadesLectura.UnidadLectura;
 import estacion.utils.Tuple;
 
 public class EstacionMeteorologica {
     private String nombre;
     private double longitud;
     private double latitud;
-    private Map<String,Tuple<Sensor, LocalDate>> sensores;
+    private Map<String,Sensor> sensores;
     private LocalDateTime fechaUltimaLectura;
 
     private LocalDateTime fechaProximaLecturaAutomatica;
     private LocalDateTime periodoLecturaAutomatica;
     private int numLecturaAutomaticaMaxima;
 
+    private List<Exception> alertas;
+
+    private List<Sensor> sensoresDetenidos;
+
+    private static final int duracionDiasCalibracionPorDefecto = 365;
 
     public EstacionMeteorologica(String nombre, double longitud, double latitud) {
         this.nombre = nombre;
@@ -31,18 +42,20 @@ public class EstacionMeteorologica {
         this.fechaUltimaLectura = null;
         this.fechaProximaLecturaAutomatica = null;
         this.numLecturaAutomaticaMaxima = 0;
+        this.sensoresDetenidos = new ArrayList<>();
         this.sensores = new HashMap<>();
+        this.alertas = new ArrayList<>();
     }
 
     public EstacionMeteorologica(String nombre, double longitud, double latitud, Collection<Sensor> sensores) throws MismoIdException {
         this(nombre, longitud, latitud);
         for(Sensor s : sensores){
             if(this.sensores.containsKey(s.getIdentificador())
-            && this.sensores.get(s.getIdentificador()).getElement1() != s)
-                throw new MismoIdException(this.sensores.get(s.getIdentificador()).getElement1(), s);
+            && this.sensores.get(s.getIdentificador()) != s)
+                throw new MismoIdException(this.sensores.get(s.getIdentificador()), s);
             else{
-                Tuple<Sensor, LocalDate> t = new Tuple<>(s, LocalDate.now());
-                this.sensores.put(s.getIdentificador(), t);
+                s.setFechaImplementación(LocalDate.now());
+                this.sensores.put(s.getIdentificador(), s);
             }
             
         }
@@ -71,26 +84,27 @@ public class EstacionMeteorologica {
 
     public boolean añadirSensor(Sensor s) throws MismoIdException {
         if(sensores.containsKey(s.getIdentificador()))
-            throw new MismoIdException(sensores.get(s.getIdentificador()).getElement1(), s);
+            throw new MismoIdException(sensores.get(s.getIdentificador()), s);
 
-        sensores.put(s.getIdentificador(), new Tuple<>(s, LocalDate.now()));
+        s.setFechaImplementación(LocalDate.now());
+        sensores.put(s.getIdentificador(), s);
         return true;
     }
 
     public Sensor getSensor(String identificador){
-        return this.sensores.get(identificador).getElement1();
+        return this.sensores.get(identificador);
     }
 
     public LocalDate getFechaInstalacion(Sensor s) {
         if(this.sensores.containsKey(s.getIdentificador()))
-            return this.sensores.get(s.getIdentificador()).getElement2();
+            return this.sensores.get(s.getIdentificador()).getFechaImplementacion();
         else
             return null;
     }
 
     public LocalDate getFechaInstalacion(String sensorId) {
         if(this.sensores.containsKey(sensorId))
-            return this.sensores.get(sensorId).getElement2();
+            return this.sensores.get(sensorId).getFechaImplementacion();
         else
             return null;
     }
@@ -98,20 +112,44 @@ public class EstacionMeteorologica {
     public void lecturaManual(){ this.lecturaManual(this.sensores.size()); }
 
     public void lecturaManual(int numLecturas){
-        int LecturasCompletadas = 0;
-        for(Tuple<Sensor, LocalDate> t : sensores.values()){
-            Sensor s = t.getElement1();
-            s.realizarMedida();
-            LecturasCompletadas++;
-            if(LecturasCompletadas >= numLecturas){
-                break;
+        int lecturasCompletadas = 0;
+        for(Sensor sensor : sensores.values()){
+            if(this.lecturaPuntual(sensor) == true){
+                lecturasCompletadas++;
             }
+
+            if(lecturasCompletadas > numLecturas)
+                break;
         }
-        if(LecturasCompletadas > 0){
+
+        if(lecturasCompletadas > 0){
             this.fechaUltimaLectura = LocalDateTime.now();
             if(this.periodoLecturaAutomatica != null)
                 this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
         }
+    }
+
+    public boolean lecturaPuntual(Sensor sensor){
+        try{
+            sensor.realizarMedida();
+        } catch (CalibracionCaducadaException | MedidaFueraRangoException e){
+            if(sensor.estaCalibrado() == true){
+                sensor.setDescalibrado();
+                this.alertas.add(e);
+                this.sensoresDetenidos.add(sensor);
+            } else if (sensor.estaCalibrado() == false && this.sensoresDetenidos.contains(sensor) == false){
+                // En caso de que nunca se calibro
+                this.alertas.add(e);
+                this.sensoresDetenidos.add(sensor);
+            }
+
+            return false;
+        }  catch (CambioBruscoLecturaException e){
+            //Puede continuar como lectura completada
+            this.alertas.add(e);
+        }
+
+        return true;
     }
 
     public void lecturaAutomatica(){
@@ -124,16 +162,15 @@ public class EstacionMeteorologica {
         System.out.println("------------------------------------------------");
         System.out.println("Sensores instalados: " + this.sensores.size());
         System.out.println("Última lectura: ");
-        for(Tuple<Sensor, LocalDate> t : this.sensores.values()){
-            Sensor s = t.getElement1();
+        for(Sensor s : this.sensores.values()){
             double min = s.getProcesador().getLecturaMinima();
             double max = s.getProcesador().getLecturaMaxima();
-            double avg = s.getProcesador().getLecturaMedia();
+            double avg = s.getProcesador().getMediaHistorica();
 
             //insertar el historial entero pero formateando los datos para que tengan 2 decimales y solo se muestre el valor de lectura y no la fecha
             String historial = "[";
-            for(Tuple<Double, LocalDateTime> tup : s.getProcesador().getHistorial()){
-                historial = historial.concat(formatDouble(tup.getElement1()) + ", ");
+            for(Medida medida : s.getProcesador().getHistorial()){
+                historial = historial.concat(formatDouble(medida.getValorMedido()) + ", ");
             }
             // le quito el ", " extra que se le añadio en el bucle anterior
             historial = historial.substring(0, historial.length()-2);
@@ -145,6 +182,22 @@ public class EstacionMeteorologica {
             System.out.println(s.getIdentificador() + " (" + s.getUnidadLectura() + ") " + conversor + ": " + historial +
                 " --" + " MIN: " + formatDouble(min) + " MAX: " + formatDouble(max) + " AVG: " + formatDouble(avg));
         }
+    }
+
+    public boolean calibrarSensor(Sensor sensor, double nuevoOffset, int diasDuracionCalibracion){
+        if(this.sensores.containsKey(sensor.getIdentificador()) == false)
+            return false;
+
+        sensor.calibrar(diasDuracionCalibracion, nuevoOffset);
+        if(this.sensoresDetenidos.contains(sensor) == true){
+            this.sensoresDetenidos.remove(sensor);
+            this.lecturaPuntual(sensor);
+        }
+        return true;
+    }
+
+    public boolean calibrarSensor(Sensor sensor, double nuevoOffset){
+        return this.calibrarSensor(sensor, nuevoOffset, duracionDiasCalibracionPorDefecto);
     }
 
     @Override

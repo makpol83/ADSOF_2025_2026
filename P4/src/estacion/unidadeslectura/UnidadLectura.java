@@ -1,4 +1,4 @@
-package estacion.unidadeslectura;
+package estacion.unidadesLectura;
 
 public interface UnidadLectura {
     double getValorMinimo();

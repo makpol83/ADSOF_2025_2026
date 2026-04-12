@@ -1,6 +1,6 @@
-package estacion.unidadeslectura.conversores;
+package estacion.unidadesLectura.conversores;
 
-import estacion.unidadeslectura.UnidadLectura;
+import estacion.unidadesLectura.UnidadLectura;
 
 public abstract class Conversor {
     private final UnidadLectura variableOrigen;
@@ -10,6 +10,7 @@ public abstract class Conversor {
     protected Conversor(UnidadLectura variableOrigen, UnidadLectura variableDestino){
         this.variableOrigen = variableOrigen;
         this.variableDestino = variableDestino;
+
     }
 
     public UnidadLectura getUnidadOrigen(){ return this.variableOrigen; }

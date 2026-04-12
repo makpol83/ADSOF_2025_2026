@@ -2,18 +2,35 @@ package estacion.exceptions;
 
 import estacion.sensores.Sensor;
 
+/**
+ * Alerta de que se ha intentado añadir un sensor que comparte identificador con uno ya existente
+ */
 public class MismoIdException extends Exception {
-    private Sensor s1;
-    private Sensor s2;
-    private static String excepcion = "Se ha intentado añadir un sensor con un ID ya existente";
+    /** Sensor ya existente */
+    private Sensor existente;
+    /** Sensor a añadir */
+    private Sensor nuevo;
 
-    public MismoIdException(Sensor s1, Sensor s2){
-        super(excepcion);
-        this.s1 = s1;
-        this.s2 = s2;
+    /**
+     * Constructor excepcion
+     * @param existente Sensor existente
+     * @param nuevo Sensor a añadir
+     */
+    public MismoIdException(Sensor existente, Sensor nuevo){
+        super("Se ha intentado añadir un sensor " + nuevo.getIdentificador() + " con un ID ya existente" + existente.getIdentificador());
+        this.existente = existente;
+        this.nuevo = nuevo;
     }
 
-    public Sensor getS1(){ return this.s1; }
-    public Sensor getS2(){ return this.s2; }
-    
+    /**
+     * Getter del sensor existente
+     * @return Sensor
+     */
+    public Sensor getExistente(){ return this.existente; }
+
+    /**
+     * Getter del sensor a añadir
+     * @return Sensor
+     */
+    public Sensor getNuevo(){ return this.nuevo; }
 }

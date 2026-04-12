@@ -1,4 +1,4 @@
-package estacion.unidadeslectura;
+package estacion.unidadesLectura;
 
 public enum MPresionAtmosferica implements UnidadLectura{
     hPa(300, 1100),
@@ -8,7 +8,7 @@ public enum MPresionAtmosferica implements UnidadLectura{
     private double minValor;
     private double maxValor;
 
-    MPresionAtmosferica(double minValor, double maxValor){
+    private MPresionAtmosferica(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
         //TODO throw exception si no son validos

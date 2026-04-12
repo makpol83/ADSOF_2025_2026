@@ -1,27 +1,40 @@
 package estacion.sensores;
 
 import estacion.estrategiasMedicion.EstrategiaMedicion;
-import estacion.unidadeslectura.MTemperatura;
+import estacion.unidadesLectura.MTemperatura;
 
+/**
+ * Sensores que miden temperatura
+ */
 public class Temperatura extends Sensor{
+    /** Próximo ID a asignar */
     private static int nextId=1;
-
+    /** Medida por defecto */
     private static final MTemperatura medidaPorDefecto = MTemperatura.Celsius;
 
-    public Temperatura(double offset){
-        this(offset, medidaPorDefecto);
+    /**
+     * Constructor sensor de temperatura
+     * @param medidaEmpleada medida empleada
+     */
+    public Temperatura(MTemperatura medidaEmpleada){
+        super("TEMP-" + String.format("%04d", nextId++), medidaEmpleada);
     }
 
-    public Temperatura(double offset, MTemperatura medidaEmpleada){
-        super("TEMP-" + String.format("%04d", nextId++), offset, medidaEmpleada);
+    /**
+     * Constructor sensor de temperatura
+     * @param estrategiaMedicion estrategia empleada
+     */
+    public Temperatura(EstrategiaMedicion estrategiaMedicion){
+        this(medidaPorDefecto, estrategiaMedicion);
     }
 
-    public Temperatura(double offset, EstrategiaMedicion estrategiaMedicion){
-        this(offset, medidaPorDefecto, estrategiaMedicion);
-    }
-
-    public Temperatura(double offset, MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
-        super("TEMP-" + String.format("%04d", nextId++), offset, medidaEmpleada, estrategiaMedicion, null);
+    /**
+     * Constructor sensor de temperatura
+     * @param medidaEmpleada medida empleada
+     * @param estrategiaMedicion estrategia empleada
+     */
+    public Temperatura(MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
+        super("TEMP-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion);
     }
     
 }

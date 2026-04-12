@@ -1,6 +1,6 @@
-package estacion.unidadeslectura.conversores;
+package estacion.unidadesLectura.conversores;
 
-import estacion.unidadeslectura.MPresionAtmosferica;
+import estacion.unidadesLectura.MPresionAtmosferica;
 
 public class ConversorMiliBarPascal extends Conversor {
     private static final ConversorMiliBarPascal INSTANCIA = new ConversorMiliBarPascal();
