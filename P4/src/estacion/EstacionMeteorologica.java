@@ -152,9 +152,14 @@ public class EstacionMeteorologica {
         return true;
     }
 
-    public void lecturaAutomatica(){
+    public boolean lecturaAutomatica(){
+        if(fechaProximaLecturaAutomatica == null)
+            return false;
+
         if(fechaProximaLecturaAutomatica.isAfter(LocalDateTime.now()) == false)
             lecturaManual(this.numLecturaAutomaticaMaxima);
+
+        return true;
     }
 
     public void printEstacionMeteorologica(){
@@ -202,7 +207,27 @@ public class EstacionMeteorologica {
 
     @Override
     public String toString(){
-        return "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + ", " + longitud;
+        String titulo = "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + ", " + longitud + "\n";
+        String separador = "--------------------------------------------------------------------------------\n";
+        String comienzoSensores = "Sensores instalados: " + this.sensores.size() + "\nÚltima lectura: " + this.fechaUltimaLectura + "\n";
+
+        String stringSensores = "";
+
+        for(Sensor sensor : this.sensores.values()){
+            if(sensor.estaCalibrado() == false)
+                continue;
+
+            stringSensores += sensor.toString() + "\n";
+        }
+
+        String tituloAlertas = "\nAlertas activas: " + this.alertas.size();
+        String alertas = "";
+
+        for(Exception exception : this.alertas){
+            alertas += exception.getMessage() + "\n";
+        }
+
+        return titulo + separador + comienzoSensores + stringSensores + tituloAlertas + alertas;
     }
 
     //añado la excepcion por si alguien la quisiera capturar (la lanza LocalDateTime.of())
