@@ -4,10 +4,12 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import estacion.exceptions.MismoIdException;
 import estacion.sensores.Sensor;
+import estacion.unidadeslectura.UnidadLectura;
 import estacion.utils.Tuple;
 
 public class EstacionMeteorologica {
@@ -22,11 +24,18 @@ public class EstacionMeteorologica {
     private int numLecturaAutomaticaMaxima;
 
 
-    public EstacionMeteorologica(String nombre, double longitud, double latitud, Collection<Sensor> sensores) throws MismoIdException {
+    public EstacionMeteorologica(String nombre, double longitud, double latitud) {
         this.nombre = nombre;
         this.longitud = longitud;
         this.latitud = latitud;
         this.fechaUltimaLectura = null;
+        this.fechaProximaLecturaAutomatica = null;
+        this.numLecturaAutomaticaMaxima = 0;
+        this.sensores = new HashMap<>();
+    }
+
+    public EstacionMeteorologica(String nombre, double longitud, double latitud, Collection<Sensor> sensores) throws MismoIdException {
+        this(nombre, longitud, latitud);
         for(Sensor s : sensores){
             if(this.sensores.containsKey(s.getIdentificador())
             && this.sensores.get(s.getIdentificador()).getElement1() != s)
@@ -45,11 +54,13 @@ public class EstacionMeteorologica {
         this.periodoLecturaAutomatica = periodoLecturaAutomatica;
         this.numLecturaAutomaticaMaxima = numLecturasMaximas;
 
-        if(this.fechaUltimaLectura == null){
-            this.fechaProximaLecturaAutomatica = addDates(LocalDateTime.now(), periodoLecturaAutomatica);
-        }
-        else{
-            this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
+        if(periodoLecturaAutomatica != null){
+            if(this.fechaUltimaLectura == null){
+                this.fechaProximaLecturaAutomatica = addDates(LocalDateTime.now(), periodoLecturaAutomatica);
+            }
+            else{
+                this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
+            }
         }
 
         //solo va a hacer el intento, no necesariamente se realiza la lectura
@@ -98,7 +109,8 @@ public class EstacionMeteorologica {
         }
         if(LecturasCompletadas > 0){
             this.fechaUltimaLectura = LocalDateTime.now();
-            this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
+            if(this.periodoLecturaAutomatica != null)
+                this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
         }
     }
 
@@ -113,7 +125,25 @@ public class EstacionMeteorologica {
         System.out.println("Sensores instalados: " + this.sensores.size());
         System.out.println("Última lectura: ");
         for(Tuple<Sensor, LocalDate> t : this.sensores.values()){
-            System.out.println(t.getElement1());
+            Sensor s = t.getElement1();
+            double min = s.getProcesador().getLecturaMinima();
+            double max = s.getProcesador().getLecturaMaxima();
+            double avg = s.getProcesador().getLecturaMedia();
+
+            //insertar el historial entero pero formateando los datos para que tengan 2 decimales y solo se muestre el valor de lectura y no la fecha
+            String historial = "[";
+            for(Tuple<Double, LocalDateTime> tup : s.getProcesador().getHistorial()){
+                historial = historial.concat(formatDouble(tup.getElement1()) + ", ");
+            }
+            // le quito el ", " extra que se le añadio en el bucle anterior
+            historial = historial.substring(0, historial.length()-3);
+            historial = historial.concat("]");
+
+            String conversor = (s.getProcesador().convierteUnidades()) ? "con conversor a " + s.getProcesador().getUnidadAConvertir().toString() : "";
+
+
+            System.out.println(s.getIdentificador() + " (" + s.getUnidadLectura() + ") " + conversor + ": " + historial +
+                " --" + " MIN: " + formatDouble(min) + " MAX: " + formatDouble(max) + " AVG: " + formatDouble(avg));
         }
     }
 
@@ -132,5 +162,9 @@ public class EstacionMeteorologica {
             date1.getMinute() + date2.getMinute(),
             date1.getSecond() + date2.getSecond()               
         );
+    }
+
+    private String formatDouble(double d){
+        return String.format("%.2f", d);
     }
 }

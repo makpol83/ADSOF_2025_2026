@@ -5,7 +5,7 @@ import estacion.sensores.Sensor;
 public class MismoIdException extends Exception {
     private Sensor s1;
     private Sensor s2;
-    private static String excepcion = "Se ha intentado crear un sensor con un ID ya existente";
+    private static String excepcion = "Se ha intentado añadir un sensor con un ID ya existente";
 
     public MismoIdException(Sensor s1, Sensor s2){
         super(excepcion);

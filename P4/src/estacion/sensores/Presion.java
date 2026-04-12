@@ -13,7 +13,7 @@ public class Presion extends Sensor {
     }
 
     public Presion(double offset, MPresionAtmosferica medidaEmpleada){
-        super("PRES-" + nextId++, offset, medidaEmpleada);
+        super("PRES-" + String.format("%04d", nextId++), offset, medidaEmpleada);
     }
 
     public Presion(double offset, EstrategiaMedicion estrategiaMedicion){
@@ -21,7 +21,7 @@ public class Presion extends Sensor {
     }
 
     public Presion(double offset, MPresionAtmosferica medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
-        super("PRES-" + nextId++, offset, medidaEmpleada, estrategiaMedicion);
+        super("PRES-" + String.format("%04d", nextId++), offset, medidaEmpleada, estrategiaMedicion, null);
     }
 
     

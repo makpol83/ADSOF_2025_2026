@@ -13,7 +13,7 @@ public class Temperatura extends Sensor{
     }
 
     public Temperatura(double offset, MTemperatura medidaEmpleada){
-        super("TEMP-" + nextId++, offset, medidaEmpleada);
+        super("TEMP-" + String.format("%04d", nextId++), offset, medidaEmpleada);
     }
 
     public Temperatura(double offset, EstrategiaMedicion estrategiaMedicion){
@@ -21,7 +21,7 @@ public class Temperatura extends Sensor{
     }
 
     public Temperatura(double offset, MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
-        super("TEMP-" + nextId++, offset, medidaEmpleada, estrategiaMedicion);
+        super("TEMP-" + String.format("%04d", nextId++), offset, medidaEmpleada, estrategiaMedicion, null);
     }
     
 }

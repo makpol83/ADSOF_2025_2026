@@ -14,7 +14,7 @@ public class Humedad extends Sensor {
     }
 
     public Humedad(double offset, MHumedad medidaEmpleada){
-        super("HUM-" + nextId++, offset, medidaEmpleada);
+        super("HUM-" + String.format("%04d", nextId++), offset, medidaEmpleada);
     }
 
     public Humedad(double offset, EstrategiaMedicion estrategiaMedicion){
@@ -22,7 +22,7 @@ public class Humedad extends Sensor {
     }
 
     public Humedad(double offset, MHumedad medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
-        super("HUM-" + nextId++, offset, medidaEmpleada, estrategiaMedicion);
+        super("HUM-" + String.format("%04d", nextId++), offset, medidaEmpleada, estrategiaMedicion, null);
     }
     
 }

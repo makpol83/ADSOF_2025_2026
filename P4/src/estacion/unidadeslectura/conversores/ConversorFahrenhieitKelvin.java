@@ -15,6 +15,6 @@ public class ConversorFahrenhieitKelvin extends Conversor {
 
     @Override
     public double convertirUnidades(double valor){
-        return (valor-32)*1.8 + 273.15;
+        return (valor-32)*5/9 + 273.15;
     }
 }

@@ -11,4 +11,9 @@ public class Tuple<A, B> {
 
     public A getElement1(){ return this.e1; }
     public B getElement2(){ return this.e2; }
+
+    @Override
+    public String toString(){
+        return this.e1.toString();
+    }
 }

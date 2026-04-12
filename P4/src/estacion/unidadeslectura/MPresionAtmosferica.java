@@ -24,4 +24,9 @@ public enum MPresionAtmosferica implements UnidadLectura{
 
         return true;
     }
+
+    @Override
+    public String toString(){
+        return this.name();
+    }
 }

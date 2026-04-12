@@ -1,6 +1,7 @@
 package estacion.unidadeslectura.conversores;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -75,5 +76,46 @@ public class Procesador {
         this.historial.add(tupla);
     }
 
+    public UnidadLectura getUnidadAConvertir(){
+        return this.conversores.get(this.conversores.size()-1).getUnidadDestino();
+    }
+
+    public boolean convierteUnidades(){
+        //si es igual a 1, solo tiene el conversor identidad
+        return this.conversores.size() > 1;
+    }
+
+    public double getLecturaMinima(){
+        double min = Double.MAX_VALUE;
+        for(Tuple<Double, LocalDateTime> t : this.historial){
+            if(t.getElement1() < min)
+                min = t.getElement1();
+        }
+        return min;
+    }
+
+    public double getLecturaMaxima(){
+        double max = Double.MIN_VALUE;
+        for(Tuple<Double, LocalDateTime> t : this.historial){
+            if(t.getElement1() > max)
+                max = t.getElement1();
+        }
+        return max;
+    }
+
+    public Collection<Tuple<Double, LocalDateTime>> getHistorial(){
+        return List.copyOf(this.historial);
+    }
+
+    public double getLecturaMedia(){
+        if(this.historial.isEmpty())
+            return 0;
+
+        double media = 0;
+        for(Tuple<Double, LocalDateTime> t : this.historial){
+            media += t.getElement1();
+        }
+        return media / this.historial.size();
+    }
 
 }

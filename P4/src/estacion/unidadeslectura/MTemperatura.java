@@ -24,4 +24,18 @@ public enum MTemperatura implements UnidadLectura{
 
         return true;
     }
+
+    @Override
+    public String toString(){
+        switch (this) {
+            case Celsius:
+                return "°C";
+            case Fahrenheit:
+                return "°F";
+            case Kelvin:
+                return "°K";
+            default:
+                return "unknown unit";
+        }
+    }
 }

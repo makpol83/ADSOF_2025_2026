@@ -22,4 +22,9 @@ public enum MHumedad implements UnidadLectura{
 
         return true;
     }
+
+    @Override
+    public String toString(){
+        return "%";
+    }
 }
