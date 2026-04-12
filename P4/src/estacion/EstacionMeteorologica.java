@@ -136,7 +136,7 @@ public class EstacionMeteorologica {
                 historial = historial.concat(formatDouble(tup.getElement1()) + ", ");
             }
             // le quito el ", " extra que se le añadio en el bucle anterior
-            historial = historial.substring(0, historial.length()-3);
+            historial = historial.substring(0, historial.length()-2);
             historial = historial.concat("]");
 
             String conversor = (s.getProcesador().convierteUnidades()) ? "con conversor a " + s.getProcesador().getUnidadAConvertir().toString() : "";
