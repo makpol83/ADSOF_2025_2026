@@ -1,6 +1,7 @@
 package programasPrueba;
 import estacion.EstacionMeteorologica;
 import estacion.exceptions.MismoIdException;
+import estacion.exceptions.UnidadesIncorrectasException;
 import estacion.sensores.*;
 import estacion.unidadesLectura.MPresionAtmosferica;
 import estacion.unidadesLectura.MTemperatura;
@@ -39,10 +40,14 @@ public class Apartado3 {
         estacion.printEstacionMeteorologica();
         System.out.println();
         
-        sTemp.getProcesador().addConversor(ConversorCelsiusFahrenheit.getConversor());
-        sTemp.getProcesador().addConversor(ConversorFahrenheitKelvin.getConversor());
-
-        sPresion.getProcesador().addConversor(ConversorPascalHectoPascal.getConversor());
+        try{
+            sTemp.getProcesador().addConversor(ConversorCelsiusFahrenheit.getConversor());
+            sTemp.getProcesador().addConversor(ConversorFahrenheitKelvin.getConversor());
+            sPresion.getProcesador().addConversor(ConversorPascalHectoPascal.getConversor());
+        } catch (UnidadesIncorrectasException e){
+            System.out.println("Error en unidades");
+            return;
+        }
         
         estacion.printEstacionMeteorologica();
     }

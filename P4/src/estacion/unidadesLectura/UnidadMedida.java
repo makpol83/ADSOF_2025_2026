@@ -1,19 +1,31 @@
 package estacion.unidadesLectura;
 
-public enum UnidadMedida {
-    ;
+/**
+ * Interfaz unidad de medida
+ */
+public interface UnidadMedida {
+    /**
+     * Getter valor mínimo a tomar
+     * @return double
+     */
+    double getValorMinimo();
 
-    private double minValor;
-    private double maxValor;
+    /**
+     * Getter valor máximo a tomar
+     * @return double
+     */
+    double getValorMaximo();
 
-    public double getValorMinimo() { return this.minValor; }
+    /**
+     * Comprueba si value está en rango válido para su unidad
+     * @param value a comprobar
+     * @return true si está en rango válido o false si no
+     */
+    boolean esRangoValido(double value);
 
-    public double getValorMaximo() { return this.maxValor; }
-
-    public boolean esRangoValido(double value){
-        if(value < this.minValor ||  value > this.maxValor)
-            return false;
-
-        return true;
-    }
+    /**
+     * Obtiene el nombre del enum, irrelevante, pero necesario si se implementan de otra forma
+     * @return String
+     */
+    String name();
 }

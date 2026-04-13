@@ -4,6 +4,7 @@ import estacion.EstacionMeteorologica;
 import estacion.estrategiasMedicion.MedicionAleatoria;
 import estacion.estrategiasMedicion.MedicionCercana;
 import estacion.exceptions.MismoIdException;
+import estacion.exceptions.UnidadesIncorrectasException;
 import estacion.formateadores.Formateador;
 import estacion.formateadores.FormateadorHTML;
 import estacion.formateadores.FormateadorMarkdown;
@@ -19,7 +20,11 @@ public class Apartado5 {
         Sensor sTemp2 = new Temperatura(MTemperatura.Fahrenheit, new MedicionCercana(0));
         Sensor sTemp3 = new Temperatura(MTemperatura.Kelvin, new MedicionCercana(0));
 
-        sTemp1.getProcesador().addConversor(ConversorCelsiusFahrenheit.getConversor());
+        try{
+            sTemp1.getProcesador().addConversor(ConversorCelsiusFahrenheit.getConversor());
+        } catch(UnidadesIncorrectasException e){
+            return;
+        }
 
         try{
             estacion.añadirSensor(sTemp1);

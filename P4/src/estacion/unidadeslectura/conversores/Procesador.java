@@ -177,8 +177,16 @@ public class Procesador {
         return this.historial.getMedida(i);
     }
 
+    /**
+     * Consigue el número de medidas almacenadas
+     * @return int >= 0
+     */
     public int getNumMedidas(){ return this.historial.getNumMedidas(); }
 
+    /**
+     * Obtiene la media histórica de las medidas del procesador
+     * @return double o 0 si no hay medidas.
+     */
     public double getMediaHistorica(){
         if(this.historial.getNumMedidas() == 0)
             return 0;

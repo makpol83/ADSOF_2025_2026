@@ -208,6 +208,11 @@ public class EstacionMeteorologica implements IDocumento{
         }
     }
 
+    /**
+     * Lectura puntual para un sensor
+     * @param sensor a medir
+     * @return true si se ha realizado, false si algo ha fallado
+     */
     public boolean lecturaPuntual(Sensor sensor){
         try{
             sensor.realizarMedida();
@@ -231,6 +236,10 @@ public class EstacionMeteorologica implements IDocumento{
         return true;
     }
 
+    /**
+     * Lectura automática, debe ejecutarse de vez en cuando para que se realice la lectura automática
+     * @return true si se ha realizado, false si no ha llegado la fecha de lectura automática
+     */
     public boolean lecturaAutomatica(){
         if(fechaProximaLecturaAutomatica == null)
             return false;
@@ -241,11 +250,18 @@ public class EstacionMeteorologica implements IDocumento{
         return true;
     }
 
+    /**
+     * Setter duracion dias calibración por defecto
+     * @param numDias numDias >= 1
+     */
     public void setDuracionDiasCalibracionPorDefecto(int numDias){
         if(numDias <= 0) return;
         this.duracionDiasCalibracionPorDefecto = numDias;
     }
 
+    /**
+     * Imprime por pantalla información de la estación.
+     */
     public void printEstacionMeteorologica(){
         System.out.println(this);
         System.out.println("------------------------------------------------");
@@ -269,6 +285,13 @@ public class EstacionMeteorologica implements IDocumento{
         System.out.println();
     }
 
+    /**
+     * Calibra un sensor dentro de la estación, elimina las alertas asociadas al sensor
+     * @param sensor a calibrar
+     * @param nuevoOffset offset a configurar
+     * @param diasDuracionCalibracion dias de Calibracion
+     * @return true si calibrado, false si no está en la estación
+     */
     public boolean calibrarSensor(Sensor sensor, double nuevoOffset, int diasDuracionCalibracion){
         if(this.sensores.containsKey(sensor.getIdentificador()) == false)
             return false;
@@ -292,10 +315,16 @@ public class EstacionMeteorologica implements IDocumento{
         return true;
     }
 
+    /**
+     * Calibrar un sensor sin tener en cuenta dias de calibracion, usa el por defecto
+     * @param sensor a calibrar
+     * @param nuevoOffset a configurar
+     * @return true si calibrado, false si no está en la estación
+     */
     public boolean calibrarSensor(Sensor sensor, double nuevoOffset){
         return this.calibrarSensor(sensor, nuevoOffset, duracionDiasCalibracionPorDefecto);
     }
-
+    
     public String getTituloDocumento(){
         return "Estación meteorológica " + this.nombre;
     }
