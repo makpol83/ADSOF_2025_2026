@@ -1,4 +1,5 @@
 package programasPrueba;
+
 import estacion.EstacionMeteorologica;
 import estacion.exceptions.MismoIdException;
 import estacion.exceptions.UnidadesIncorrectasException;
@@ -23,7 +24,7 @@ public class Apartado3 {
      * Metodo main
      * @param args vacio
      */
-    public void main(String ... args){
+    public static void main(String ... args){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", 40.4168, -37038);
         Sensor sTemp = new Temperatura(MTemperatura.Celsius);
         Sensor sPresion = new Presion(MPresionAtmosferica.Pa);

@@ -1,7 +1,6 @@
 package programasPrueba;
 
 import estacion.EstacionMeteorologica;
-import estacion.estrategiasMedicion.MedicionAleatoria;
 import estacion.estrategiasMedicion.MedicionCercana;
 import estacion.exceptions.MismoIdException;
 import estacion.exceptions.UnidadesIncorrectasException;
