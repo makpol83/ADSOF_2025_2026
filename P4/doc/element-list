@@ -1,0 +1,9 @@
+estacion
+estacion.estrategiasMedicion
+estacion.exceptions
+estacion.formateadores
+estacion.sensores
+estacion.unidadesLectura
+estacion.unidadesLectura.conversores
+estacion.utils
+programasPrueba

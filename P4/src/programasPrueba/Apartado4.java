@@ -15,8 +15,20 @@ import estacion.unidadesLectura.MHumedad;
 import estacion.unidadesLectura.MPresionAtmosferica;
 import estacion.unidadesLectura.MTemperatura;
 
+/**
+ * Pruebas apartado4
+ */
 public class Apartado4 {
-    public static void main(String ... args){
+
+    /**
+     * Constructor por defecto
+     */
+    public Apartado4(){}
+
+    /**
+     * Metodo main
+     * @param args vacio
+     */    public static void main(String ... args){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", -3.7038, 40.4168);
         Sensor sTemp1 = new Temperatura(MTemperatura.Celsius, new MedicionAleatoria(1));
         Sensor sTemp2 = new Temperatura(MTemperatura.Fahrenheit, new MedicionCercana(0));
