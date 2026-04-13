@@ -26,7 +26,7 @@ public class Presion extends Sensor {
 
     /**
      * Constructor sensor de presión con estrategia especial
-     * @param estrategiaMedicion Estrategia a fijar
+     * @param estrategiaMedicion
      */
     public Presion(EstrategiaMedicion estrategiaMedicion){
         this(medidaPorDefecto, estrategiaMedicion);

@@ -1,5 +1,4 @@
 package programasPrueba;
-
 import estacion.EstacionMeteorologica;
 import estacion.estrategiasMedicion.MedicionAleatoria;
 import estacion.estrategiasMedicion.MedicionCercana;
@@ -13,21 +12,9 @@ import estacion.unidadesLectura.conversores.ConversorFahrenheitKelvin;
 import estacion.unidadesLectura.conversores.ConversorKelvinCelsius;
 import estacion.unidadesLectura.conversores.ConversorPascalHectoPascal;
 
-/**
- * Pruebas apartado3
- */
 public class Apartado3 {
 
-    /**
-     * Constructor por defecto
-     */
-    public Apartado3(){}
-
-    /**
-     * Metodo main
-     * @param args vacio
-     */
-    public static void main(String ... args){
+    public void main(String ... args){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", 40.4168, -37038);
         Sensor sTemp = new Temperatura(MTemperatura.Celsius, new MedicionCercana(5));
         Sensor sPresion = new Presion(MPresionAtmosferica.Pa, new MedicionAleatoria(0));
