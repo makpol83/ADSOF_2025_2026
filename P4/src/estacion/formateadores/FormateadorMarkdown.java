@@ -3,7 +3,16 @@ package estacion.formateadores;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase para formatear una interfaz IDocumento a formato Markdown
+ */
 public class FormateadorMarkdown implements Formateador{
+
+    /**
+     * Constructor por defecto
+     */
+    public FormateadorMarkdown(){}
+
     public String formatear(IDocumento informacion){
         String tituloDocumento = informacion.getTituloDocumento();
         String tituloPrincipal = informacion.getTituloSeccionPrincipal();
