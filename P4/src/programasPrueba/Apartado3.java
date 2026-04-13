@@ -80,6 +80,7 @@ public class Apartado3 {
         System.out.println();
         System.out.println();
         System.out.println("FINALMENTE, AÑADIMOS UN CONVERSOR INCOMPATIBLE PARA TESTEAR EL CORRECTO LANZAMIENTO DE LA EXCEPCION");
+        System.out.println();
 
         try{
             System.out.println("Añadimos conversor ºK --> ºC en sensor " + sTemp.getIdentificador() + ", sabiendo que ahora mismo" +
@@ -89,10 +90,13 @@ public class Apartado3 {
             return;
             
         } catch (UnidadesIncorrectasException e){
+            System.out.println();
             System.out.println("Excepcion obtenida correctamente");
+            System.out.println();
         }
 
         System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA PASADO CON EXITO");
+        System.out.println();
         return;
     }
     
