@@ -38,10 +38,10 @@ public class Procesador {
      * Constructor con lista de conversores
      * @param variableMedida Variable original que mide el sensor
      * @param conversores Lista de conversores en el orden correcto
-     * @throws UnidadesIncorrectasException Si un conversor genera problemas entre unidades de medida
+     * @throws ConversorIncompatibleException Si un conversor genera problemas entre unidades de medida
      */
     public Procesador(UnidadMedida variableMedida, List<Conversor> conversores)
-    throws UnidadesIncorrectasException
+    throws ConversorIncompatibleException
     {
         this(variableMedida);
 

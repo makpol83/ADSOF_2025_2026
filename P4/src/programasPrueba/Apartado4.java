@@ -37,14 +37,14 @@ public class Apartado4 {
         } catch(MismoIdException e){
             //No debe pasar
         }
-        System.out.println("Imprimos con sólo los sensores añadidos:");
+        System.out.println("Imprimimos con sólo los sensores añadidos:");
         //Vemosq ue esta vacio pero hay sensores
         estacion.printEstacionMeteorologica();
 
         //Realizamos lectura
         estacion.lecturaManual();
         
-        System.out.println("Imprimos con errores de calibración:");
+        System.out.println("Imprimimos con errores de calibración:");
         //Vemos que la lectura falla y se generan alertas de calibración
         estacion.printEstacionMeteorologica();
 

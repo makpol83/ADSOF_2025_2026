@@ -3,7 +3,7 @@ package estacion.exceptions;
 import estacion.unidadesLectura.UnidadMedida;
 import estacion.unidadesLectura.conversores.Conversor;
 
-public class ConversorIncompatibleException extends RuntimeException {
+public class ConversorIncompatibleException extends Exception {
     /** Conversor que genera incompatibilidad */
     private final Conversor c;
     /** Unidad de Lectura con la que el Conversor tiene conflicto*/

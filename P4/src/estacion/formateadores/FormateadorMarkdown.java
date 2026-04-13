@@ -1,6 +1,5 @@
 package estacion.formateadores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FormateadorMarkdown implements Formateador{

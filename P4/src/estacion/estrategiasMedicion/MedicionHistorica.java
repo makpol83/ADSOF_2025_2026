@@ -21,7 +21,8 @@ public class MedicionHistorica implements EstrategiaMedicion{
     }
 
     public double medir(Sensor s){
-        double p = Math.random() * offsetPorcentaje;
-        return s.getMediaHistorica() + s.getMediaHistorica() * p;
+        double p = Math.random() * offsetPorcentaje /100;
+        int signo = Math.random() > 0.5 ? 1 : -1;
+        return s.getMediaHistorica() + signo * s.getMediaHistorica() * p;
     }
 }

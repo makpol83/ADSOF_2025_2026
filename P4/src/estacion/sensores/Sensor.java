@@ -8,8 +8,8 @@ import estacion.estrategiasMedicion.EstrategiaMedicion;
 import estacion.estrategiasMedicion.MedicionAleatoria;
 import estacion.exceptions.CalibracionCaducadaException;
 import estacion.exceptions.CambioBruscoLecturaException;
+import estacion.exceptions.ConversorIncompatibleException;
 import estacion.exceptions.MedidaFueraRangoException;
-import estacion.exceptions.UnidadesIncorrectasException;
 import estacion.unidadesLectura.UnidadMedida;
 import estacion.unidadesLectura.conversores.Conversor;
 import estacion.unidadesLectura.conversores.Procesador;
@@ -47,6 +47,11 @@ public abstract class Sensor{
     private EstrategiaMedicion estrategia;
     /** Procesador de las medidas */
     private Procesador procesador;
+    /** Establece la duracion por defecto en dias de la calibracion (por defecto 365)*/
+    private int duracionCalibracionDias;
+    /** Valor por defecto de la calibracion
+     * 
+     */
 
     /**
      * Constructor sensor completo
@@ -54,17 +59,19 @@ public abstract class Sensor{
      * @param variableMedida Variable medida por el sensor
      * @param estrategia Estrategia a emplear
      * @param conversores Conversores del sensor, puede ser null
+     * @param duracionCalibracionDias dias que durara la calibracion del sensor. Pasado este tiempo tras hacer una medicion se descalibrará
      */
-    public Sensor(String identificador, UnidadMedida variableMedida, EstrategiaMedicion estrategia, Collection<Conversor> conversores){
+    public Sensor(String identificador, UnidadMedida variableMedida, EstrategiaMedicion estrategia, Collection<Conversor> conversores, int duracionCalibracionDias){
         this.identificador = identificador;
         this.fechaImplementacion = null;
         this.estrategia = estrategia;
-        this.fechaCaducidad = null;
+        this.duracionCalibracionDias = duracionCalibracionDias;
+        this.fechaCaducidad = LocalDateTime.now().plusDays(duracionCalibracionDias);
         this.variableMedida = variableMedida;
         if(conversores != null)
             try{
                 this.procesador = new Procesador(variableMedida, List.copyOf(conversores));
-            } catch(UnidadesIncorrectasException e){
+            } catch(ConversorIncompatibleException e){
                 //Se crea sin conversores
                 this.procesador = new Procesador(variableMedida);
             }
@@ -73,7 +80,18 @@ public abstract class Sensor{
     }
 
     /**
-     * Constructor sensor sin estrategia especial
+     * Constructor sensor con una duracion de calibracion por defecto de 365 dias
+     * @param identificador Identificador del sensor: {TIPOSENSOR}-{Número 4 dígitos}
+     * @param variableMedida Variable medida por el sensor
+     * @param estrategia Estrategia a emplear
+     * @param conversores Conversores del sensor, puede ser null
+     */
+    public Sensor(String identificador, UnidadMedida variableMedida, EstrategiaMedicion estrategia, Collection<Conversor> conversores){
+        this(identificador, variableMedida, estrategia, conversores, 365);
+    }
+
+    /**
+     * Constructor sensor sin estrategia especial y calibracion por defecto
      * @param identificador Identificador del sensor: {TIPOSENSOR}-{Número 4 dígitos}
      * @param variableMedida Variable medida por el sensor
      * @param conversores Conversores del sensor, puede ser null
@@ -83,7 +101,7 @@ public abstract class Sensor{
     }
 
     /**
-     * Constructor sensor sin conversores especiales
+     * Constructor sensor sin conversores especiales y calibracion por defecto
      * @param identificador Identificador del sensor: {TIPOSENSOR}-{Número 4 dígitos}
      * @param variableMedida Variable medida por el sensor
      * @param estrategia Estrategia a emplear
@@ -93,7 +111,7 @@ public abstract class Sensor{
     }
 
     /**
-     * Constructor sensor sin conversores especiales ni estrategia especial
+     * Constructor sensor sin conversores especiales ni estrategia especial y con calibracion por defecto
      * @param identificador Identificador del sensor: {TIPOSENSOR}-{Número 4 dígitos}
      * @param variableMedida Variable medida por el sensor
      */
@@ -102,14 +120,24 @@ public abstract class Sensor{
     }
 
     /**
-     * Calibra el sensor a un nuevo offset y le fija la duracion de la calibracion en dias
+     * Calibra el sensor a un nuevo offset y le asigna una nueva duracion de la calibracion en dias
      * @param duracionCalibracionDias numero de dias que dura la calibracion
      * @param nuevoOffset nuevo offset a fijar
      */
     public void calibrar(int duracionCalibracionDias, double nuevoOffset){
+        this.duracionCalibracionDias = duracionCalibracionDias;
+        this.calibrar(nuevoOffset);
+    }
+
+    /**
+     * Calibra el sensor a un nuevo offset y actualiza la fecha de caducidad/descalibración
+     * @param nuevoOffset nuevo offset a fijar
+     */
+    public void calibrar(double nuevoOffset){
         this.calibrado = true;
-        this.fechaCaducidad = LocalDateTime.now().plusDays(duracionCalibracionDias);
+        this.fechaCaducidad = LocalDateTime.now().plusDays(this.duracionCalibracionDias);
         this.offset = nuevoOffset;
+        
     }
 
     /**
