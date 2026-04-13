@@ -91,6 +91,22 @@ public class EstacionMeteorologica implements IDocumento{
     public List<Sensor> getSensores(){ return List.copyOf(this.sensores.values()); }
 
     /**
+     * Getter sensores de un tipo concreto pertenecientes a la estacion. El tipo debera ser un string igual al mostrado en su ID
+     * Por ejemplo, para sensores de temperatura el tipo debera ser "TEMP" (no es case sensitive)
+     * @param tipo
+     * @return
+     */
+    public List<Sensor> getSensores(String tipo){
+        List<Sensor> sensores = new ArrayList<>();
+        for(Sensor sensor : getSensores()){
+            String tipoDelSensor = sensor.getIdentificador().substring(0, tipo.length());
+            if(tipoDelSensor.equalsIgnoreCase(tipo))
+                sensores.add(sensor);
+        }
+        return sensores;
+    }
+
+    /**
      * Consigue un sensor por identificador
      * @param identificador Identificador
      * @return Sensor o null si no está

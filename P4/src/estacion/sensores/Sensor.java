@@ -346,7 +346,7 @@ public abstract class Sensor{
         String valorUltLectura="";
         Medida ultimaMedida = this.getUltimaMedida();
 
-        if(ultimaMedida.getFechaMedida() == null){
+        if(ultimaMedida == null){
             fechaUltLectura = "No hay lecturas.";
             valorUltLectura = "...";
         }

@@ -46,11 +46,11 @@ public class Apartado3 {
     
         try{
             sTemp.getProcesador().addConversor(ConversorCelsiusFahrenheit.getConversor());
-            System.out.println("Añadimos conversor ºC --> ºF en sensor Temperatura");
+            System.out.println("Añadimos conversor ºC --> ºF en sensor " + sTemp.getIdentificador());
             sTemp.getProcesador().addConversor(ConversorFahrenheitKelvin.getConversor());
-            System.out.println("Añadimos conversor ºF --> ºK en sensor Temperatura");
+            System.out.println("Añadimos conversor ºF --> ºK en sensor " + sTemp.getIdentificador());
             sPresion.getProcesador().addConversor(ConversorPascalHectoPascal.getConversor());
-            System.out.println("Añadimos conversor Pa --> hPa en sensor Presion");
+            System.out.println("Añadimos conversor Pa --> hPa en sensor" + sPresion.getIdentificador());
         } catch (UnidadesIncorrectasException e){
             System.out.println(e);
             System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA FALLADO");
@@ -66,7 +66,7 @@ public class Apartado3 {
 
         try{
             sTemp.getProcesador().addConversor(ConversorKelvinCelsius.getConversor());
-            System.out.println("Añadimos conversor ºK --> ºC en sensor Temperatura");
+            System.out.println("Añadimos conversor ºK --> ºC en sensor " + sTemp.getIdentificador());
         } catch (UnidadesIncorrectasException e){
             System.out.println(e);
             System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA FALLADO");
@@ -82,8 +82,8 @@ public class Apartado3 {
         System.out.println("FINALMENTE, AÑADIMOS UN CONVERSOR INCOMPATIBLE PARA TESTEAR EL CORRECTO LANZAMIENTO DE LA EXCEPCION");
 
         try{
-            System.out.println("Añadimos conversor ºK --> ºC en sensor Temperatura, sabiendo que ahora mismo el sensor tiene" +
-                               " medidas en ºC en lugar de ºK");
+            System.out.println("Añadimos conversor ºK --> ºC en sensor " + sTemp.getIdentificador() + ", sabiendo que ahora mismo" +
+                                "el sensor tiene medidas en ºC en lugar de ºK");
             sTemp.getProcesador().addConversor(ConversorKelvinCelsius.getConversor());
             System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA FALLADO");
             return;
