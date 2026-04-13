@@ -15,6 +15,6 @@ public class MedidaFueraRangoException extends SensorException {
      * @param medidaFueraDeRango Medida fuera de rango
      */
     public MedidaFueraRangoException(Sensor sensor, Medida medidaFueraDeRango){
-        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Lectura fuera de rango en " + sensor.getIdentificador() + ": " + String.format("%.2f", medidaFueraDeRango.getValorMedido()) + sensor.getUnidadLectura());
+        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Lectura fuera de rango en " + sensor.getIdentificador() + ": " + String.format("%.2f", medidaFueraDeRango.getValorMedido()) + sensor.getUnidadMedida());
     }
 }

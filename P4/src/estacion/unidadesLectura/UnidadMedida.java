@@ -1,17 +1,10 @@
 package estacion.unidadesLectura;
 
-public enum MPresionAtmosferica implements UnidadMedida{
-    hPa(300, 1100),
-    Pa(3, 11),
-    mbar(300, 1100);
+public enum UnidadMedida {
+    ;
 
     private double minValor;
     private double maxValor;
-
-    private MPresionAtmosferica(double minValor, double maxValor){
-        this.minValor = minValor;
-        this.maxValor = maxValor;
-    }
 
     public double getValorMinimo() { return this.minValor; }
 
@@ -22,10 +15,5 @@ public enum MPresionAtmosferica implements UnidadMedida{
             return false;
 
         return true;
-    }
-
-    @Override
-    public String toString(){
-        return this.name();
     }
 }

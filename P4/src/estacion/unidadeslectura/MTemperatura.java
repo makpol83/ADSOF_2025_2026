@@ -1,17 +1,29 @@
 package estacion.unidadesLectura;
 
-public enum MTemperatura implements UnidadLectura{
+/**
+ * Unidades de medida asociadas a la temperatura
+ */
+public enum MTemperatura implements UnidadMedida{
+    /** Celsius */
     Celsius(-273.15, 1000),
+    /** Fahrenheit */
     Fahrenheit(-459.67,1832),
+    /** Kelvin */
     Kelvin(0, 1273.15);
 
+    /** Valor mínimo a tomar */
     private double minValor;
+    /** Valor máximo a tomar */
     private double maxValor;
 
+    /**
+     * Constructor
+     * @param minValor a tomar
+     * @param maxValor a tomar
+     */
     private MTemperatura(double minValor, double maxValor){
         this.minValor = minValor;
         this.maxValor = maxValor;
-        //TODO throw exception si no son validos
     }
 
     public double getValorMinimo() { return this.minValor; }

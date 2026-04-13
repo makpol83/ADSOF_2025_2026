@@ -132,7 +132,7 @@ m2=*</panel_attributes>
       <w>136</w>
       <h>96</h>
     </coordinates>
-    <panel_attributes>UnidadLectura
+    <panel_attributes>UnidadMedida
 -</panel_attributes>
     <additional_attributes/>
   </element>
@@ -314,8 +314,8 @@ r2=conversores</panel_attributes>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 /Conversor/
 -
-- variableOrigen : UnidadLectura
-- variableDestino : UnidadLectura
+- variableOrigen : UnidadMedida
+- variableDestino : UnidadMedida
 -
 # Conversor() : Conversor
 /+ getConversor(): Conversor/

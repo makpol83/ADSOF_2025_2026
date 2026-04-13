@@ -21,7 +21,7 @@ public class CambioBruscoLecturaException extends SensorException {
      * @param ultimaMedida ultima medida con cambio brusco
      */
     public CambioBruscoLecturaException(Sensor sensor, Medida penultimaMedida, Medida ultimaMedida){
-        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Cambio brusco en " + sensor.getIdentificador() + ": " + String.format("%.2f", ultimaMedida.getValorMedido()) + sensor.getUnidadLectura() + " (anterior: " + String.format("%.2f", penultimaMedida.getValorMedido()) + sensor.getUnidadLectura() + ")");
+        super(sensor, "[" + LocalDateTime.now().withNano(0) + "] " + "Cambio brusco en " + sensor.getIdentificador() + ": " + String.format("%.2f", ultimaMedida.getValorMedido()) + sensor.getUnidadMedida() + " (anterior: " + String.format("%.2f", penultimaMedida.getValorMedido()) + sensor.getUnidadMedida() + ")");
     }
 
     /**

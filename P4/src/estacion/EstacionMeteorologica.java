@@ -16,26 +16,42 @@ import estacion.exceptions.MismoIdException;
 import estacion.exceptions.SensorException;
 import estacion.formateadores.IDocumento;
 import estacion.formateadores.SeccionSecundaria;
-import estacion.sensores.Medida;
 import estacion.sensores.Sensor;
+import estacion.unidadesLectura.UnidadMedida;
 
+/**
+ * Estacion meteorológica que almacena los sensores, los calibra y los usa.
+ */
 public class EstacionMeteorologica implements IDocumento{
+    /** Nombre */
     private String nombre;
+    /** Longitud en coordenadas*/
     private double longitud;
+    /** Latitud en coordenadas*/
     private double latitud;
+    /** Mapa de sensores, relaciona Identificador con el sensor */
     private Map<String,Sensor> sensores;
+    /** Guarda la fecha de última lectura automática */
     private LocalDateTime fechaUltimaLectura;
-
+    /** Guarda la siguiente fecha a la que se va a hacer una lectura automática */
     private LocalDateTime fechaProximaLecturaAutomatica;
+    /** Guarda el periodo de lectura automática */
     private LocalDateTime periodoLecturaAutomatica;
+    /** Guarda el número de lecturas que hace en la lectura automática */
     private int numLecturaAutomaticaMaxima;
-
+    /** Guarda las excepciones de los sensores */
     private List<SensorException> alertas;
-
+    /** Guarda los sensores que no han podido realizar su medida dado que han lanzado un SensorException */
     private List<Sensor> sensoresDetenidos;
+    /** Establece la duracion por defecto en dias de la calibracion*/
+    private int duracionDiasCalibracionPorDefecto = 365;
 
-    private static final int duracionDiasCalibracionPorDefecto = 365;
-
+    /**
+     * Constructor estacion sin sensores
+     * @param nombre Nombre
+     * @param longitud Longitud coordenadas
+     * @param latitud Latitud coordenadas
+     */
     public EstacionMeteorologica(String nombre, double longitud, double latitud) {
         this.nombre = nombre;
         this.longitud = longitud;
@@ -48,6 +64,14 @@ public class EstacionMeteorologica implements IDocumento{
         this.alertas = new ArrayList<>();
     }
 
+    /**
+     * Constructor estación con sensores
+     * @param nombre Nombre
+     * @param longitud Longitud coordenadas
+     * @param latitud Latitud coordenadas
+     * @param sensores Sensores a añadir
+     * @throws MismoIdException Si hay al menos dos sensores que comparten identificador
+     */
     public EstacionMeteorologica(String nombre, double longitud, double latitud, Collection<Sensor> sensores) throws MismoIdException {
         this(nombre, longitud, latitud);
         for(Sensor s : sensores){
@@ -62,6 +86,43 @@ public class EstacionMeteorologica implements IDocumento{
         }
     }
 
+    /**
+     * Getter sensores de la estación
+     * @return List Sensor, inmutable
+     */
+    public List<Sensor> getSensores(){ return List.copyOf(this.sensores.values()); }
+
+    /**
+     * Consigue un sensor por identificador
+     * @param identificador Identificador
+     * @return Sensor o null si no está
+     */
+    public Sensor getSensor(String identificador){
+        return this.sensores.get(identificador);
+    }
+
+    /**
+     * Getter de los sensores por variable medida por el sensor
+     * @param variableMedida Variable medida por el sensor
+     * @return List Sensor, inmutable
+     */
+    public List<Sensor> getSensores(UnidadMedida variableMedida){
+        List<Sensor> sensores = new ArrayList<>();
+        for(Sensor sensor : this.sensores.values()){
+            if(sensor.getUnidadMedida().equals(variableMedida) == true){
+                sensores.add(sensor);
+            }
+        }
+
+        return List.copyOf(sensores);
+    }
+
+    /**
+     * Configura la lectura automática de la estación
+     * @param periodoLecturaAutomatica periodo a establecer
+     * @param numLecturasMaximas Número de lecturas a realizar
+     * @return true si se ha configurado, false si algo ha fallado
+     */
     public boolean configurarLecturaAutomatica(LocalDateTime periodoLecturaAutomatica, int numLecturasMaximas){
         if(numLecturasMaximas < 1) return false;
 
@@ -83,19 +144,24 @@ public class EstacionMeteorologica implements IDocumento{
         return true;
     }
 
-    public boolean añadirSensor(Sensor s) throws MismoIdException {
+    /**
+     * Añade un sensor a la estación
+     * @param s sensor a añadir
+     * @throws MismoIdException Si ya existe algún sensor en la estación el identificador de s
+     */
+    public void añadirSensor(Sensor s) throws MismoIdException {
         if(sensores.containsKey(s.getIdentificador()))
             throw new MismoIdException(sensores.get(s.getIdentificador()), s);
 
         s.setFechaImplementación(LocalDate.now());
         sensores.put(s.getIdentificador(), s);
-        return true;
     }
 
-    public Sensor getSensor(String identificador){
-        return this.sensores.get(identificador);
-    }
-
+    /**
+     * Getter fecha de instalación de un sensor
+     * @param s sensor
+     * @return LocalDate o null si no está el sensor en la estación
+     */
     public LocalDate getFechaInstalacion(Sensor s) {
         if(this.sensores.containsKey(s.getIdentificador()))
             return this.sensores.get(s.getIdentificador()).getFechaImplementacion();
@@ -103,6 +169,11 @@ public class EstacionMeteorologica implements IDocumento{
             return null;
     }
 
+    /**
+     * Getter fecha de instalación de un sensor por identificador
+     * @param sensorId Identificador del sensor
+     * @return LocalDate o null si no está el sensor en la estación
+     */
     public LocalDate getFechaInstalacion(String sensorId) {
         if(this.sensores.containsKey(sensorId))
             return this.sensores.get(sensorId).getFechaImplementacion();
@@ -110,8 +181,15 @@ public class EstacionMeteorologica implements IDocumento{
             return null;
     }
 
+    /**
+     * Realiza una lectura manual de todos los sensores
+     */
     public void lecturaManual(){ this.lecturaManual(this.sensores.size()); }
 
+    /**
+     * Realiza una lectura manual para numLecturas
+     * @param numLecturas número de sensores que van a medir
+     */
     public void lecturaManual(int numLecturas){
         int lecturasCompletadas = 0;
         for(Sensor sensor : sensores.values()){
@@ -161,6 +239,11 @@ public class EstacionMeteorologica implements IDocumento{
             lecturaManual(this.numLecturaAutomaticaMaxima);
 
         return true;
+    }
+
+    public void setDuracionDiasCalibracionPorDefecto(int numDias){
+        if(numDias <= 0) return;
+        this.duracionDiasCalibracionPorDefecto = numDias;
     }
 
     public void printEstacionMeteorologica(){

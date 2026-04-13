@@ -9,7 +9,8 @@ import estacion.estrategiasMedicion.MedicionAleatoria;
 import estacion.exceptions.CalibracionCaducadaException;
 import estacion.exceptions.CambioBruscoLecturaException;
 import estacion.exceptions.MedidaFueraRangoException;
-import estacion.unidadesLectura.UnidadLectura;
+import estacion.exceptions.UnidadesIncorrectasException;
+import estacion.unidadesLectura.UnidadMedida;
 import estacion.unidadesLectura.conversores.Conversor;
 import estacion.unidadesLectura.conversores.Procesador;
 import estacion.utils.Formatter;
@@ -41,7 +42,7 @@ public abstract class Sensor{
     /** Fecha de caducidad del sensor */
     private LocalDateTime fechaCaducidad;
     /** Variable medida por el sensor, no la que se muestra tras procesar */
-    private UnidadLectura variableMedida;
+    private UnidadMedida variableMedida;
     /** Estrategia actual del sensor */
     private EstrategiaMedicion estrategia;
     /** Procesador de las medidas */
@@ -54,14 +55,19 @@ public abstract class Sensor{
      * @param estrategia Estrategia a emplear
      * @param conversores Conversores del sensor, puede ser null
      */
-    public Sensor(String identificador, UnidadLectura variableMedida, EstrategiaMedicion estrategia, Collection<Conversor> conversores){
+    public Sensor(String identificador, UnidadMedida variableMedida, EstrategiaMedicion estrategia, Collection<Conversor> conversores){
         this.identificador = identificador;
         this.fechaImplementacion = null;
         this.estrategia = estrategia;
         this.fechaCaducidad = null;
         this.variableMedida = variableMedida;
         if(conversores != null)
-            this.procesador = new Procesador(variableMedida, List.copyOf(conversores));
+            try{
+                this.procesador = new Procesador(variableMedida, List.copyOf(conversores));
+            } catch(UnidadesIncorrectasException e){
+                //Se crea sin conversores
+                this.procesador = new Procesador(variableMedida);
+            }
         else
             this.procesador = new Procesador(variableMedida);
     }
@@ -72,7 +78,7 @@ public abstract class Sensor{
      * @param variableMedida Variable medida por el sensor
      * @param conversores Conversores del sensor, puede ser null
      */
-    public Sensor(String identificador, UnidadLectura variableMedida, Collection<Conversor> conversores){
+    public Sensor(String identificador, UnidadMedida variableMedida, Collection<Conversor> conversores){
         this(identificador, variableMedida, estrategiaPorDefecto, conversores);
     }
 
@@ -82,7 +88,7 @@ public abstract class Sensor{
      * @param variableMedida Variable medida por el sensor
      * @param estrategia Estrategia a emplear
      */
-    public Sensor(String identificador, UnidadLectura variableMedida, EstrategiaMedicion estrategia){
+    public Sensor(String identificador, UnidadMedida variableMedida, EstrategiaMedicion estrategia){
         this(identificador, variableMedida, estrategia, null);
     }
 
@@ -91,7 +97,7 @@ public abstract class Sensor{
      * @param identificador Identificador del sensor: {TIPOSENSOR}-{Número 4 dígitos}
      * @param variableMedida Variable medida por el sensor
      */
-    public Sensor(String identificador, UnidadLectura variableMedida){
+    public Sensor(String identificador, UnidadMedida variableMedida){
         this(identificador, variableMedida, estrategiaPorDefecto, null);
     }
 
@@ -163,17 +169,17 @@ public abstract class Sensor{
 
     /**
      * Getter unidad de lectura
-     * @return UnidadLectura
+     * @return UnidadMedida
      */
-    public UnidadLectura getUnidadLectura(){
+    public UnidadMedida getUnidadMedida(){
         return this.variableMedida;
     }
 
     /**
      * Getter unidad final a mostrar
-     * @return UnidadLectura
+     * @return UnidadMedida
      */
-    public UnidadLectura getUnidadConvertida(){
+    public UnidadMedida getUnidadConvertida(){
         return this.procesador.getUnidadAConvertir();
     }
 
@@ -278,6 +284,11 @@ public abstract class Sensor{
         this.procesador.procesarDato(medida);
     }
 
+    /**
+     * Método para obtener un String más detallado del sensor, hecho para mantener
+     * distintas expresiones de los sensores
+     * @return String
+     */
     public String stringSensor(){
         double min = this.getProcesador().getLecturaMinima();
         double max = this.getProcesador().getLecturaMaxima();
@@ -297,7 +308,7 @@ public abstract class Sensor{
 
         String conversor = (this.getProcesador().convierteUnidades()) ? "con conversor a " + this.getProcesador().getUnidadAConvertir().toString() : "";
 
-        return this.getIdentificador() + " (" + this.getUnidadLectura() + ") " + conversor + ": " + historial +
+        return this.getIdentificador() + " (" + this.getUnidadMedida() + ") " + conversor + ": " + historial +
             " --" + " MIN: " + Formatter.formatDouble(min) + " MAX: " + Formatter.formatDouble(max) + " AVG: " + Formatter.formatDouble(avg);
     }
 
@@ -313,7 +324,7 @@ public abstract class Sensor{
         }
         else{
             fechaUltLectura = ultimaMedida.getFechaMedida().toString();
-            valorUltLectura = String.format("%.2f%s", ultimaMedida.getValorMedido(), this.getUnidadLectura());
+            valorUltLectura = String.format("%.2f%s", ultimaMedida.getValorMedido(), this.getUnidadMedida());
         }
 
         return this.identificador + " (desde: " + this.fechaImplementacion + "): Sensor " + this.getClass().getSimpleName() +
