@@ -1,6 +1,5 @@
 package estacion;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import estacion.formateadores.IDocumento;
 import estacion.formateadores.SeccionSecundaria;
 import estacion.sensores.Sensor;
 import estacion.unidadesLectura.UnidadMedida;
+import estacion.utils.DateUtils;
 
 /**
  * Estacion meteorológica que almacena los sensores, los calibra y los usa.
@@ -43,8 +43,6 @@ public class EstacionMeteorologica implements IDocumento{
     private List<SensorException> alertas;
     /** Guarda los sensores que no han podido realizar su medida dado que han lanzado un SensorException */
     private List<Sensor> sensoresDetenidos;
-    /** Establece la duracion por defecto en dias de la calibracion*/
-    private int duracionDiasCalibracionPorDefecto = 365;
 
     /**
      * Constructor estacion sin sensores
@@ -131,10 +129,10 @@ public class EstacionMeteorologica implements IDocumento{
 
         if(periodoLecturaAutomatica != null){
             if(this.fechaUltimaLectura == null){
-                this.fechaProximaLecturaAutomatica = addDates(LocalDateTime.now(), periodoLecturaAutomatica);
+                this.fechaProximaLecturaAutomatica = DateUtils.addDates(LocalDateTime.now(), periodoLecturaAutomatica);
             }
             else{
-                this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
+                this.fechaProximaLecturaAutomatica = DateUtils.addDates(fechaUltimaLectura, periodoLecturaAutomatica);
             }
         }
 
@@ -204,7 +202,7 @@ public class EstacionMeteorologica implements IDocumento{
         if(lecturasCompletadas > 0){
             this.fechaUltimaLectura = LocalDateTime.now().withNano(0);
             if(this.periodoLecturaAutomatica != null)
-                this.fechaProximaLecturaAutomatica = addDates(fechaUltimaLectura, periodoLecturaAutomatica);
+                this.fechaProximaLecturaAutomatica = DateUtils.addDates(fechaUltimaLectura, periodoLecturaAutomatica);
         }
     }
 
@@ -251,31 +249,32 @@ public class EstacionMeteorologica implements IDocumento{
     }
 
     /**
-     * Setter duracion dias calibración por defecto
-     * @param numDias numDias >= 1
+     * Imprime por pantalla información de la estación sin incluir las alertas (usado para facilitar la lectura en los tests iniciales)
      */
-    public void setDuracionDiasCalibracionPorDefecto(int numDias){
-        if(numDias <= 0) return;
-        this.duracionDiasCalibracionPorDefecto = numDias;
-    }
-
-    /**
-     * Imprime por pantalla información de la estación.
-     */
-    public void printEstacionMeteorologica(){
+    public void shortPrint(boolean printNotCalibrated){
         System.out.println(this);
         System.out.println("------------------------------------------------");
         System.out.println("Sensores instalados: " + this.sensores.size());
         //Sale el carácter ? si se pone tilde en última
         System.out.println("Ultima lectura: " + (this.fechaUltimaLectura == null ? "Sin lecturas" : this.fechaUltimaLectura));
         for(Sensor s : this.sensores.values()){
-            //Si no está calibrado lo ignoramos
-            if(s.estaCalibrado() == false){
-                continue;
+            if(printNotCalibrated == false){
+                //Si no está calibrado lo ignoramos
+                if(s.estaCalibrado() == false){
+                    continue;
+                }
             }
 
             System.out.println(s.stringSensor());
         }
+    }
+
+    /**
+     * Imprime por pantalla información de la estación.
+     */
+    public void print(){
+
+        this.shortPrint(false);
 
         System.out.println("\nAlertas activas: " + this.alertas.size());
 
@@ -292,11 +291,11 @@ public class EstacionMeteorologica implements IDocumento{
      * @param diasDuracionCalibracion dias de Calibracion
      * @return true si calibrado, false si no está en la estación
      */
-    public boolean calibrarSensor(Sensor sensor, double nuevoOffset, int diasDuracionCalibracion){
+    public boolean calibrarSensor(Sensor sensor, double nuevoOffset){
         if(this.sensores.containsKey(sensor.getIdentificador()) == false)
             return false;
 
-        sensor.calibrar(diasDuracionCalibracion, nuevoOffset);
+        sensor.calibrar(nuevoOffset);
         if(this.sensoresDetenidos.contains(sensor) == true){
             this.sensoresDetenidos.remove(sensor);
             this.lecturaPuntual(sensor);
@@ -313,16 +312,6 @@ public class EstacionMeteorologica implements IDocumento{
         this.alertas.removeAll(excepcionesAntiguas);
 
         return true;
-    }
-
-    /**
-     * Calibrar un sensor sin tener en cuenta dias de calibracion, usa el por defecto
-     * @param sensor a calibrar
-     * @param nuevoOffset a configurar
-     * @return true si calibrado, false si no está en la estación
-     */
-    public boolean calibrarSensor(Sensor sensor, double nuevoOffset){
-        return this.calibrarSensor(sensor, nuevoOffset, duracionDiasCalibracionPorDefecto);
     }
     
     public String getTituloDocumento(){
@@ -373,15 +362,5 @@ public class EstacionMeteorologica implements IDocumento{
         return "Estación Meteorológica: " + nombre + "\nUbicación: " + latitud + ", " + longitud;
     }
 
-    //añado la excepcion por si alguien la quisiera capturar (la lanza LocalDateTime.of())
-    private LocalDateTime addDates(LocalDateTime date1, LocalDateTime date2) throws DateTimeException {
-        return LocalDateTime.of(
-            date1.getYear() + date2.getYear(),
-            date1.getMonthValue() + date2.getMonthValue(),
-            date1.getDayOfMonth() + date2.getDayOfMonth(),
-            date1.getHour() + date2.getHour(),
-            date1.getMinute() + date2.getMinute(),
-            date1.getSecond() + date2.getSecond()               
-        );
-    }
+    
 }

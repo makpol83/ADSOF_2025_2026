@@ -6,12 +6,6 @@ import java.util.List;
  * Clase para formatear una interfaz IDocumento a formato HTML
  */
 public class FormateadorHTML implements Formateador{
-
-    /**
-     * Constructor por defecto
-     */
-    public FormateadorHTML(){}
-
     public String formatear(IDocumento informacion){
         // Extraemos los datos de informacion
         String tituloDocumento = informacion.getTituloDocumento();

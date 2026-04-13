@@ -3,7 +3,7 @@ package estacion.unidadesLectura.conversores;
 import estacion.unidadesLectura.MTemperatura;
 
 /**
- * Conversor Fahrenheit --> Kelvin
+ * Esta clase (singleton) extendida de Conversor realiza un cambio de unidades de Fahrenheit a Kelvin
  */
 public class ConversorFahrenheitKelvin extends Conversor {
     /** Instancia */
@@ -17,8 +17,8 @@ public class ConversorFahrenheitKelvin extends Conversor {
     }
 
     /**
-     * Getter instancia
-     * @return ConversorFahrenheitKelvin
+     * Retorna la instancia única (singleton) de esta clase
+     * @return la instancia de esta clase
      */
     public static ConversorFahrenheitKelvin getConversor(){
         return INSTANCIA;

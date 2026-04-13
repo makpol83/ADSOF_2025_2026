@@ -3,7 +3,7 @@ package estacion.unidadesLectura.conversores;
 import estacion.unidadesLectura.MTemperatura;
 
 /**
- * Conversor Celsius --> Fahrenheit
+ * Esta clase (singleton) extendida de Conversor realiza un cambio de unidades de Celsius a Fahrenheit
  */
 public class ConversorCelsiusFahrenheit extends Conversor {
     /** Instancia */
@@ -17,10 +17,10 @@ public class ConversorCelsiusFahrenheit extends Conversor {
     }
 
     /**
-     * Getter instancia
-     * @return ConversorCelsiusFahrenheit
+     * Retorna la instancia única (singleton) de esta clase
+     * @return la instancia de esta clase
      */
-    public static Conversor getConversor(){
+    public static ConversorCelsiusFahrenheit getConversor(){
         return INSTANCIA;
     }
 

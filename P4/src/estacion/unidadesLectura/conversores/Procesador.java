@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import estacion.exceptions.UnidadesIncorrectasException;
+import estacion.exceptions.ConversorIncompatibleException;
 import estacion.sensores.Medicion;
 import estacion.sensores.Medida;
 import estacion.unidadesLectura.UnidadMedida;
@@ -37,24 +38,22 @@ public class Procesador {
      * Constructor con lista de conversores
      * @param variableMedida Variable original que mide el sensor
      * @param conversores Lista de conversores en el orden correcto
-     * @throws UnidadesIncorrectasException Si un conversor genera problemas entre unidades de medida
+     * @throws ConversorIncompatibleException Si un conversor genera problemas entre unidades de medida
      */
     public Procesador(UnidadMedida variableMedida, List<Conversor> conversores)
-    throws UnidadesIncorrectasException
+    throws ConversorIncompatibleException
     {
         this(variableMedida);
-        if(conversores != null)
-            this.conversores.addAll(conversores);
 
         UnidadMedida unidadActual = this.variableMedida;
         UnidadMedida unidadSiguiente;
-        for(Conversor c : this.conversores){
-            if(c != ConversorIdentidad.getConversor()){
-                unidadSiguiente = c.getUnidadOrigen();
-                if(unidadActual.equals(unidadSiguiente) == false)
-                    throw new UnidadesIncorrectasException(this);
-                else
-                    unidadActual = c.getUnidadDestino();
+        for(Conversor c : conversores){
+            unidadSiguiente = c.getUnidadOrigen();
+            if(unidadActual.equals(unidadSiguiente) == false)
+                throw new ConversorIncompatibleException(c, unidadActual);
+            else{
+                unidadActual = c.getUnidadDestino();
+                this.conversores.add(c);
             }
         }
     }
@@ -120,8 +119,8 @@ public class Procesador {
     }
 
     /**
-     * Booleano para saber si es la identidad o no
-     * @return true si convierte a unidades distintas del origen, false si es la identidad
+     * Comprueba si este Procesador transforma a una unidad de lectura distinta a la inicial
+     * @return True si transforma a otra unidad o False.
      */
     public boolean convierteUnidades(){
         //si es igual a 1, solo tiene el conversor identidad

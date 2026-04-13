@@ -4,12 +4,6 @@ package estacion.utils;
  * Clase de utilidad para formateo
  */
 public abstract class Formatter {
-
-    /**
-     * Constructor por defecto
-     */
-    public Formatter(){}
-
     /**
      * Formatea un double con dos decimales
      * @param d double

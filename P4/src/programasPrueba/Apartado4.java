@@ -15,20 +15,8 @@ import estacion.unidadesLectura.MHumedad;
 import estacion.unidadesLectura.MPresionAtmosferica;
 import estacion.unidadesLectura.MTemperatura;
 
-/**
- * Pruebas apartado4
- */
 public class Apartado4 {
-
-    /**
-     * Constructor por defecto
-     */
-    public Apartado4(){}
-
-    /**
-     * Metodo main
-     * @param args vacio
-     */    public static void main(String ... args){
+    public static void main(String ... args){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", -3.7038, 40.4168);
         Sensor sTemp1 = new Temperatura(MTemperatura.Celsius, new MedicionAleatoria(1));
         Sensor sTemp2 = new Temperatura(MTemperatura.Fahrenheit, new MedicionCercana(0));
@@ -49,16 +37,16 @@ public class Apartado4 {
         } catch(MismoIdException e){
             //No debe pasar
         }
-        System.out.println("Imprimos con sólo los sensores añadidos:");
+        System.out.println("Imprimimos con sólo los sensores añadidos:");
         //Vemosq ue esta vacio pero hay sensores
-        estacion.printEstacionMeteorologica();
+        estacion.print();
 
         //Realizamos lectura
         estacion.lecturaManual();
         
-        System.out.println("Imprimos con errores de calibración:");
+        System.out.println("Imprimimos con errores de calibración:");
         //Vemos que la lectura falla y se generan alertas de calibración
-        estacion.printEstacionMeteorologica();
+        estacion.print();
 
         //Calibramos
         //Aunque sTemp1 siempre da valores fuera de rango, la primera lectura siempre se hace dentro de rango
@@ -73,13 +61,13 @@ public class Apartado4 {
 
         System.out.println("Imprimos tras calibrar y vemos que han retomado las medidas:");
         //Vemos que está vacío pero esta vez están calibrados
-        estacion.printEstacionMeteorologica();
+        estacion.print();
 
         //Realizamos lectura
         estacion.lecturaManual();
 
         System.out.println("Volvemos a hacer lecturas y vemos que sTemp1 sale de rango siempre");
-        estacion.printEstacionMeteorologica();
+        estacion.print();
 
         System.out.println("Forzamos un cambio brusco en HUM-0001 cambiando el offset un poco y aprovechando que es medicion cercana");
         sHum.forzarMedida(new Medida(80, LocalDateTime.now().withNano(0)));
@@ -88,7 +76,7 @@ public class Apartado4 {
 
         estacion.lecturaPuntual(sHum);
 
-        estacion.printEstacionMeteorologica();
+        estacion.print();
 
         System.out.println("Restauro el offset de HUM-0001 para que no salgan sus alertas");
         sHum.calibrar(10, 0);
