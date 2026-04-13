@@ -3,7 +3,7 @@ package estacion.unidadesLectura.conversores;
 import estacion.unidadesLectura.MTemperatura;
 
 /**
- * Conversor Celsius --> Kelvin
+ * Esta clase (singleton) extendida de Conversor realiza un cambio de unidades de Celsius a Kelvin
  */
 public class ConversorCelsiusKelvin extends Conversor {
     /** Instancia */
@@ -17,8 +17,8 @@ public class ConversorCelsiusKelvin extends Conversor {
     }
 
     /**
-     * Getter instancia
-     * @return ConversorCelsiusKelvin
+     * Retorna la instancia única (singleton) de esta clase
+     * @return la instancia de esta clase
      */
     public static ConversorCelsiusKelvin getConversor(){
         return INSTANCIA;

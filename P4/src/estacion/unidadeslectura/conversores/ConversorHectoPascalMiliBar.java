@@ -3,7 +3,7 @@ package estacion.unidadesLectura.conversores;
 import estacion.unidadesLectura.MPresionAtmosferica;
 
 /**
- * Conversor HectoPascal --> Milibar
+ * Esta clase (singleton) extendida de Conversor realiza un cambio de unidades de hecto Pascal a Milibar
  */
 public class ConversorHectoPascalMiliBar extends Conversor {
     /** Instancia */
@@ -17,8 +17,8 @@ public class ConversorHectoPascalMiliBar extends Conversor {
     }
 
     /**
-     * Getter instancia
-     * @return ConversorHectoPascalMilibar
+     * Retorna la instancia única (singleton) de esta clase
+     * @return la instancia de esta clase
      */
     public static ConversorHectoPascalMiliBar getConversor(){ return INSTANCIA; }
 
