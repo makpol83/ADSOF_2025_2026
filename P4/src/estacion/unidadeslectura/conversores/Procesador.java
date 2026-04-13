@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import estacion.exceptions.UnidadesIncorrectasException;
-import estacion.exceptions.ConversorIncompatibleException;
 import estacion.sensores.Medicion;
 import estacion.sensores.Medida;
 import estacion.unidadesLectura.UnidadMedida;
@@ -44,16 +43,18 @@ public class Procesador {
     throws UnidadesIncorrectasException
     {
         this(variableMedida);
+        if(conversores != null)
+            this.conversores.addAll(conversores);
 
         UnidadMedida unidadActual = this.variableMedida;
         UnidadMedida unidadSiguiente;
-        for(Conversor c : conversores){
-            unidadSiguiente = c.getUnidadOrigen();
-            if(unidadActual.equals(unidadSiguiente) == false)
-                throw new ConversorIncompatibleException(c, unidadActual);
-            else{
-                unidadActual = c.getUnidadDestino();
-                this.conversores.add(c);
+        for(Conversor c : this.conversores){
+            if(c != ConversorIdentidad.getConversor()){
+                unidadSiguiente = c.getUnidadOrigen();
+                if(unidadActual.equals(unidadSiguiente) == false)
+                    throw new UnidadesIncorrectasException(this);
+                else
+                    unidadActual = c.getUnidadDestino();
             }
         }
     }
@@ -119,8 +120,8 @@ public class Procesador {
     }
 
     /**
-     * Comprueba si este Procesador transforma a una unidad de lectura distinta a la inicial
-     * @return True si transforma a otra unidad o False.
+     * Booleano para saber si es la identidad o no
+     * @return true si convierte a unidades distintas del origen, false si es la identidad
      */
     public boolean convierteUnidades(){
         //si es igual a 1, solo tiene el conversor identidad

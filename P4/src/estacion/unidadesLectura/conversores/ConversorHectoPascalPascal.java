@@ -3,7 +3,7 @@ package estacion.unidadesLectura.conversores;
 import estacion.unidadesLectura.MPresionAtmosferica;
 
 /**
- * Esta clase (singleton) extendida de Conversor realiza un cambio de unidades de hecto Pascal a Pascal
+ * Conversor HectoPascal --> Pascal
  */
 public class ConversorHectoPascalPascal extends Conversor {
     /** Instancia */
@@ -15,8 +15,8 @@ public class ConversorHectoPascalPascal extends Conversor {
     }
 
     /**
-     * Retorna la instancia única (singleton) de esta clase
-     * @return la instancia de esta clase
+     * Getter instancia
+     * @return ConversorHectoPascalPascal
      */
     public static ConversorHectoPascalPascal getConversor(){ return INSTANCIA; }
 
