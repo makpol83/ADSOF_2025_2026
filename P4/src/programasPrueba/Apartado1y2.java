@@ -134,7 +134,7 @@ public class Apartado1y2 {
         estacion.shortPrint(true);
         System.out.println();
         System.out.println("NOTA: la primera lectura siempre es Aleatoria. De ahi que el valor sea enorme en comparacion al resto" + 
-                            "a los que si se le ha aplicado la medicion logaritmica");
+                            "\n a los que si se le ha aplicado la medicion logaritmica");
         System.out.println();
 
         System.out.println("Si se imprime esta linea se ha llegado al final del test");
