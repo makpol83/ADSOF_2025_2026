@@ -10,10 +10,19 @@ import estacion.sensores.*;
 import estacion.unidadesLectura.MPresionAtmosferica;
 import estacion.unidadesLectura.MTemperatura;
 
+/**
+ * Clase para testear los apartados 1 y 2
+ */
 public class Apartado1y2 {
     private Apartado1y2(){}
 
-    
+    /**
+     * Programa tester de los apartados 1 y 2.
+     * Añade 6 sensores con los distintos tipos de mediciones. Los calibra todos (por defecto
+     * estan descalibrados, y realiza varias lecturas imprimiendo los resultados. Luego crea otra estación igual a la que añade un
+     * sensor con una estrategia de medición personal (MedicionLogaritmica) y realiza 4 lecturas para luego imprimir sus mediciones).
+     * Dado que la primera medicion siempre es aleatoria, es posible que el valor salga mucho mayor que las siguientes.
+     */
     public static void main(){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Mi Estacion", 6.7, 6.7);
 

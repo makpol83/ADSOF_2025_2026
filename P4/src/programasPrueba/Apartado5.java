@@ -2,8 +2,8 @@ package programasPrueba;
 
 import estacion.EstacionMeteorologica;
 import estacion.estrategiasMedicion.MedicionCercana;
+import estacion.exceptions.ConversorIncompatibleException;
 import estacion.exceptions.MismoIdException;
-import estacion.exceptions.UnidadesIncorrectasException;
 import estacion.formateadores.Formateador;
 import estacion.formateadores.FormateadorHTML;
 import estacion.formateadores.FormateadorMarkdown;
@@ -12,8 +12,16 @@ import estacion.sensores.Temperatura;
 import estacion.unidadesLectura.MTemperatura;
 import estacion.unidadesLectura.conversores.ConversorCelsiusFahrenheit;
 
+/**
+ * Clase para testear el apartado 5
+ */
 public class Apartado5 {
-    public static void main(String ... args){
+    private Apartado5(){}
+    /**
+     * Programa para testear el apartado 5.
+     * Crea una estacion sencilla y genera una impresion en formato Markdown y luego en formato HTML
+     */
+    public static void main(){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", -3.7038, 40.4168);
         Sensor sTemp1 = new Temperatura(MTemperatura.Celsius, new MedicionCercana(0));
         Sensor sTemp2 = new Temperatura(MTemperatura.Fahrenheit, new MedicionCercana(0));
@@ -21,7 +29,7 @@ public class Apartado5 {
 
         try{
             sTemp1.getProcesador().addConversor(ConversorCelsiusFahrenheit.getConversor());
-        } catch(UnidadesIncorrectasException e){
+        } catch(ConversorIncompatibleException e){
             return;
         }
 

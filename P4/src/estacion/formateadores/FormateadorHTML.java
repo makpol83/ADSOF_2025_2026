@@ -3,9 +3,16 @@ package estacion.formateadores;
 import java.util.List;
 
 /**
- * Clase para formatear una interfaz IDocumento a formato HTML
+ * Clase que formatea un IDocumento a formato HTML
  */
 public class FormateadorHTML implements Formateador{
+
+    /**
+     * Constructor por defecto. Retorna y devuelvo un objeto de tipo FormateadorHTML necesario para pasar a formato HTML
+     * un IDocumento
+     */
+    public FormateadorHTML(){}
+
     public String formatear(IDocumento informacion){
         // Extraemos los datos de informacion
         String tituloDocumento = informacion.getTituloDocumento();

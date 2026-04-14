@@ -27,7 +27,7 @@ public class Humedad extends Sensor {
 
     /**
      * Constructor sensor de humedad
-     * @param estrategiaMedicion estrategia de medicion
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      */
     public Humedad(EstrategiaMedicion estrategiaMedicion){
         this(medidaPorDefecto, estrategiaMedicion);
@@ -36,7 +36,7 @@ public class Humedad extends Sensor {
     /**
      * Constructor sensor de humedad
      * @param medidaEmpleada medida empleada
-      * @param estrategiaMedicion estrategia medicion
+      * @param estrategiaMedicion estrategia empleada en las lecturas
      */
     public Humedad(MHumedad medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
         super("HUM-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion);
@@ -45,8 +45,8 @@ public class Humedad extends Sensor {
     /**
      * Constructor sensor de humedad
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
-     * @param duracionCalibracion periodo en dias hasta la proxima descalibración automática
+     * @param estrategiaMedicion estrategia empleada en las lecturas
+     * @param duracionCalibracionDias periodo en dias hasta la proxima descalibración automática
      */
     public Humedad(MHumedad medidaEmpleada, EstrategiaMedicion estrategiaMedicion, int duracionCalibracionDias){
         this(medidaEmpleada, estrategiaMedicion, null, duracionCalibracionDias);
@@ -55,10 +55,10 @@ public class Humedad extends Sensor {
     /**
      * Constructor sensor de humedad
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      * @param conversores coleccion de conversores (ordenados) con los que inicializar el sensor. Si alguno de los sensores es incompatible,
      * se inicializará el sensor sin conversores.
-     * @param duracionCalibracion periodo en dias hasta la proxima descalibración automática
+     * @param duracionCalibracionDias periodo en dias hasta la proxima descalibración automática
      */
     public Humedad(MHumedad medidaEmpleada, EstrategiaMedicion estrategiaMedicion, Collection<Conversor> conversores, int duracionCalibracionDias){
         super("HUM-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion, conversores, duracionCalibracionDias);

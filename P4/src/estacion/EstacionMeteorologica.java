@@ -93,8 +93,8 @@ public class EstacionMeteorologica implements IDocumento{
     /**
      * Getter sensores de un tipo concreto pertenecientes a la estacion. El tipo debera ser un string igual al mostrado en su ID
      * Por ejemplo, para sensores de temperatura el tipo debera ser "TEMP" (no es case sensitive)
-     * @param tipo
-     * @return
+     * @param tipo tipo del sensor
+     * @return lista de sensores del tipo especificado
      */
     public List<Sensor> getSensores(String tipo){
         List<Sensor> sensores = new ArrayList<>();
@@ -266,6 +266,7 @@ public class EstacionMeteorologica implements IDocumento{
 
     /**
      * Imprime por pantalla información de la estación sin incluir las alertas (usado para facilitar la lectura en los tests iniciales)
+     * @param printNotCalibrated indicador para imprimir o no los sensores no calibrados (si es true se imprimen los NO calibrados)
      */
     public void shortPrint(boolean printNotCalibrated){
         System.out.println(this);
@@ -304,7 +305,6 @@ public class EstacionMeteorologica implements IDocumento{
      * Calibra un sensor dentro de la estación, elimina las alertas asociadas al sensor
      * @param sensor a calibrar
      * @param nuevoOffset offset a configurar
-     * @param diasDuracionCalibracion dias de Calibracion
      * @return true si calibrado, false si no está en la estación
      */
     public boolean calibrarSensor(Sensor sensor, double nuevoOffset){

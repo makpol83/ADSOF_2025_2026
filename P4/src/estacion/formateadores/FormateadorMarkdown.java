@@ -2,7 +2,17 @@ package estacion.formateadores;
 
 import java.util.List;
 
+/**
+ * Clase que formatea un IDocumento a formato Markdown
+ */
 public class FormateadorMarkdown implements Formateador{
+
+    /**
+     * Constructor por defecto. Retorna y devuelvo un objeto de tipo FormateadorMarkdown necesario para pasar a formato Markdown
+     * un IDocumento
+     */
+    public FormateadorMarkdown(){}
+
     public String formatear(IDocumento informacion){
         String tituloDocumento = informacion.getTituloDocumento();
         String tituloPrincipal = informacion.getTituloSeccionPrincipal();

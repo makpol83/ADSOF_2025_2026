@@ -7,6 +7,11 @@ import estacion.sensores.Sensor;
  * MedicionAleatoria. Si el resultado es negativo retornara 0. Es posible que termine fuera del rango tras aplicar el logaritmo.
  */
 public class MedicionLogaritmica extends MedicionAleatoria{
+
+
+    /**
+     * Constructor de la medicion aleatoria
+     */
     public MedicionLogaritmica(){
         super(0);
     }

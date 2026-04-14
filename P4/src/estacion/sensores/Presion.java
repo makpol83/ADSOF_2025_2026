@@ -26,7 +26,7 @@ public class Presion extends Sensor {
 
     /**
      * Constructor sensor de presión con estrategia especial
-     * @param estrategiaMedicion
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      */
     public Presion(EstrategiaMedicion estrategiaMedicion){
         this(medidaPorDefecto, estrategiaMedicion);
@@ -35,7 +35,7 @@ public class Presion extends Sensor {
     /**
      * Constructor sensor de presión con medida empelada especial y estrategia de medicion especial
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia medicion
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      */
     public Presion(MPresionAtmosferica medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
         super("PRES-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion);
@@ -44,8 +44,8 @@ public class Presion extends Sensor {
     /**
      * Constructor sensor de presión
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
-     * @param duracionCalibracion periodo en dias hasta la proxima descalibración automática
+     * @param estrategiaMedicion estrategia empleada en las lecturas
+     * @param duracionCalibracionDias periodo en dias hasta la proxima descalibración automática
      */
     public Presion(MPresionAtmosferica medidaEmpleada, EstrategiaMedicion estrategiaMedicion, int duracionCalibracionDias){
         this(medidaEmpleada, estrategiaMedicion, null, duracionCalibracionDias);
@@ -54,10 +54,10 @@ public class Presion extends Sensor {
     /**
      * Constructor sensor de presión
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      * @param conversores coleccion de conversores (ordenados) con los que inicializar el sensor. Si alguno de los sensores es incompatible,
      * se inicializará el sensor sin conversores.
-     * @param duracionCalibracion periodo en dias hasta la proxima descalibración automática
+     * @param duracionCalibracionDias periodo en dias hasta la proxima descalibración automática
      */
     public Presion(MPresionAtmosferica medidaEmpleada, EstrategiaMedicion estrategiaMedicion, Collection<Conversor> conversores, int duracionCalibracionDias){
         super("PRES-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion, conversores, duracionCalibracionDias);

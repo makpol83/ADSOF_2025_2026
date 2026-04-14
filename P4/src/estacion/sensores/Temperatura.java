@@ -24,7 +24,7 @@ public class Temperatura extends Sensor{
 
     /**
      * Constructor sensor de temperatura
-     * @param estrategiaMedicion estrategia empleada
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      */
     public Temperatura(EstrategiaMedicion estrategiaMedicion){
         this(medidaPorDefecto, estrategiaMedicion);
@@ -33,7 +33,7 @@ public class Temperatura extends Sensor{
     /**
      * Constructor sensor de temperatura
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      */
     public Temperatura(MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion){
         super("TEMP-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion);
@@ -42,7 +42,7 @@ public class Temperatura extends Sensor{
     /**
      * Constructor sensor de temperatura
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      * @param duracionCalibracionDias periodo en dias hasta la proxima descalibración automática
      */
     public Temperatura(MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion, int duracionCalibracionDias){
@@ -52,10 +52,10 @@ public class Temperatura extends Sensor{
     /**
      * Constructor sensor de temperatura
      * @param medidaEmpleada medida empleada
-     * @param estrategiaMedicion estrategia empleada
+     * @param estrategiaMedicion estrategia empleada en las lecturas
      * @param conversores coleccion de conversores (ordenados) con los que inicializar el sensor. Si alguno de los sensores es incompatible,
      * se inicializará el sensor sin conversores.
-     * @param duracionCalibracion periodo en dias hasta la proxima descalibración automática
+     * @param duracionCalibracionDias periodo en dias hasta la proxima descalibración automática
      */
     public Temperatura(MTemperatura medidaEmpleada, EstrategiaMedicion estrategiaMedicion, Collection<Conversor> conversores, int duracionCalibracionDias){
         super("TEMP-" + String.format("%04d", nextId++), medidaEmpleada, estrategiaMedicion, conversores, duracionCalibracionDias);

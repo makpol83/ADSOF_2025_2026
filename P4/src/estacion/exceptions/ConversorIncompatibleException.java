@@ -3,6 +3,11 @@ package estacion.exceptions;
 import estacion.unidadesLectura.UnidadMedida;
 import estacion.unidadesLectura.conversores.Conversor;
 
+/**
+ *  Informa que se ha intentado añadir un conversor incompatible a un sensor. Sean dos conversores A y B consecutivos, un conversor B es
+ * incompatible cuando la unidad de destino del conversor A es distinta a la unidad de origen del conversor B. Tambien se considera
+ * incompatible el primer conversor añadido a un sensor si su unidad de origen no coincide con la unidad de lectura del sensor.
+ */
 public class ConversorIncompatibleException extends Exception {
     /** Conversor que genera incompatibilidad */
     private final Conversor c;
@@ -43,9 +48,15 @@ public class ConversorIncompatibleException extends Exception {
         this(message, c, null);
     }
 
-    /** Retorna el conversor incompatible */
+    /**
+     * Retorna el conversor incompatible
+     * @return conversor incompatible
+     */
     public Conversor getConversorIncompatible(){return this.c; }
-    /**  Retorna la unidad de lectura que genera conflicto con el conversor*/
+    /**
+     * Retorna la unidad de lectura que genera conflicto
+     * @return unidad de lectura conflictiva
+     */
     public UnidadMedida getUnidadLecturaConflicto(){return this.conflicto; }
 
 }

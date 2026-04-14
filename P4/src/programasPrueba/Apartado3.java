@@ -12,9 +12,20 @@ import estacion.unidadesLectura.conversores.ConversorFahrenheitKelvin;
 import estacion.unidadesLectura.conversores.ConversorKelvinCelsius;
 import estacion.unidadesLectura.conversores.ConversorPascalHectoPascal;
 
+/**
+ * Clase para testear el apartado 3
+ */
 public class Apartado3 {
-
-    public void main(String ... args){
+    private Apartado3(){}
+    /**
+     * Programa tester del apartado 3. Añade un par de sensores a la estacion, realiza varias lecturas e imprime sus medidas. Luego
+     * añade algunos conversores y reimprime las medidas con el historial del procesador actualizado. A continuación inserta otro conversor
+     * para que uno de los sensores vuelva a la unidad de lectura original, mostrando como es posible concatenar conversores y los valores
+     * inicial y final son identicos.
+     * 
+     * Finalmente añade un conversor incompatible para recoger la exepcion lanzada.
+     */
+    public void main(){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", 40.4168, -37038);
         Sensor sTemp = new Temperatura(MTemperatura.Celsius, new MedicionCercana(5));
         Sensor sPresion = new Presion(MPresionAtmosferica.Pa, new MedicionAleatoria(0));
