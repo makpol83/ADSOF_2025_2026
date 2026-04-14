@@ -25,7 +25,7 @@ public class Apartado3 {
      * 
      * Finalmente añade un conversor incompatible para recoger la exepcion lanzada.
      */
-    public void main(){
+    public static void main(){
         EstacionMeteorologica estacion = new EstacionMeteorologica("Madrid Centro", 40.4168, -37038);
         Sensor sTemp = new Temperatura(MTemperatura.Celsius, new MedicionCercana(5));
         Sensor sPresion = new Presion(MPresionAtmosferica.Pa, new MedicionAleatoria(0));
