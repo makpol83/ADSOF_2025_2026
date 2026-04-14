@@ -2,8 +2,8 @@ package programasPrueba;
 import estacion.EstacionMeteorologica;
 import estacion.estrategiasMedicion.MedicionAleatoria;
 import estacion.estrategiasMedicion.MedicionCercana;
+import estacion.exceptions.ConversorIncompatibleException;
 import estacion.exceptions.MismoIdException;
-import estacion.exceptions.UnidadesIncorrectasException;
 import estacion.sensores.*;
 import estacion.unidadesLectura.MPresionAtmosferica;
 import estacion.unidadesLectura.MTemperatura;
@@ -51,7 +51,7 @@ public class Apartado3 {
             System.out.println("Añadimos conversor ºF --> ºK en sensor " + sTemp.getIdentificador());
             sPresion.getProcesador().addConversor(ConversorPascalHectoPascal.getConversor());
             System.out.println("Añadimos conversor Pa --> hPa en sensor" + sPresion.getIdentificador());
-        } catch (UnidadesIncorrectasException e){
+        } catch (ConversorIncompatibleException e){
             System.out.println(e);
             System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA FALLADO");
             return;
@@ -67,7 +67,7 @@ public class Apartado3 {
         try{
             sTemp.getProcesador().addConversor(ConversorKelvinCelsius.getConversor());
             System.out.println("Añadimos conversor ºK --> ºC en sensor " + sTemp.getIdentificador());
-        } catch (UnidadesIncorrectasException e){
+        } catch (ConversorIncompatibleException e){
             System.out.println(e);
             System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA FALLADO");
             return;
@@ -89,7 +89,7 @@ public class Apartado3 {
             System.out.println("SI SE IMPRIME ESTE MENAJE, EL TEST HA FALLADO");
             return;
             
-        } catch (UnidadesIncorrectasException e){
+        } catch (ConversorIncompatibleException e){
             System.out.println();
             System.out.println("Excepcion obtenida correctamente");
             System.out.println();

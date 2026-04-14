@@ -1,0 +1,332 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLClass</id><coordinates><x>1568</x><y>392</y><w>480</w><h>344</h></coordinates><panel_attributes>EstacionMeteorologica
+--
+- nombre : String
+- longitud : double
+- latitud : double
+- fechaUltimaLectura : Date
+- fechaProximaLectura : Date
+- periodoLecturaAutomática : Date
+- numLecturaAutomaticaMaxima : int
+--
++ getSensores() : Sensor[*]
++ getSensor(identificador::String) : Sensor
++ getSensores(variableMedida::UnidadMedida) : Sensor[*]
++ configurarLecturaAutomatica(periodoLecturaAutomatica::Date, numLecturasMaximas::int) : boolean
++ añadirSensor(Sensor) : void
++ getFechaInstalacion(Sensor) : Date
++ getFechaInstalacion(sensorId::String) : Date
++ lecturaManual() : void
++ lecturaManual(numLecturas::int) : void
++ lecturaPuntual(Sensor) : boolean
++ lecturaAutomatica() : boolean
++ shortPrint(printNotCalibrated::boolean) : void
++ print() : void
++ calibrarSensor(Sensor, nuevoOffset::double) : boolean
++ getTituloDocumento() : String
++ getTituloSeccionPrincipal() : String
++ getParrafosSeccionPrincipal() : String[*]
++ getSeccionesSecundarias() : SeccionSecundaria[*]
++ toString() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1544</x><y>792</y><w>280</w><h>296</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/Sensor/
+-
+- porcentajeCambioBrusco : double
+- identificador : String
+- offset : double
+- fechaImplementacion : Date
+- calibrado : boolean
+- duracionCalibracionDias : int
+-
++ calibrar(duracionCalibracionDias::int, nuevoOffset::double) : void
++ calibrar(nuevoOffset::double) : void
+- comprobarCalibracion() : void
++ realizarMedida() : void
++ getMediaHistorica() : double
++ getUltimaMedida() : Medida
++ getValorLecturaMinimo() : double
++ getValorLecturaMaximo() : double
++ estaCalibrado() : boolean
++ setPorcentajeCambioBrusco(nuevoPorcentaje::double) : boolean
++ setFechaImplementacion(LocalDate) : void
++ setDescalibrado() : void
++ forzarMedida(medida::Medida) : void
++ stringSensor() : String
++ toString() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1360</x><y>1264</y><w>192</w><h>64</h></coordinates><panel_attributes>Temperatura
+-
+_-nextId : int_</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1472</x><y>1080</y><w>240</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>280;10;280;100;10;100;10;230</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1824</x><y>1264</y><w>192</w><h>64</h></coordinates><panel_attributes>Humedad
+-
+_-nextId : int_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1592</x><y>1264</y><w>192</w><h>64</h></coordinates><panel_attributes>Presion
+-
+_- nextId : int_</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1688</x><y>1080</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1688</x><y>1080</y><w>248</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100;290;100;290;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1680</x><y>728</y><w>64</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+r2=sensores
+m2=*
+m1=1</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1224</x><y>800</y><w>136</w><h>96</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+UnidadMedida
+--
+getValorMinimo() : double
+getValorMaximo() : double
+esRangoValido() : double
+name() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1352</x><y>832</y><w>208</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+r1=variableMedida
+m1=1
+m2=*</panel_attributes><additional_attributes>10;20;240;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2176</x><y>760</y><w>272</w><h>88</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+EstrategiaMedicion
+-
+medir(s: Sensor) : double</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>784</y><w>376</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+r1=estrategia
+m1=1
+m2=*</panel_attributes><additional_attributes>450;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2528</x><y>640</y><w>544</w><h>88</h></coordinates><panel_attributes>MedicionAleatoria
+-
+- probFueraRango: double
+-
++ medir(s: Sensor) : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2528</x><y>776</y><w>544</w><h>88</h></coordinates><panel_attributes>MedicionCercana
+-
+- offsetPorcentaje : double
+-
++ medir(s: Sensor) : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2440</x><y>800</y><w>104</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;70;10;70;180;110;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2528</x><y>896</y><w>544</w><h>88</h></coordinates><panel_attributes>MedicionHistorica
+-
+- offsetPorcentaje: double
+-
++ medir(s: Sensor) : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2440</x><y>800</y><w>104</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2440</x><y>672</y><w>104</w><h>152</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;170;70;170;70;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1336</x><y>600</y><w>224</w><h>232</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;&gt;
+r1=procesador
+m1=1
+m2=1</panel_attributes><additional_attributes>10;20;130;20;130;260;260;260</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1104</x><y>584</y><w>240</w><h>144</h></coordinates><panel_attributes>Procesador
+-
++ addConversor(Conversor) : void
++ procesarDato(Medida) : boolean
++ getUnidadAConvertir() : UnidadMedida
++ convierteUnidades() : boolean
++ getLecturaMinima() : double
++ getLecturaMaxima() : double
++ getHistorial() : Medida[*]
++ getMedida(i::int) : Medida
++ getNumMedidas() : int
++ getMediaHistorica() : double</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>936</x><y>600</y><w>184</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=1..n
+r2=conversores</panel_attributes><additional_attributes>210;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>656</x><y>568</y><w>288</w><h>120</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/Conversor/
+-
+- variableOrigen : UnidadMedida
+- variableDestino : UnidadMedida
+-
+/+ getConversor(): Conversor/
+/+ convertirUnidades() : double/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>664</x><y>368</y><w>128</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>140;250;140;50;10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>376</y><w>632</w><h>208</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>770;240;770;40;10;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>456</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorPascalHectoPascal
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>568</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorHectoPascalMiliBar
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>680</y><w>344</w><h>96</h></coordinates><panel_attributes>ConversorMiliBarPascal
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>616</y><w>184</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>210;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>504</y><w>184</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>210;150;100;150;100;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>616</y><w>184</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>210;10;100;10;100;120;10;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>296</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorCelsiusFahrenheit
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>288</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorKelvinCelsius
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>408</x><y>256</y><w>384</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>460;390;460;190;10;190;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>744</x><y>680</y><w>24</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>640</x><y>760</y><w>240</w><h>88</h></coordinates><panel_attributes>ConversorIdentidad
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>176</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorFahrenhieitKelvin
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>856</x><y>288</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorFahrenheitCelsius
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1336</x><y>264</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorCelsiusKelvin
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1096</x><y>168</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorKelvinFahrenheit
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>888</x><y>344</y><w>600</w><h>240</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;280;10;80;730;80;730;10</additional_attributes></element><element><id>Relation</id><coordinates><x>888</x><y>368</y><w>176</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;250;10;50;200;50;200;10</additional_attributes></element><element><id>Relation</id><coordinates><x>888</x><y>248</y><w>392</w><h>336</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;400;10;200;470;200;470;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>920</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorHectoPascalMiliBar
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>1032</y><w>344</w><h>96</h></coordinates><panel_attributes>ConversorMiliBarPascal
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>808</y><w>344</w><h>88</h></coordinates><panel_attributes>ConversorPascalHectoPascal
+-
+_- INSTANCIA_
+-
++ getConversor(): Conversor
++ convertirUnidades() : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>848</y><w>144</w><h>136</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>160;150;100;150;100;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>960</y><w>152</w><h>112</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>170;10;100;10;100;120;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>656</y><w>184</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>210;10;170;10;170;390;10;390</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2528</x><y>1016</y><w>544</w><h>88</h></coordinates><panel_attributes>MedicionLogarítmica
+-
++ medir(s: Sensor) : double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2440</x><y>800</y><w>104</w><h>288</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;70;10;70;340;110;340</additional_attributes></element><element><id>Relation</id><coordinates><x>1696</x><y>184</y><w>24</w><h>224</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;260</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1664</x><y>40</y><w>240</w><h>152</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+IDocumento
+--
+getTituloDocumento() : String
+getTituloSeccionPrincipal() :String
+getParrafosSeccionPrincipal() : String
+getSeccionesSecundarias(): SeccionSecundaria[*]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2176</x><y>48</y><w>240</w><h>48</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Formateador
+-
+formatear(IDocumento) : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2064</x><y>192</y><w>168</w><h>40</h></coordinates><panel_attributes>FormateadorHTML
+-
++ formatear(IDocumento) : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2256</x><y>192</y><w>168</w><h>40</h></coordinates><panel_attributes>FormateadorMarkdown
+-
++ formatear(IDocumento) : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1944</x><y>40</y><w>168</w><h>80</h></coordinates><panel_attributes>SeccionSecundaria
+--
+- titulo : String
+- elementos : String[*]
+--
++ getTitulo() : String
++ getElementos() : String[*]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2208</x><y>88</y><w>96</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;100;60;10;60;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>2280</x><y>88</y><w>64</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;60;60;60;60;130</additional_attributes></element><element><id>UMLClass</id><coordinates><x>888</x><y>960</y><w>136</w><h>128</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+MHumedad
+--
++ Porcentaje(0, 100)
+--
+- minValor : double
+- maxValor : double
+--
++ getValorMinimo() : double
++ getValorMaximo() : double
++ esRangoValido() : double
++ name() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1040</x><y>960</y><w>136</w><h>160</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+MPresionAtmosferica
+--
++ hPa(300,1100)
++ Pa(3,11)
++ mbar(300,1100)
+--
+- minValor : double
+- maxValor : double
+--
++ getValorMinimo() : double
++ getValorMaximo() : double
++ esRangoValido() : double
++ name() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1192</x><y>960</y><w>136</w><h>160</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+MTemperatura
+--
++ Celsius(-273.1000)
++ Fahrenheit(-459.67, 1832)
++ Kelvin(0, 1273.15)
+--
+- minValor : double
+- maxValor : double
+--
++ getValorMinimo() : double
++ getValorMaximo() : double
++ esRangoValido() : double
++ name() : String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1264</x><y>888</y><w>24</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1096</x><y>840</y><w>144</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>160;10;10;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>968</x><y>840</y><w>272</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>320;10;10;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>1304</x><y>1112</y><w>104</w><h>168</h></coordinates><panel_attributes>lt=&lt;-
+r1=medidaPorDefecto
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;10;130;90;130;90;190</additional_attributes></element><element><id>Relation</id><coordinates><x>1128</x><y>1112</y><w>536</w><h>272</h></coordinates><panel_attributes>lt=&lt;-
+r1=medidaPorDefecto
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;10;320;640;320;640;270</additional_attributes></element><element><id>Relation</id><coordinates><x>928</x><y>1080</y><w>984</w><h>328</h></coordinates><panel_attributes>lt=&lt;-
+r1=medidaPorDefecto
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;10;390;1200;390;1200;310</additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>816</y><w>376</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+r1=estrategiaPorDefecto
+m1=1
+m2=*</panel_attributes><additional_attributes>450;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1304</x><y>520</y><w>56</w><h>80</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;&gt;
+r1=historial
+m1=1
+m2=1</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1304</x><y>720</y><w>96</w><h>96</h></coordinates><panel_attributes>lt=&lt;-
+r1=variableMedida
+m1=1
+m2=*</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1232</x><y>424</y><w>168</w><h>104</h></coordinates><panel_attributes>Medicion
+--
+- sumaMedidas : double
+--
++ getMediaHistorica() : double
++ getNumMedidas() : int
++ getMedida(i::int) : Medida
++ añadirMedida(Medida) : boolean
++ values() : Medida[*]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1392</x><y>352</y><w>432</w><h>112</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;&gt;
+r1=mediciones
+m1=*
+m2=1</panel_attributes><additional_attributes>520;20;200;20;200;110;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1808</x><y>280</y><w>168</w><h>96</h></coordinates><panel_attributes>Medida
+--
+- valorMedido : double
+- fechaMedida : Date
+--
++ getValorMedido() : double
++ getFechaMedida() : Date</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1400</x><y>80</y><w>168</w><h>48</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/DateUtils/
+--
+_+ addDates(Date, Date) : Date_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1400</x><y>0</y><w>168</w><h>48</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/Formatter/
+--
+_+ formatDouble(double) : String_</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1752</x><y>728</y><w>112</w><h>80</h></coordinates><panel_attributes>lt=-&gt;
+r2=sensoresDetenidos
+m2=*
+m1=1</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2112</x><y>496</y><w>120</w><h>64</h></coordinates><panel_attributes>SensorException
+--
+- sensor : Sensor
+-
++ getSensor() : Sensor</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2072</x><y>344</y><w>184</w><h>64</h></coordinates><panel_attributes>CalibracionCaducadaException
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2288</x><y>344</y><w>184</w><h>64</h></coordinates><panel_attributes>CambioBruscoLecturaException
+--
++ getPenultimaMedida() : Medida
++ getUltimaMedida() : Medida</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1968</x><y>296</y><w>384</w><h>64</h></coordinates><panel_attributes>lt=&lt;-
+r1=penultimaMedida
+m1=1
+m2=1</panel_attributes><additional_attributes>10;20;450;20;450;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1968</x><y>272</y><w>408</w><h>88</h></coordinates><panel_attributes>lt=&lt;-
+r1=ultimaMedida
+m1=1
+m2=1</panel_attributes><additional_attributes>10;20;480;20;480;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>736</y><w>224</w><h>64</h></coordinates><panel_attributes>ConversorIncompatibleException
+--
+_- message : String_
+--
++ getConversorIncompatible() : Conversor
++ getUnidadLecturaConflicto() : UnidadMedida</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>936</x><y>656</y><w>128</w><h>96</h></coordinates><panel_attributes>lt=&lt;-
+r1=c
+m1=1
+m2=*</panel_attributes><additional_attributes>10;20;130;20;130;100</additional_attributes></element><element><id>Relation</id><coordinates><x>2168</x><y>400</y><w>24</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2224</x><y>400</y><w>112</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;150;120;150;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2040</x><y>520</y><w>88</w><h>40</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;&gt;
+m1=*
+m2=1
+r1=alertas</panel_attributes><additional_attributes>90;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1992</x><y>928</y><w>184</w><h>64</h></coordinates><panel_attributes>MismoIdException
+--
++ getExistente() : Sensor
++ getNuevo() : Sensor</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>928</y><w>192</w><h>40</h></coordinates><panel_attributes>lt=-&gt;
+r2=existente
+m1=1
+m2=1</panel_attributes><additional_attributes>220;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>960</y><w>192</w><h>40</h></coordinates><panel_attributes>lt=-&gt;
+r2=nuevo
+m1=1
+m2=1</panel_attributes><additional_attributes>220;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>792</y><w>144</w><h>64</h></coordinates><panel_attributes>lt=&lt;-
+r1=conflicto
+m1=1
+m2=1</panel_attributes><additional_attributes>160;50;10;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2504</x><y>344</y><w>184</w><h>64</h></coordinates><panel_attributes>MedidaFueraRangoException
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2224</x><y>400</y><w>360</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;150;430;150;430;10</additional_attributes></element></diagram>

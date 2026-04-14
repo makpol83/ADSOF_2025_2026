@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import estacion.exceptions.UnidadesIncorrectasException;
 import estacion.exceptions.ConversorIncompatibleException;
 import estacion.sensores.Medicion;
 import estacion.sensores.Medida;
@@ -61,10 +60,10 @@ public class Procesador {
     /**
      * Añade un conversor al procesador
      * @param conversorUnidades a añadir
-     * @throws UnidadesIncorrectasException Si el conversor genera problemas entre unidades de medida
+     * @throws ConversorIncompatibleException Si el conversor genera problemas entre unidades de medida
      */
     public void addConversor(Conversor conversorUnidades)
-    throws UnidadesIncorrectasException
+    throws ConversorIncompatibleException
     {
         UnidadMedida unidadFinal = this.conversores.get(this.conversores.size()-1).getUnidadDestino();
 
@@ -90,7 +89,7 @@ public class Procesador {
             return;
         }
         else
-            throw new UnidadesIncorrectasException(this);
+            throw new ConversorIncompatibleException(conversorUnidades, this.variableMedida);
     }
 
     /**

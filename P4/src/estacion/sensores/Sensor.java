@@ -29,6 +29,7 @@ import estacion.utils.Formatter;
 public abstract class Sensor{
     /** Estrategia por defecto de medicion */
     private static final EstrategiaMedicion estrategiaPorDefecto = new MedicionAleatoria(0.2);
+    /** Valor por defecto duración calibración */
     /** Porcentaje de cambio brusco */
     private double porcentajeCambioBrusco = 0.5;
     /** Identificador del sensor */
@@ -48,10 +49,7 @@ public abstract class Sensor{
     /** Procesador de las medidas */
     private Procesador procesador;
     /** Establece la duracion por defecto en dias de la calibracion (por defecto 365)*/
-    private int duracionCalibracionDias;
-    /** Valor por defecto de la calibracion
-     * 
-     */
+    private int duracionCalibracionDias = 365;
 
     /**
      * Constructor sensor completo
