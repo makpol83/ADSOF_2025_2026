@@ -17,7 +17,7 @@ public class Dataset<T extends Comparable<? super T>> extends ArrayList<T>{
     public Feature<?> feature(String name){
         List<Feature<?>> features = this.featurizer.featurize(this);
 
-        for(Feature f : features){
+        for(Feature<?> f : features){
             if(f.getName().equals(name) == true){
                 return f;
             }
@@ -40,5 +40,21 @@ public class Dataset<T extends Comparable<? super T>> extends ArrayList<T>{
                 }
             }
         }
+    }
+
+    @Override
+    public String toString(){
+        String output="{";
+        List<Feature<?>> features = this.featurizer.featurize(this);
+        int i=0, size = features.size()-1;
+
+        for(Feature<?> f : features){
+            output += f.toString();
+            size++;
+            if(i != size){
+                output+=", ";
+            }
+        }
+        return output+="}";
     }
 }
