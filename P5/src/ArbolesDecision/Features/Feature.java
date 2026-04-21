@@ -25,7 +25,7 @@ public class Feature<T extends Comparable<? super T>> extends AbstractList<T> {
 
     /*public boolean add(T e){
         return this.data.add(e);
-    }
+    }*/
 
     public boolean add(Feature<T> feature){
         if(this.name.equals(feature.getName()) == false)
@@ -33,7 +33,7 @@ public class Feature<T extends Comparable<? super T>> extends AbstractList<T> {
 
         this.data.addAll(feature);
         return true;
-    }*/
+    }
 
     public T min(){
         if(this.data.size() == 0)
