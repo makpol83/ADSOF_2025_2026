@@ -11,9 +11,8 @@ import java.util.Objects;
 //Extiende de AbstractList<T> para que podamos usar Feature como una lista, ya que sólo hay que implementar el get y el
 //size
 
-public class Feature<T extends Comparable<? super T>> extends AbstractList<T> {
+public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
     private String name;
-    private List<T> data;
 
     public Feature(String name, List<? extends T> data){
         this.data = new ArrayList<T>(data);
@@ -31,7 +30,7 @@ public class Feature<T extends Comparable<? super T>> extends AbstractList<T> {
         if(this.name.equals(feature.getName()) == false)
             return false;
 
-        this.data.addAll(feature);
+        super.addAll(feature);
         return true;
     }
 
