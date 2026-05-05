@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.function.Predicate;
 
 import ArbolesDecision.Exceptions.StuckElementException;
@@ -48,6 +49,24 @@ public class DecisionTree<T extends Comparable<? super T>> {
         return null;
     }
 
+    private List<Predicate<T>> search(String nodeName){
+        if(nodeName.equals(name) == true){
+            List<Predicate<T>> predicates = new ArrayList<>();
+            predicates.add(this.toNode);
+            return predicates;
+        }
+
+        for(DecisionTree<T> tree : this.children){
+            List<Predicate<T>> predicates = search(nodeName);
+            if(predicates != null){
+                predicates.add(this.toNode);
+                return predicates;
+            }
+        }
+
+        return null;
+    }
+
     public DecisionTree<T> withCondition(String nodeName, Predicate<T> toNode){
         DecisionTree<T> children = new DecisionTree<>(nodeName);
         this.children.add(children);
@@ -67,7 +86,6 @@ public class DecisionTree<T extends Comparable<? super T>> {
     }
 
     public Map<String, Collection<T>> predict(Dataset<T> data){
-
         return predict(data.getData());
     }
 
@@ -116,5 +134,17 @@ public class DecisionTree<T extends Comparable<? super T>> {
             throw new StuckElementException(e); 
     }
     
-    
+    public Predicate<T> getPredicate(String leave_node){
+        List<Predicate<T>> predicates = this.search(leave_node);
+
+        if(predicates == null)
+            return null;
+
+        Predicate<T> superPredicate = predicates.get(0);
+        for(int i = 1; i < predicates.size(); i++){
+            superPredicate = superPredicate.and(predicates.get(i));
+        }
+
+        return superPredicate;
+    }
 }

@@ -2,6 +2,7 @@ package ArbolesDecision.Features;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,33 +15,22 @@ import java.util.Objects;
 public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
     private String name;
 
-    public Feature(String name, List<? extends T> data){
-        this.data = new ArrayList<T>(data);
+    public Feature(String name){
+        super();
+        this.name = name;
     }
 
     public String getName(){
         return this.name;
     }
 
-    /*public boolean add(T e){
-        return this.data.add(e);
-    }*/
-
-    public boolean add(Feature<T> feature){
-        if(this.name.equals(feature.getName()) == false)
-            return false;
-
-        super.addAll(feature);
-        return true;
-    }
-
     public T min(){
-        if(this.data.size() == 0)
+        if(size() == 0)
             return null;
 
-        T minimumData = this.data.get(0);
-        for(T d : this.data){
-            if(minimumData.compareTo(d) < 0)
+        T minimumData = get(0);
+        for(T d : this){
+            if(minimumData.compareTo(d) > 0)
                 minimumData = d;
         }
 
@@ -48,12 +38,12 @@ public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
     }
 
     public T max(){
-        if(this.data.size() == 0)
+        if(size() == 0)
             return null;
 
-        T maximumData = this.data.get(0);
-        for(T d : this.data){
-            if(maximumData.compareTo(d) > 0)
+        T maximumData = get(0);
+        for(T d : this){
+            if(maximumData.compareTo(d) < 0)
                 maximumData = d;
         }
 
@@ -62,7 +52,7 @@ public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
 
     public Map<T, Integer> distribution(){
         Map<T, Integer> distribution = new HashMap<>();
-        List<T> copyData = new ArrayList<>(this.data);
+        List<T> copyData = new ArrayList<>(this);
 
         /*
         Para contar creamos una copia del data, tomamos el primero,
@@ -89,14 +79,6 @@ public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
         }
 
         return distribution;
-    }
-
-    public int size() {
-        return data.size();
-    }
-
-    public T get(int index) {
-        return data.get(index);
     }
 
     public boolean equals(Object obj){
