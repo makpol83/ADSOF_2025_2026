@@ -1,8 +1,9 @@
-package PruebasArboles;
+package PruebasArboles.Apartado2;
 
 import ArbolesDecision.Dataset;
 import ArbolesDecision.DecisionTree;
-import PruebasArboles.DatasetTest;
+import PruebasArboles.Apartado1.DatasetTest;
+import PruebasArboles.Apartado1.Person;
 
 public class DecisionTreeTest {
 

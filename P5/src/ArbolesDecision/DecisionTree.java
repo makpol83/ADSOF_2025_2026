@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.function.Predicate;
 
 import ArbolesDecision.Exceptions.StuckElementException;
@@ -57,7 +56,7 @@ public class DecisionTree<T extends Comparable<? super T>> {
         }
 
         for(DecisionTree<T> tree : this.children){
-            List<Predicate<T>> predicates = search(nodeName);
+            List<Predicate<T>> predicates = tree.search(nodeName);
             if(predicates != null){
                 predicates.add(this.toNode);
                 return predicates;
@@ -148,5 +147,26 @@ public class DecisionTree<T extends Comparable<? super T>> {
         }
 
         return superPredicate;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        buildString(sb, "", "");
+        return sb.toString();
+    }
+
+    private void buildString(StringBuilder sb, String prefix, String childrenPrefix) {
+        // Añadimos el nombre del nodo actual
+        sb.append(prefix);
+        sb.append(name != null ? name : "root");
+        sb.append("\n");
+
+        // Recorremos los hijos
+        for (int i = 0; i < children.size(); i++) {
+            DecisionTree<T> child = children.get(i);
+
+            child.buildString(sb, childrenPrefix + "    ", childrenPrefix + "    ");
+        }
     }
 }

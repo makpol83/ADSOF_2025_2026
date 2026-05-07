@@ -1,4 +1,4 @@
-package PruebasArboles;
+package PruebasArboles.Apartado1;
 
 import java.util.Collections;
 

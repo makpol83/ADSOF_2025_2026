@@ -6,7 +6,7 @@ import ArbolesDecision.Features.*;
 public class LabeledDataSet<T extends Comparable<? super T>, L> extends Dataset<T> {
     private LabelProvider<T,L> labelProvider;
 
-    LabeledDataSet(Featurizer<T> featurizer, LabelProvider<T,L> labelProvider){
+    public LabeledDataSet(Featurizer<T> featurizer, LabelProvider<T,L> labelProvider){
         super(featurizer);
         this.labelProvider = labelProvider;
     }
