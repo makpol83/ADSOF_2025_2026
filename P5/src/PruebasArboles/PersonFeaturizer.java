@@ -16,30 +16,28 @@ public class PersonFeaturizer implements Featurizer<Person>{
     }
 
     @Override
-    
-    public Collection<Feature<?>> featurize(Collection<Person> elements) {
-        Collection<Feature<?>> features = new ArrayList<>();
-        for(Person person : elements){
-            Feature<Integer> ageFeature = new Feature<>(featureNames.get(0));
-            ageFeature.add(person.getAge());
+    public <S extends Comparable<? super S>> Feature<S> featurize(Person element, String featureName) {
 
-            Feature<Double> weightFeature = new Feature<>(featureNames.get(1));
-            weightFeature.add(person.getWeight());
+        switch(featureName){
+            case "age":
+                Feature<Integer> ageFeature = new Feature<>(featureNames.get(0));
+                ageFeature.add(element.getAge());
+                return (Feature)ageFeature;
+            case "weight":
+                Feature<Double> weightFeature = new Feature<>(featureNames.get(1));
+                weightFeature.add(element.getWeight());
+                return (Feature)weightFeature;
+            case "gender":
+                Feature<Gender> genderFeature = new Feature<>(featureNames.get(2));
+                if(element.isMale() == true){
+                    genderFeature.add(Gender.MALE);
+                } else {
+                    genderFeature.add(Gender.FEMALE);
+                }
+                return (Feature)genderFeature;
 
-            Feature<Gender> genderFeature = new Feature<>(featureNames.get(2));
-            if(person.isMale() == true){
-                genderFeature.add(Gender.MALE);
-            } else {
-                genderFeature.add(Gender.FEMALE);
-            }
-
-            features.add(weightFeature);
-            features.add(genderFeature);
-            features.add(ageFeature);
         }
 
-        return features;
+        return null;
     }
-
-    
 }

@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface Featurizer<T> {
     List<String> getFeatureNames();
-    Collection<Feature<?>> featurize(Collection<T> element);
+    <S extends Comparable<? super S>> Feature<S> featurize(T element, String featureName);
 }

@@ -3,9 +3,12 @@ package ArbolesDecision;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ArbolesDecision.Features.Feature;
 import ArbolesDecision.Features.Featurizer;
@@ -35,19 +38,24 @@ public class Dataset<T extends Comparable<? super T>>{
     public void add(T elem){
         this.elementsFeaturized.add(elem);
         // Obtenemos las features del nuevo elemento
-        for (Feature<?> newFeature : this.featurizer.featurize(List.of(elem))) {
-            String name = newFeature.getName();
+        for (String featureName : this.featurizer.getFeatureNames()) {
+            
 
-            if (features.containsKey(name)) {
+            if (features.containsKey(featureName)){
                 // Sacamos feature y guardamos en crudo
-                Feature existingFeature = features.get(name);
-                existingFeature.addAll(newFeature);
+                addFeature(features.get(featureName), this.featurizer.featurize(elem, featureName));
             } else {
                 // Si no existe, la guardamos directamente
-                features.put(name, newFeature);
+                features.put(featureName, this.featurizer.featurize(elem, featureName));
             }
         }
     }
+
+    private <S extends Comparable<? super S>> void addFeature(Feature<S> featureToAdd, Feature<?> featureToGet) {
+        featureToAdd.add((S) featureToGet.get(0)); 
+    }
+
+    
 
     public void addAll(Collection<T> elems){
 
@@ -65,46 +73,17 @@ public class Dataset<T extends Comparable<? super T>>{
     
 
     public void removeDuplicates(){
-        for(int i = 0; i < elementsFeaturized.size(); i++){
-            T dataInstance = elementsFeaturized.get(i);
-            
-            //Iterador que empieza en i + 1
-            Iterator<T> it = elementsFeaturized.listIterator(i + 1);
+        Set<T> withoutDuplicates = new TreeSet<>(this.elementsFeaturized);
 
-            while(it.hasNext()){
-                T dataToCompare = it.next();
-                if(dataInstance.compareTo(dataToCompare) == 0){
-                    it.remove();
-                }
-            }
-        }
-
-        
-        this.reFeaturize(this.elementsFeaturized);
-    }
-
-    private void reFeaturize(Collection<T> elements){
+        this.elementsFeaturized.clear();
         this.features.clear();
-        for(T elem : elements){
-            for (Feature<?> newFeature : this.featurizer.featurize(List.of(elem))) {
-            String name = newFeature.getName();
-
-            if (features.containsKey(name)) {
-                // Sacamos feature y guardamos en crudo
-                Feature existingFeature = features.get(name);
-                existingFeature.addAll(newFeature);
-            } else {
-                // Si no existe, la guardamos directamente
-                features.put(name, newFeature);
-            }
-            }
-        }
+        this.addAll(withoutDuplicates);
     }
 
     public Collection<T> getData(){ return this.elementsFeaturized; }
 
-    public Feature feature(String name){
-        return this.features.get(name);
+    public <S extends Comparable<? super S>> Feature<S> feature(String name){
+        return (Feature<S>)this.features.get(name);
     }
 
     @Override
