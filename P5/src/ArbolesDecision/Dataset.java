@@ -22,19 +22,6 @@ public class Dataset<T extends Comparable<? super T>>{
         this.featurizer = featurizer;
     }
 
-    //public void add2(T elem){
-    //    this.elementsFeaturized.add(elem);
-    //
-    //    for(Feature<?> f : this.featurizer.featurize(List.of(elem))){
-    //        if(features.containsKey(f.getName())) {
-    //            Collection<Feature<?>> tmp = new ArrayList(f);
-    //            Feature<?> feature = features.get(f.getName());
-    //            addToFeature(feature, tmp);
-    //        }
-    //    }
-    //}
-
-
     public void add(T elem){
         this.elementsFeaturized.add(elem);
         // Obtenemos las features del nuevo elemento
@@ -84,6 +71,10 @@ public class Dataset<T extends Comparable<? super T>>{
 
     public <S extends Comparable<? super S>> Feature<S> feature(String name){
         return (Feature<S>)this.features.get(name);
+    }
+
+    public Featurizer<T> getFeaturizer(){
+        return this.featurizer;
     }
 
     @Override

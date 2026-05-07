@@ -105,6 +105,8 @@ public class DecisionTree<T extends Comparable<? super T>> {
                 result.get(nodeName).add(t);
             } catch (StuckElementException e){
                 stuckElements.add(t);
+                result.putIfAbsent(e.getNodeNameStuck(), new ArrayList<>());
+                result.get(e.getNodeNameStuck()).add(t);
             }
         }
 
@@ -131,7 +133,7 @@ public class DecisionTree<T extends Comparable<? super T>> {
         if(this.defaultChild != null){
             return defaultChild.evaluate(e);
         } else
-            throw new StuckElementException(e); 
+            throw new StuckElementException(e, this.name); 
     }
     
     public Predicate<T> getPredicate(String leave_node){
