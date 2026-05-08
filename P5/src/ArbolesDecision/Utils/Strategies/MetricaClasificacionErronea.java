@@ -10,8 +10,13 @@ import ArbolesDecision.Utils.FeatureSelectStrategy;
 
 /**
  * Implementacion del método de métrica de clasificación errónea para elegir features en el dataset
+ * @param <T> Tipo del dato guardado en el dataset
+ * @param <L> Tipo de label que da el LabelProvider
  */
-public class MetricaClasificacionErronea<T extends Comparable<? super T>, L> implements FeatureSelectStrategy<T,L>{
+public class MetricaClasificacionErronea<T, L> implements FeatureSelectStrategy<T,L>{
+
+    /** Constructor default */
+    public MetricaClasificacionErronea(){}
 
     @Override
     public String selectFeature(List<String> availableFeatures, LabeledDataSet<T, L> dataset) {

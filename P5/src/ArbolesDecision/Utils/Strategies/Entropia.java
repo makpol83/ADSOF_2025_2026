@@ -10,8 +10,13 @@ import ArbolesDecision.Utils.FeatureSelectStrategy;
 
 /**
  * Implementación del método de la entropía para elegir features en el dataset
+ * @param <T> Tipo del dato guardado en el dataset
+ * @param <L> Tipo de label que da el LabelProvider
  */
-public class Entropia<T extends Comparable<? super T>,L> implements FeatureSelectStrategy<T,L>{
+public class Entropia<T,L> implements FeatureSelectStrategy<T,L>{
+
+    /** Constructor default */
+    public Entropia(){}
 
     @Override
     public String selectFeature(List<String> availableFeatures, LabeledDataSet<T,L> dataset) {

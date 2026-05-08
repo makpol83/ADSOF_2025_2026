@@ -16,11 +16,13 @@ public interface VisitableTree {
     
     /**
      * Retorna el nombre de este nodo
+     * @return String nombre del nodo
      */
     String getNodeName();
     
     /**
      * Retorna una colección con los hijos de este nodo en el órden en que fueron añadidos
+     * @return Collection VisitableTree hijos del nodo
      */
     Collection<VisitableTree> getChildren();
 }

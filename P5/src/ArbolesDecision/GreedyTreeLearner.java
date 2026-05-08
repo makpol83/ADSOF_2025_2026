@@ -15,6 +15,8 @@ import ArbolesDecision.Utils.FeatureSelectStrategy;
 
 /**
  * Clase para crear árboles de decisión con algoritmos codiciosos
+ * @param <T> Tipo del dato guardado en el dataset
+ * @param <L> Tipo de label que da el LabelProvider
  */
 public class GreedyTreeLearner<T,L> {
     /** 

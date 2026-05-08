@@ -19,7 +19,7 @@ public interface Featurizer<T> {
      * @param <S> tipo paramétrico de la feature retornada
      * @param element elemento al que extraer la feature
      * @param featureName nombre de la feature a extraer
-     * @return
+     * @return Feature S con un solo dato que es el valor de la feature para element
      */
     <S extends Comparable<? super S>> Feature<S> featurize(T element, String featureName);
 }

@@ -8,6 +8,9 @@ import ArbolesDecision.DecisionTree.Visitor;
  */
 public class GraphVizVisitor implements Visitor{
 
+    /** Constructor default */
+    public GraphVizVisitor(){}
+
     /**
      * Imprime por pantalla el árbol visitable en formato DOT
      */

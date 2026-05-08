@@ -63,7 +63,7 @@ public class DecisionTree<T> implements VisitableTree{
      * Retorna true si este árbol contiene al nodo de nombre especificado. Este método no comprueba
      * desde el nodo raíz, sino desde el nodo llamante para abajo.
      * @param nodeName nombre del nodo especificdado
-     * @return
+     * @return true si lo contiene, false si no
      */
     public boolean contains(String nodeName) {
     	return this.searchForNode(nodeName) != null;
@@ -146,7 +146,8 @@ public class DecisionTree<T> implements VisitableTree{
      * Crea y añade un nodo a este árbol para el que todos los objetos podrán pasar en caso de que cumplan ninguno
      * de los predicados del mismo nivel previos. En caso de que ya existiera un nodo de estas características en 
      * el mismo nivel, se sobreescribirá perdiendo el subárbol que pudiera formar 
-     * @param nodeName
+     * @param nodeName nombre del nodo a crear
+     * @return DecisionTree T árbol de decisión usado
      */
     public DecisionTree<T> otherwise(String nodeName){
     	if(this.root().contains(nodeName)) return null;
@@ -166,7 +167,7 @@ public class DecisionTree<T> implements VisitableTree{
      * Retorna un mapa que relaciona los nodo hoja con todos los objetos que hayan tomado camino en el árbol de decision
      * que lleva a él. 
      * Además, imprime por pantalla aquellos objetos que no llegaron a un nodo hoja.
-     * @param elementsToEvaluate Dataset con los elementos sobre los que realizar la precición
+     * @param data Dataset con los elementos sobre los que realizar la precición
      * @return mapa que relaciona los nodos con los objetos que llegaron a él
      */
     public Map<String, Collection<T>> predict(Dataset<T> data){

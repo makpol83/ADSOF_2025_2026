@@ -9,6 +9,9 @@ import ArbolesDecision.DecisionTree.Visitor;
  */
 public class IndentedTreeVisitor implements Visitor{
 
+    /** Constructor default */
+    public IndentedTreeVisitor(){}
+
 	/**
 	 * Imprime el árbol con un formado de indentación tabulada
 	 */
