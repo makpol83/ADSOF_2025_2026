@@ -51,7 +51,7 @@ public class DecisionTree<T> implements VisitableTree{
     public DecisionTree<T> node(String nodeName){
 
         //Es root si es el primero
-        if(this.name == null){
+        if(this.name.equals("root")){
             this.name = nodeName;
             return this;
         }
