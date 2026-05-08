@@ -13,7 +13,7 @@ public class WeatherGreedyTree {
     }
 
     public static DecisionTree<Weather> learnTree() {
-        //LabeledDataSet<Weather, Boolean> dataSet = buildDataSet();
+        LabeledDataSet<Weather, Boolean> dataSet = buildDataSet();
         GreedyTreeLearner<Weather, Boolean> learner = new GreedyTreeLearner<>();
         
         List<Weather> data = List.of(buildConditions());
@@ -21,7 +21,7 @@ public class WeatherGreedyTree {
         
         
         
-        DecisionTree<Weather> tree = learner. learn(data, new WeatherFeaturizer(), new ShouldIPlayTennisToday());
+        DecisionTree<Weather> tree = learner.learn(dataSet);
         return tree;
     }
 
