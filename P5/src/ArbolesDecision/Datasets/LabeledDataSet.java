@@ -10,7 +10,7 @@ import ArbolesDecision.Utils.LabelProvider;
  * @param <T> tipo paramétrico de los objetos cuyas features se almacenarán
  * @param <L> tipo de las etiquetas retornas por el LabelProvider
  */
-public class LabeledDataSet<T extends Comparable<? super T>, L> extends Dataset<T> {
+public class LabeledDataSet<T, L> extends Dataset<T> {
     private LabelProvider<T,L> labelProvider;
 
     /**

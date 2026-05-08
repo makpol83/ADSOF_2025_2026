@@ -13,7 +13,7 @@ import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.Features.Featurizer;
 import ArbolesDecision.Utils.FeatureSelectStrategy;
 
-public class GreedyTreeLearner<T extends Comparable<? super T>,L> {
+public class GreedyTreeLearner<T,L> {
     private Map<L, Integer> lastRepeatedLabel = new HashMap<>();
     private Featurizer<T> featurizer;
 

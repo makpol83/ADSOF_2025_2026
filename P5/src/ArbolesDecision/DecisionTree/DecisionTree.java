@@ -15,7 +15,7 @@ import ArbolesDecision.Exceptions.StuckElementException;
  * Esta clase proporciona la funcionalidad básica para construir un árbol de decisión usando métodos.
  * @param <T> tipo paramétrico del árbol de decisión
  */
-public class DecisionTree<T extends Comparable<? super T>> implements VisitableTree{
+public class DecisionTree<T> implements VisitableTree{
 	/** Nombre del nodo */
     private String name;
     /** Predicado que determina si un objeto del nodo padre es apto para pasar por este nodo */

@@ -11,7 +11,7 @@ import ArbolesDecision.Datasets.LabeledDataSet;
  * @param <L> tipo paramétrico de las Labels que proporciona el LabeledDataset
  */
 @FunctionalInterface
-public interface FeatureSelectStrategy<T extends Comparable<? super T>,L> {
+public interface FeatureSelectStrategy<T,L> {
 	
 	/**
 	 * Retorna el nombre de una feature en base a una estrategia

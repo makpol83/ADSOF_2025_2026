@@ -15,7 +15,7 @@ import ArbolesDecision.Features.Featurizer;
  * su featurizer.
  * @param <T> tipo de objeto cuyas features guarda el dataset
  */
-public class Dataset<T extends Comparable<? super T>>{
+public class Dataset<T>{
 	/** Featurizer del tipo del dataset, usado para extraer las features */
     private Featurizer<T> featurizer;
     /** Lista en la que se guardan los objetos añadidos originales al dataset */
