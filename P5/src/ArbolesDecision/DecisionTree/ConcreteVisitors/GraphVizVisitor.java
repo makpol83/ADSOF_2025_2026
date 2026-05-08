@@ -7,8 +7,8 @@ import ArbolesDecision.DecisionTree.Visitor;
 public class GraphVizVisitor implements Visitor{
 
     @Override
-    public void visit(VisitableTree decisionTree) {
-        String finalString = "digraph G {\n" + getNodeLinkage(decisionTree) + attributes(decisionTree) + "}";
+    public void visit(VisitableTree tree) {
+        String finalString = "digraph G {\n" + getNodeLinkage(tree) + attributes(tree) + "}";
         System.out.println(finalString);
     }
 

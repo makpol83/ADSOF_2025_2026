@@ -12,24 +12,43 @@ import ArbolesDecision.DecisionTree.ConcreteVisitors.IndentedTreeVisitor;
 import ArbolesDecision.Exceptions.StuckElementException;
 
 /**
- * Esta clase proporciona la funcionalidad de un árbol de decisión.
- * @param <T> tipo paramétrico
+ * Esta clase proporciona la funcionalidad básica para construir un árbol de decisión usando métodos.
+ * @param <T> tipo paramétrico del árbol de decisión
  */
 public class DecisionTree<T extends Comparable<? super T>> implements VisitableTree{
+	/** Nombre del nodo */
     private String name;
+    /** Predicado que determina si un objeto del nodo padre es apto para pasar por este nodo */
     private Predicate<T> toNode;
+    /** Lista que contiene a los hijos de este nodo */
     private List<DecisionTree<T>> children = new ArrayList<>();
-
+    /** Nodo hijo al que los objetos irán en caso de darse una condición "otherwise" */
     private DecisionTree<T> defaultChild = null;
+    /** Nodo padre. En la raíz vale null */
+    private DecisionTree<T> parent;
 
+    /**
+     * Construye y retorna la raíz de un árbol de decisión
+     */
     public DecisionTree(){
-        this.name = null;
+        this.name = "root";
+        this.parent = null;
     }
 
-    private DecisionTree(String name){
+    /**
+     * Construye y retorna un nodo con nombre que será asignado a la lista de hijos de otro nodo
+     * @param name nombre del nodo
+     */
+    private DecisionTree(String name, DecisionTree<T> parent){
         this.name = name;
+        this.parent = parent;
     }
     
+    /**
+     * Busca y retorna, si existe, el nodo o subárbol perteneciente a este 
+     * @param nodeName nombre del nodo a buscar
+     * @return Nodo buscado o null si no está contenido en este objeto
+     */
     public DecisionTree<T> node(String nodeName){
 
         //Es root si es el primero
@@ -40,7 +59,34 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
 
         return searchForNode(nodeName);
     }
+    
+    /**
+     * Retorna true si este árbol contiene al nodo de nombre especificado. Este método no comprueba
+     * desde el nodo raíz, sino desde el nodo llamante para abajo.
+     * @param nodeName nombre del nodo especificdado
+     * @return
+     */
+    public boolean contains(String nodeName) {
+    	return this.searchForNode(nodeName) != null;
+    }
+    
+    
+    /**
+     * Retorna la raíz de este árbol. Si el método llamante es la raíz, se retorna a sí mismo.
+     * @return raíz del árbol.
+     */
+    public DecisionTree<T> root(){
+    	DecisionTree<T> root = this;
+    	while(this.parent != null)
+    		root = this;
+    	return root;
+    }
 
+    /**
+     * Método auxiliar para buscar un nodo contenido en este árbol
+     * @param nodeName nombre del nodo a buscar
+     * @return nodo buscado o null si no existe
+     */
     private DecisionTree<T> searchForNode(String nodeName){
         if(nodeName.equals(name) == true)
             return this;
@@ -54,6 +100,12 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
         return null;
     }
 
+    /**
+     * Retorna una lista con los predicados por los que un objeto del tipo paramétrico de este árbol, ha sido sometido
+     * hasta llegar al nodo de nombre especificado
+     * @param nodeName nombre del nodo a buscar los predicados de su camino
+     * @return Lista con los predicados o null si no se encontró el nodo
+     */
     private List<Predicate<T>> search(String nodeName){
         if(nodeName.equals(name) == true){
             List<Predicate<T>> predicates = new ArrayList<>();
@@ -73,8 +125,16 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
         return null;
     }
 
+    /**
+     * Crea y añade un nodo a este árbol de decisión con el nombre y predicado para llegar a él especificados.
+     * @param nodeName nombre del nodo a añadir
+     * @param toNode predicado para llegar al nodo
+     * @return El nodo sobre el que se llama a este método (padre del nodo creado) o null si ya existía un nodo
+     * con ese nombre
+     */
     public DecisionTree<T> withCondition(String nodeName, Predicate<T> toNode){
-        DecisionTree<T> children = new DecisionTree<>(nodeName);
+    	if(this.root().contains(nodeName)) return null;
+        DecisionTree<T> children = new DecisionTree<>(nodeName, this);
         this.children.add(children);
         children.toNode = toNode;
 
@@ -82,15 +142,25 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
         return this;
     }
 
-    public void otherwise(String nodeName){
-        if(defaultChild != null)
-            return;
-
-        DecisionTree<T> child = new DecisionTree<>(nodeName);
+    /**
+     * Crea y añade un nodo a este árbol para el que todos los objetos podrán pasar en caso de que cumplan ninguno
+     * de los predicados del mismo nivel previos. En caso de que ya existiera un nodo de estas características en 
+     * el mismo nivel, se sobreescribirá perdiendo el subárbol que pudiera formar 
+     * @param nodeName
+     */
+    public DecisionTree<T> otherwise(String nodeName){
+    	if(this.root().contains(nodeName)) return null;
+    	
+    	if(this.defaultChild != null) 
+    		this.children.remove(this.defaultChild);
+    	
+        DecisionTree<T> child = new DecisionTree<>(nodeName, this);
         this.children.add(child);
         this.defaultChild = child;
+        return this;
     }
 
+    
     public Map<String, Collection<T>> predict(Dataset<T> data){
         return predict(data.getData());
     }
@@ -165,10 +235,6 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
     }
 
     public String getNodeName(){
-
-        if(this.name == null || this.name.equals(""))
-            return "root";
-
         return this.name;
     }
 

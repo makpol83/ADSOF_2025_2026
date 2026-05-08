@@ -7,13 +7,13 @@ import ArbolesDecision.DecisionTree.Visitor;
 public class IndentedTreeVisitor implements Visitor{
 
     @Override
-    public void visit(VisitableTree decisionTree) {
-        visitNodeLevel("", decisionTree);
+    public void visit(VisitableTree tree) {
+        visitNodeLevel("", tree);
     }
 
-    private void visitNodeLevel(String identation, VisitableTree decisionTree){
-        System.out.println(identation + decisionTree.getNodeName());
-        for(VisitableTree child : decisionTree.getChildren()){
+    private void visitNodeLevel(String identation, VisitableTree tree){
+        System.out.println(identation + tree.getNodeName());
+        for(VisitableTree child : tree.getChildren()){
             visitNodeLevel(identation+"    ", child);
         }
     }
