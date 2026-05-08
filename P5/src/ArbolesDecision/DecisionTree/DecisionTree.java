@@ -49,13 +49,7 @@ public class DecisionTree<T> implements VisitableTree{
      * @return Nodo buscado o null si no está contenido en este objeto
      */
     public DecisionTree<T> node(String nodeName){
-
-        //Es root si es el primero
-        if(this.name.equals("root")){
-            this.name = nodeName;
-            return this;
-        }
-
+        
         return searchForNode(nodeName);
     }
     
