@@ -2,11 +2,8 @@ package PruebasArboles.Apartado1;
 
 import java.util.Collections;
 
-import ArbolesDecision.*;
 import ArbolesDecision.Datasets.Dataset;
 import ArbolesDecision.Features.*;
-import ArbolesDecision.Exceptions.*;
-import PruebasArboles.*;
 
 public class DatasetTest {
     public static void main(String[] args){

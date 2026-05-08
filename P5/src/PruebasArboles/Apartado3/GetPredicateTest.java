@@ -1,15 +1,12 @@
 package PruebasArboles.Apartado3;
 
-import ArbolesDecision.Datasets.Dataset;
 import ArbolesDecision.DecisionTree.DecisionTree;
-import PruebasArboles.Apartado1.DatasetTest;
 import PruebasArboles.Apartado1.Person;
 import java.util.function.Predicate;
 
 public class GetPredicateTest {
 
     public static void main(String[] args){
-        Dataset<Person> dataSet = DatasetTest.buildDataSet();
         DecisionTree<Person> dt = buildPersonDecisionTree();
 
         dt.print();

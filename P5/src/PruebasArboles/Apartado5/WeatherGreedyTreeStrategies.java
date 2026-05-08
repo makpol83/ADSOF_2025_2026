@@ -3,10 +3,7 @@ package PruebasArboles.Apartado5;
 import ArbolesDecision.*;
 import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.DecisionTree.DecisionTree;
-import ArbolesDecision.Features.*;
-import ArbolesDecision.Exceptions.*;
 import PruebasArboles.Apartado4.*;
-import PruebasArboles.*;
 
 public class WeatherGreedyTreeStrategies {
     public static void main(String[] args){

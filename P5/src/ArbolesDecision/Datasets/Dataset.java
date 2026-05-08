@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import ArbolesDecision.Features.Feature;
 import ArbolesDecision.Features.Featurizer;
@@ -44,7 +42,7 @@ public class Dataset<T extends Comparable<? super T>>{
             
 
             if (features.containsKey(featureName)){
-                // Sacamos feature y guardamos en crudo
+                // Sacamos feature y guardamos
                 addFeature(features.get(featureName), this.featurizer.featurize(elem, featureName));
             } else {
                 // Si no existe, la guardamos directamente
@@ -92,11 +90,64 @@ public class Dataset<T extends Comparable<? super T>>{
      * No elimina las features iguales provenientes de distintos objetos
      */
     public void removeDuplicates(){
-        Set<T> withoutDuplicates = new TreeSet<>(this.elementsFeaturized);
+        //Guardo los T que son únicos
+        List<T> uniqueInstances = new ArrayList<>();
 
-        this.elementsFeaturized.clear();
+        //Para cada elemento T almacenado en el dataset
+        for (T element : this.elementsFeaturized) {
+            //Sacamos las features del elemento T
+            Map<String, Feature<?>> featuresOfElement = new HashMap<>();
+            for(int i = 0; i < this.featurizer.getFeatureNames().size(); i++){
+                String featureName = this.featurizer.getFeatureNames().get(i);
+                featuresOfElement.put(featureName,  featurizer.featurize(element, featureName));
+            }
+
+            //Sacamos las features para cada uno de los elementos únicos
+            Map<String, Feature<?>> uniqueInstancesFeature = new HashMap<>();
+            for(int i = 0; i < this.featurizer.getFeatureNames().size(); i++){
+                String featureName = this.featurizer.getFeatureNames().get(i);
+                for(T uniqueElem : uniqueInstances){
+                    if (uniqueInstancesFeature.containsKey(featureName)){
+                        // Sacamos feature y guardamos
+                        addFeature(uniqueInstancesFeature.get(featureName), this.featurizer.featurize(uniqueElem, featureName));
+                    } else {
+                        // Si no existe, la guardamos directamente
+                        uniqueInstancesFeature.put(featureName, this.featurizer.featurize(uniqueElem, featureName));
+                    }
+                }
+            }
+            
+            //Miramos índice por índice (i) si nuestro elemento comparte el valor de las features para algun dato en uniqueInstances
+            boolean isElemDuplicated = false;
+            for(int i = 0; i < uniqueInstances.size(); i++){
+
+                if(isElemDuplicated){
+                    break;
+                }
+
+                isElemDuplicated = true;
+                for(Map.Entry<String, Feature<?>> entry: featuresOfElement.entrySet()){
+                    Comparable<?> feature = entry.getValue().get(0);
+                    Comparable<?> noDupFeature = uniqueInstancesFeature.get(entry.getKey()).get(i);
+
+                    //Podemos compararlos porque son comparables de Feature
+                    if(feature.equals(noDupFeature) == false){
+                        isElemDuplicated = false;
+                        break;
+                    }
+                }
+            }
+
+            //Si está duplicado el elemento no lo añado
+            if(isElemDuplicated == false){
+                uniqueInstances.add(element);
+            }
+        }
+
+        //Al tenerlo filtrado, limpio los datos actuales y lo añado todo
         this.features.clear();
-        this.addAll(withoutDuplicates);
+        this.elementsFeaturized.clear();
+        this.addAll(uniqueInstances);
     }
 
     /**

@@ -5,23 +5,20 @@ import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.DecisionTree.ConcreteVisitors.GraphVizVisitor;
 import ArbolesDecision.DecisionTree.ConcreteVisitors.IndentedTreeVisitor;
-import ArbolesDecision.Features.*;
-import ArbolesDecision.Exceptions.*;
 import PruebasArboles.Apartado4.*;
 import PruebasArboles.Apartado5.Entropia;
 import PruebasArboles.Apartado5.MetricaClasificacionErronea;
-import PruebasArboles.*;
 
 public class VisitorTests {
     public static void main(String[] args){
         DecisionTree<Weather> learnTree = learnTreeMetricaClasificacionErronea();
-        learnTree.accept(new IndentedTreeVisitor<>());
-        learnTree.accept(new GraphVizVisitor<>());
+        learnTree.accept(new IndentedTreeVisitor());
+        learnTree.accept(new GraphVizVisitor());
 
         System.out.println();
 
         learnTree = learnTreeEntropia();
-        learnTree.accept(new GraphVizVisitor<>());
+        learnTree.accept(new GraphVizVisitor());
     }
 
     public static DecisionTree<Weather> learnTreeMetricaClasificacionErronea() {

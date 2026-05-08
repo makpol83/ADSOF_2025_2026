@@ -1,7 +1,5 @@
 package PruebasArboles.Apartado1;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import ArbolesDecision.Features.Feature;
