@@ -161,14 +161,35 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
     }
 
     
+    /**
+     * Retorna un mapa que relaciona los nodo hoja con todos los objetos que hayan tomado camino en el árbol de decision
+     * que lleva a él. 
+     * Además, imprime por pantalla aquellos objetos que no llegaron a un nodo hoja.
+     * @param elementsToEvaluate Dataset con los elementos sobre los que realizar la precición
+     * @return mapa que relaciona los nodos con los objetos que llegaron a él
+     */
     public Map<String, Collection<T>> predict(Dataset<T> data){
         return predict(data.getData());
     }
 
+    /**
+     * Retorna un mapa que relaciona los nodo hoja con todos los objetos que hayan tomado camino en el árbol de decision
+     * que lleva a él. 
+     * Además, imprime por pantalla aquellos objetos que no llegaron a un nodo hoja.
+     * @param elementsToEvaluate array con los elementos sobre los que realizar la precición
+     * @return mapa que relaciona los nodos con los objetos que llegaron a él
+     */
     public Map<String, Collection<T>> predict(T ... elementsToEvaluate){
         return predict(List.of(elementsToEvaluate));
     }
 
+    /**
+     * Retorna un mapa que relaciona los nodo hoja con todos los objetos que hayan tomado camino en el árbol de decision
+     * que lleva a él. 
+     * Además, imprime por pantalla aquellos objetos que no llegaron a un nodo hoja.
+     * @param elementsToEvaluate colección de elementos a evaluar
+     * @return mapa que relaciona los nodos con los objetos que llegaron a él
+     */
     public Map<String, Collection<T>> predict(Collection<T> elementsToEvaluate){
         HashMap<String, Collection<T>> result = new HashMap<>();
         List<T> stuckElements = new ArrayList<>();
@@ -194,6 +215,14 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
         return result;
     }
 
+    /**
+     * Evalua un elemento recorriendo el árbol por el camino que satisface todos los predicados.
+     * En caso de no llegar a un nodo hoja y no cumplir ninguno de los predicados del nodo actual,
+     * lanza una excepción
+     * @param e elemento a evaluar
+     * @return nombre del nodo hoja al que ha llegado (final del camino)
+     * @throws StuckElementException en caso de que un elemento quede "atascado" sin llegar al final del camino
+     */
     private String evaluate(T e) throws StuckElementException{
         if(this.children.size() == 0)
             return this.name;
@@ -212,8 +241,13 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
             throw new StuckElementException(e, this.name); 
     }
     
-    public Predicate<T> getPredicate(String leaveNode){
-        List<Predicate<T>> predicates = this.search(leaveNode);
+    /**
+     * Retorna un predicado que pasarán aquellos objetos cuyo camino en el árbol de decisión contiene al nodo especificado
+     * @param node nodo para el que obtener el predicado
+     * @return el predicado que pasarán los objetos cuyo camino contiene al nodo especificado
+     */
+    public Predicate<T> getPredicate(String node){
+        List<Predicate<T>> predicates = this.search(node);
 
         if(predicates == null || predicates.isEmpty())
             return null;
@@ -226,14 +260,19 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
         return superPredicate;
     }
 
+    /**
+     * Imprime el árbol de decision con el formato especificado por IndentedTreeVisitor
+     */
     public void print() {
         this.accept(new IndentedTreeVisitor());
     }
 
+    @Override
     public Collection<VisitableTree> getChildren(){
         return new ArrayList<>(this.children);
     }
 
+    @Override
     public String getNodeName(){
         return this.name;
     }
