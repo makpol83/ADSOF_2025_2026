@@ -1,4 +1,4 @@
-package ArbolesDecision;
+package ArbolesDecision.Datasets;
 
 import java.util.ArrayList;
 import java.util.Collection;

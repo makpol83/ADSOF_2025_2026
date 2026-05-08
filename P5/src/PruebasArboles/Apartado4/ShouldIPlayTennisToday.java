@@ -1,6 +1,6 @@
 package PruebasArboles.Apartado4;
 
-import ArbolesDecision.LabelProvider;
+import ArbolesDecision.Utils.LabelProvider;
 
 public class ShouldIPlayTennisToday implements LabelProvider<Weather, Boolean> {
 

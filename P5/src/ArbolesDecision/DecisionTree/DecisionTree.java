@@ -1,4 +1,4 @@
-package ArbolesDecision;
+package ArbolesDecision.DecisionTree;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import ArbolesDecision.Datasets.Dataset;
+import ArbolesDecision.DecisionTree.ConcreteVisitors.IndentedTreeVisitor;
 import ArbolesDecision.Exceptions.StuckElementException;
 
-public class DecisionTree<T extends Comparable<? super T>> {
+public class DecisionTree<T extends Comparable<? super T>> implements VisitableTree{
     private String name;
     private Predicate<T> toNode;
     private List<DecisionTree<T>> children = new ArrayList<>();
@@ -58,7 +60,8 @@ public class DecisionTree<T extends Comparable<? super T>> {
         for(DecisionTree<T> tree : this.children){
             List<Predicate<T>> predicates = tree.search(nodeName);
             if(predicates != null){
-                predicates.add(this.toNode);
+                if(this.toNode != null)
+                    predicates.add(this.toNode);
                 return predicates;
             }
         }
@@ -138,7 +141,7 @@ public class DecisionTree<T extends Comparable<? super T>> {
     public Predicate<T> getPredicate(String leave_node){
         List<Predicate<T>> predicates = this.search(leave_node);
 
-        if(predicates == null)
+        if(predicates == null || predicates.isEmpty())
             return null;
 
         Predicate<T> superPredicate = predicates.get(0);
@@ -149,24 +152,24 @@ public class DecisionTree<T extends Comparable<? super T>> {
         return superPredicate;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        buildString(sb, "", "");
-        return sb.toString();
+    public void print() {
+        this.accept(new IndentedTreeVisitor<>());
     }
 
-    private void buildString(StringBuilder sb, String prefix, String childrenPrefix) {
-        // Añadimos el nombre del nodo actual
-        sb.append(prefix);
-        sb.append(name != null ? name : "root");
-        sb.append("\n");
+    public Collection<DecisionTree<T>> getChildren(){
+        return this.children;
+    }
 
-        // Recorremos los hijos
-        for (int i = 0; i < children.size(); i++) {
-            DecisionTree<T> child = children.get(i);
+    public String getNodeName(){
 
-            child.buildString(sb, childrenPrefix + "    ", childrenPrefix + "    ");
-        }
+        if(this.name == null || this.name.equals(""))
+            return "root";
+
+        return this.name;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

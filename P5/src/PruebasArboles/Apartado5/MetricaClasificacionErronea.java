@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ArbolesDecision.FeatureSelectStrategy;
-import ArbolesDecision.LabeledDataSet;
+import ArbolesDecision.Datasets.LabeledDataSet;
+import ArbolesDecision.Utils.FeatureSelectStrategy;
 
 public class MetricaClasificacionErronea<T extends Comparable<? super T>, L> implements FeatureSelectStrategy<T,L>{
 

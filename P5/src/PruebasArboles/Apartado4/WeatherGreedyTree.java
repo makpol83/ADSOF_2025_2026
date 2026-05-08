@@ -1,6 +1,8 @@
 package PruebasArboles.Apartado4;
 
 import ArbolesDecision.*;
+import ArbolesDecision.Datasets.LabeledDataSet;
+import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.Features.*;
 import ArbolesDecision.Exceptions.*;
 import PruebasArboles.Apartado4.*;
@@ -9,7 +11,7 @@ import PruebasArboles.*;
 public class WeatherGreedyTree {
     public static void main(String[] args){
         DecisionTree<Weather> learnTree = learnTree();
-        System.out.print(learnTree);
+        learnTree.print();
     }
 
     public static DecisionTree<Weather> learnTree() {

@@ -1,7 +1,7 @@
 package PruebasArboles.Apartado2;
 
-import ArbolesDecision.Dataset;
-import ArbolesDecision.DecisionTree;
+import ArbolesDecision.Datasets.Dataset;
+import ArbolesDecision.DecisionTree.DecisionTree;
 import PruebasArboles.Apartado1.DatasetTest;
 import PruebasArboles.Apartado1.Person;
 
@@ -13,6 +13,7 @@ public class DecisionTreeTest {
 
         System.out.println(dt.predict(dataSet));
         System.out.println(dt.predict(new Person("Miguel", 86, 72, 165, true), new Person("Clara", 42, 59, 162, false)));
+        dt.print();
     }
 
 

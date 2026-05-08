@@ -1,22 +1,27 @@
-package PruebasArboles.Apartado5;
+package PruebasArboles.Apartado6;
 
 import ArbolesDecision.*;
 import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.DecisionTree.DecisionTree;
+import ArbolesDecision.DecisionTree.ConcreteVisitors.GraphVizVisitor;
+import ArbolesDecision.DecisionTree.ConcreteVisitors.IndentedTreeVisitor;
 import ArbolesDecision.Features.*;
 import ArbolesDecision.Exceptions.*;
 import PruebasArboles.Apartado4.*;
+import PruebasArboles.Apartado5.Entropia;
+import PruebasArboles.Apartado5.MetricaClasificacionErronea;
 import PruebasArboles.*;
 
-public class WeatherGreedyTreeStrategies {
+public class VisitorTests {
     public static void main(String[] args){
         DecisionTree<Weather> learnTree = learnTreeMetricaClasificacionErronea();
-        learnTree.print();
+        learnTree.accept(new IndentedTreeVisitor<>());
+        learnTree.accept(new GraphVizVisitor<>());
 
         System.out.println();
 
         learnTree = learnTreeEntropia();
-        learnTree.print();
+        learnTree.accept(new GraphVizVisitor<>());
     }
 
     public static DecisionTree<Weather> learnTreeMetricaClasificacionErronea() {

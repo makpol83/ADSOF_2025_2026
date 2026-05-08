@@ -1,7 +1,8 @@
-package ArbolesDecision;
+package ArbolesDecision.Datasets;
 
 import ArbolesDecision.*;
 import ArbolesDecision.Features.*;
+import ArbolesDecision.Utils.LabelProvider;
 
 public class LabeledDataSet<T extends Comparable<? super T>, L> extends Dataset<T> {
     private LabelProvider<T,L> labelProvider;

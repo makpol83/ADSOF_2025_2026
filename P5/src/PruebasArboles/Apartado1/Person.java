@@ -35,6 +35,6 @@ public class Person implements Comparable<Person>{
  
     @Override
     public String toString(){
-        return this.name +"(age: " + this.age +", " + ((isMale) ? "male" : "female");
+        return this.name +"(age: " + this.age +", " + ((isMale) ? "male" : "female" + ")");
     }
 }

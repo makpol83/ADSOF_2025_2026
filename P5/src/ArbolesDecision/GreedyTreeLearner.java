@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import ArbolesDecision.Datasets.LabeledDataSet;
+import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.Features.Featurizer;
+import ArbolesDecision.Utils.FeatureSelectStrategy;
 
 public class GreedyTreeLearner<T extends Comparable<? super T>,L> {
     private Map<L, Integer> lastRepeatedLabel = new HashMap<>();
