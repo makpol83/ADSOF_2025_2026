@@ -11,11 +11,21 @@ import java.util.TreeSet;
 import ArbolesDecision.Features.Feature;
 import ArbolesDecision.Features.Featurizer;
 
+/**
+ * Esta clase poporciona la implementación básica de un dataset genérico. Permitiendo extraer las features del tipo paramétrico dado
+ * su featurizer.
+ */
 public class Dataset<T extends Comparable<? super T>>{
+    /** Featurizer del tipo del dataset, usado para extraer las features */
     private Featurizer<T> featurizer;
+    /** Lista en la que se guardan los objetos añadidos originales al dataset */
     private List<T> elementsFeaturized = new ArrayList<>();
+    /** Mapa con las features de cada persona */
     private Map<String, Feature<?>> features = new HashMap<>();
 
+    /**
+     * 
+     */
     public Dataset(Featurizer<T> featurizer){
         this.featurizer = featurizer;
     }
