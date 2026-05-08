@@ -1,29 +1,40 @@
 package ArbolesDecision.Features;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-//Feature guarda objetos de tipo T que son comparables en T o en una de sus superclases
-//Extiende de AbstractList<T> para que podamos usar Feature como una lista, ya que sólo hay que implementar el get y el
-//size
-
+/**
+ * Esta clase, compatible con una Lista, almacena valores de una característica del tipo paramétrico
+ * @param <T> tipo del que almacenar las características
+ */
 public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
+	/** Nombre de la feature*/
     private String name;
 
+    /**
+     * Construye y retorna una feature con el nombre especificadp
+     * @param name nombre de la feature
+     */
     public Feature(String name){
         super();
         this.name = name;
     }
 
+    /**
+     * Retorna el nombre de esta feature
+     * @return nombre de esta feature
+     */
     public String getName(){
         return this.name;
     }
 
+    /**
+     * Retorna el mínimo de los valores almacenados por esta feature
+     * @return valor mínimo
+     */
     public T min(){
         if(size() == 0)
             return null;
@@ -37,6 +48,10 @@ public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
         return minimumData;
     }
 
+    /**
+     * Retorna el máximo de los valores almacenados por esta feature
+     * @return valor máximo
+     */
     public T max(){
         if(size() == 0)
             return null;
@@ -50,6 +65,10 @@ public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
         return maximumData;
     }
 
+    /**
+     * Retorna un mapa con las frecuencias de los valores almacenados en esta feature
+     * @return mapa de frecuencias
+     */
     public Map<T, Integer> distribution(){
         Map<T, Integer> distribution = new HashMap<>();
         List<T> copyData = new ArrayList<>(this);
@@ -81,12 +100,17 @@ public class Feature<T extends Comparable<? super T>> extends ArrayList<T> {
         return distribution;
     }
 
+   /**
+    * Dos features se consideran la misma si su nombre es el mimso, independientemente de los valores que contenga
+    */
+    @Override
     public boolean equals(Object obj){
         if(obj == this) return true;
         if(!(obj instanceof Feature feature)) return false;
         return this.name.equals(feature.name);
     }
 
+    @Override
     public int hashCode(){
         return Objects.hash(this.name);
     }
