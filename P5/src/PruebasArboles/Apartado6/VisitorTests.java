@@ -5,9 +5,9 @@ import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.DecisionTree.ConcreteVisitors.GraphVizVisitor;
 import ArbolesDecision.DecisionTree.ConcreteVisitors.IndentedTreeVisitor;
+import ArbolesDecision.Utils.Strategies.Entropia;
+import ArbolesDecision.Utils.Strategies.MetricaClasificacionErronea;
 import PruebasArboles.Apartado4.*;
-import PruebasArboles.Apartado5.Entropia;
-import PruebasArboles.Apartado5.MetricaClasificacionErronea;
 
 public class VisitorTests {
     public static void main(String[] args){

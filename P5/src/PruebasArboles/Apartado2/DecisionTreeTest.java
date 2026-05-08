@@ -14,6 +14,9 @@ public class DecisionTreeTest {
         System.out.println(dt.predict(dataSet));
         System.out.println(dt.predict(new Person("Miguel", 86, 72, 165, true), new Person("Clara", 42, 59, 162, false)));
         dt.print();
+
+        dt = buildWrongPersonDecisionTree();
+        System.out.println(dt.predict(dataSet));
     }
 
 
@@ -23,6 +26,20 @@ public class DecisionTreeTest {
         dt.node("root")
             .withCondition("male", p -> p.isMale())
             .otherwise("female");
+
+        dt.node("male")
+            .withCondition("old male", p -> p.getAge() > 65)
+            .withCondition("middle male", p -> p.getAge() <= 65 && p.getAge() > 34)
+            .otherwise("young male");
+            
+        return dt;
+    }
+
+    //Sin otherwise
+    public static DecisionTree<Person> buildWrongPersonDecisionTree(){
+        DecisionTree<Person> dt = new DecisionTree<>();
+        dt.node("root")
+            .withCondition("male", p -> p.isMale());
 
         dt.node("male")
             .withCondition("old male", p -> p.getAge() > 65)

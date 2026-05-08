@@ -25,7 +25,7 @@ public class DecisionTree<T> implements VisitableTree{
     /** Nodo hijo al que los objetos irán en caso de darse una condición "otherwise" */
     private DecisionTree<T> defaultChild = null;
     /** Nodo padre. En la raíz vale null */
-    private DecisionTree<T> parent;
+    private DecisionTree<T> parent = null;
 
     /**
      * Construye y retorna la raíz de un árbol de decisión
@@ -39,9 +39,8 @@ public class DecisionTree<T> implements VisitableTree{
      * Construye y retorna un nodo con nombre que será asignado a la lista de hijos de otro nodo
      * @param name nombre del nodo
      */
-    private DecisionTree(String name, DecisionTree<T> parent){
+    private DecisionTree(String name){
         this.name = name;
-        this.parent = parent;
     }
     
     /**
@@ -77,8 +76,8 @@ public class DecisionTree<T> implements VisitableTree{
      */
     public DecisionTree<T> root(){
     	DecisionTree<T> root = this;
-    	while(this.parent != null)
-    		root = this;
+    	while(root.parent != null)
+    		root = root.parent;
     	return root;
     }
 
@@ -134,9 +133,10 @@ public class DecisionTree<T> implements VisitableTree{
      */
     public DecisionTree<T> withCondition(String nodeName, Predicate<T> toNode){
     	if(this.root().contains(nodeName)) return null;
-        DecisionTree<T> children = new DecisionTree<>(nodeName, this);
+        DecisionTree<T> children = new DecisionTree<>(nodeName);
         this.children.add(children);
         children.toNode = toNode;
+        children.parent = this;
 
         //Sigue retornando al padre para añadir más condiciones
         return this;
@@ -154,9 +154,10 @@ public class DecisionTree<T> implements VisitableTree{
     	if(this.defaultChild != null) 
     		this.children.remove(this.defaultChild);
     	
-        DecisionTree<T> child = new DecisionTree<>(nodeName, this);
+        DecisionTree<T> child = new DecisionTree<>(nodeName);
         this.children.add(child);
         this.defaultChild = child;
+        child.parent = this;
         return this;
     }
 

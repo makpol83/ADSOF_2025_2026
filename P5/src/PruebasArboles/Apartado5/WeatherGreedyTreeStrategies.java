@@ -3,6 +3,8 @@ package PruebasArboles.Apartado5;
 import ArbolesDecision.*;
 import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.DecisionTree.DecisionTree;
+import ArbolesDecision.Utils.Strategies.Entropia;
+import ArbolesDecision.Utils.Strategies.MetricaClasificacionErronea;
 import PruebasArboles.Apartado4.*;
 
 public class WeatherGreedyTreeStrategies {

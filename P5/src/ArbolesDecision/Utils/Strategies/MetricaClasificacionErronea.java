@@ -1,4 +1,4 @@
-package PruebasArboles.Apartado5;
+package ArbolesDecision.Utils.Strategies;
 
 import java.util.Collection;
 import java.util.HashMap;
