@@ -1,27 +1,28 @@
 package ArbolesDecision.DecisionTree.ConcreteVisitors;
 
 import ArbolesDecision.DecisionTree.DecisionTree;
+import ArbolesDecision.DecisionTree.VisitableTree;
 import ArbolesDecision.DecisionTree.Visitor;
 
-public class GraphVizVisitor<T extends Comparable<? super T>> implements Visitor<T>{
+public class GraphVizVisitor implements Visitor{
 
     @Override
-    public void visit(DecisionTree<T> decisionTree) {
+    public void visit(VisitableTree decisionTree) {
         String finalString = "digraph G {\n" + getNodeLinkage(decisionTree) + attributes(decisionTree) + "}";
         System.out.println(finalString);
     }
 
-    private String attributes(DecisionTree<T> tree){
+    private String attributes(VisitableTree tree){
         return "    \"" + tree.getNodeName() + "\"" + " [shape = Mdiamond];\n";
     }
 
-    private String getNodeLinkage(DecisionTree<T> tree){
+    private String getNodeLinkage(VisitableTree tree){
         String output = "";
-        for(DecisionTree<T> child : tree.getChildren()){
+        for(VisitableTree child : tree.getChildren()){
             output += "    \"" +tree.getNodeName() + "\""+ " -> " + "\"" +child.getNodeName() + "\"" + ";\n";
         }
 
-        for(DecisionTree<T> child : tree.getChildren()){
+        for(VisitableTree child : tree.getChildren()){
             output += getNodeLinkage(child);
         }
 

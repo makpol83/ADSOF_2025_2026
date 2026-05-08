@@ -11,6 +11,10 @@ import ArbolesDecision.Datasets.Dataset;
 import ArbolesDecision.DecisionTree.ConcreteVisitors.IndentedTreeVisitor;
 import ArbolesDecision.Exceptions.StuckElementException;
 
+/**
+ * Esta clase proporciona la funcionalidad de un árbol de decisión.
+ * @param <T> tipo paramétrico
+ */
 public class DecisionTree<T extends Comparable<? super T>> implements VisitableTree{
     private String name;
     private Predicate<T> toNode;
@@ -91,7 +95,7 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
         return predict(data.getData());
     }
 
-    public Map<String, Collection<T>> predict(T... elementsToEvaluate){
+    public Map<String, Collection<T>> predict(T ... elementsToEvaluate){
         return predict(List.of(elementsToEvaluate));
     }
 
@@ -138,8 +142,8 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
             throw new StuckElementException(e, this.name); 
     }
     
-    public Predicate<T> getPredicate(String leave_node){
-        List<Predicate<T>> predicates = this.search(leave_node);
+    public Predicate<T> getPredicate(String leaveNode){
+        List<Predicate<T>> predicates = this.search(leaveNode);
 
         if(predicates == null || predicates.isEmpty())
             return null;
@@ -153,11 +157,11 @@ public class DecisionTree<T extends Comparable<? super T>> implements VisitableT
     }
 
     public void print() {
-        this.accept(new IndentedTreeVisitor<>());
+        this.accept(new IndentedTreeVisitor());
     }
 
-    public Collection<DecisionTree<T>> getChildren(){
-        return this.children;
+    public Collection<VisitableTree> getChildren(){
+        return new ArrayList<>(this.children);
     }
 
     public String getNodeName(){
