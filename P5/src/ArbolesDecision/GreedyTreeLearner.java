@@ -13,18 +13,39 @@ import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.Features.Featurizer;
 import ArbolesDecision.Utils.FeatureSelectStrategy;
 
+/**
+ * Clase para crear árboles de decisión con algoritmos codiciosos
+ */
 public class GreedyTreeLearner<T,L> {
+    /** 
+     * Mapa para uso en cada learn, guarda el número asignado a la hora de asignar esa
+     * label, útil para cuando pueden haber varias salidas repetidas como false0, false1...
+     */
     private Map<L, Integer> lastRepeatedLabel = new HashMap<>();
+    /** Featurizer del dataset al ejecutar learn */
     private Featurizer<T> featurizer;
 
+    /** Estrategia a emplear para seleccionar feature en cada nivel */
     private FeatureSelectStrategy<T,L> featureSelectStrategy = null;
 
+    /**
+     * Constructor por defecto
+     */
     public GreedyTreeLearner(){}
 
+    /**
+     * Asigna la estrategia a la instancia de GreedyTreeLearner
+     * @param featureSelectStrategy estrategia a seleccionar
+     */
     public void setFeatureSelectStrategy(FeatureSelectStrategy<T,L> featureSelectStrategy){
         this.featureSelectStrategy = featureSelectStrategy;
     }
 
+    /**
+     * Crea un árbol de decisión en base al dataset recibido y la estrategia seleccionada
+     * @param dataset dataset
+     * @return DecisionTree T
+     */
     public DecisionTree<T> learn(LabeledDataSet<T,L> dataset){
         //Limpiamos ejecuciones anteriores
         this.featurizer = dataset.getFeaturizer();
@@ -65,7 +86,15 @@ public class GreedyTreeLearner<T,L> {
         return tree;
     }
 
-    public <S extends Comparable<? super S>> void buildTree(DecisionTree<T> treeToCreate, String nodeName, LabeledDataSet<T,L> dataSet, List<String> availableFeatures){        
+    /**
+     * Construye el árbol recursivamente en cada nivel
+     * @param <S> Tipo del featurizer obtenido, comparable
+     * @param treeToCreate árbol al que se le añaden los nodos
+     * @param nodeName Nombre del nodo actual
+     * @param dataSet Dataset con el que se deben crear los siguientes nodos
+     * @param availableFeatures Features por seleccionar
+     */
+    private <S extends Comparable<? super S>> void buildTree(DecisionTree<T> treeToCreate, String nodeName, LabeledDataSet<T,L> dataSet, List<String> availableFeatures){        
         Set<L> differentLabels = new HashSet<>();
         for(T elem : dataSet.getData()){
             differentLabels.add(dataSet.getLabelProvider().getLabel(elem));
@@ -119,6 +148,13 @@ public class GreedyTreeLearner<T,L> {
         }
     }
 
+    /**
+     * Consigue los subsets de un set para la feature recibida
+     * @param <S> Tipo que maneja la feature en el featurizer
+     * @param originalSet set original a partir
+     * @param featureName nombre de la feature por la que partir
+     * @return Map S, LabeledDataSet T,L con los subsets para cada valor posible de la feature S
+     */
     private <S extends Comparable<? super S>> Map<S, LabeledDataSet<T,L>> getSubSets(LabeledDataSet<T,L> originalSet, String featureName){
         // Inicializamos el mapa y el set con los posibles valores distintos a tomar de originalSet
         Map<S, LabeledDataSet<T,L>> subsets = new HashMap<>();

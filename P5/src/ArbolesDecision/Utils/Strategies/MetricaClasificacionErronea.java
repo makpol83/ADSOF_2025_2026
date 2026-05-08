@@ -8,6 +8,9 @@ import java.util.Map;
 import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.Utils.FeatureSelectStrategy;
 
+/**
+ * Implementacion del método de métrica de clasificación errónea para elegir features en el dataset
+ */
 public class MetricaClasificacionErronea<T extends Comparable<? super T>, L> implements FeatureSelectStrategy<T,L>{
 
     @Override
@@ -37,6 +40,11 @@ public class MetricaClasificacionErronea<T extends Comparable<? super T>, L> imp
         return lowest;
     }
 
+    /**
+     * Consigue la label que más se repite en el dataset
+     * @param dataSet dataset
+     * @return L
+     */
     private L getMajorityLabel(LabeledDataSet<T,L> dataSet){
         Map<L, Integer> scores = new HashMap<>();
 
@@ -63,6 +71,12 @@ public class MetricaClasificacionErronea<T extends Comparable<? super T>, L> imp
         return highest;
     }
 
+    /**
+     * Cuenta el número de labels que no se producen en un dataset iguales a label
+     * @param label label a comparar
+     * @param dataSet dataset
+     * @return número de labels que no coinciden
+     */
     private int countNotMatchingLabel(L label, LabeledDataSet<T,L> dataSet){
         int count = 0;
 
@@ -74,6 +88,13 @@ public class MetricaClasificacionErronea<T extends Comparable<? super T>, L> imp
         return count;
     }
 
+    /**
+     * Consigue los subsets de un set para la feature recibida
+     * @param <S> Tipo que maneja la feature en el featurizer
+     * @param originalSet set original a partir
+     * @param featureName nombre de la feature por la que partir
+     * @return Collection LabeledDataSet T,L con los subsets
+     */
     private <S extends Comparable<? super S>> Collection<LabeledDataSet<T,L>> getSubSets(LabeledDataSet<T,L> originalSet, String featureName){
         // Inicializamos el mapa y el set con los posibles valores distintos a tomar de originalSet
         Map<S, LabeledDataSet<T,L>> subsets = new HashMap<>();
