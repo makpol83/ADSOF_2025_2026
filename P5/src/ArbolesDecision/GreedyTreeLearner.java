@@ -1,6 +1,7 @@
 package ArbolesDecision;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import ArbolesDecision.Datasets.LabeledDataSet;
 import ArbolesDecision.DecisionTree.DecisionTree;
 import ArbolesDecision.Features.Featurizer;
 import ArbolesDecision.Utils.FeatureSelectStrategy;
+import ArbolesDecision.Utils.LabelProvider;
 
 /**
  * Clase para crear árboles de decisión con algoritmos codiciosos
@@ -86,6 +88,20 @@ public class GreedyTreeLearner<T,L> {
         this.buildTree(tree, "root", dataset, availableFeatures);
 
         return tree;
+    }
+    
+    
+    /**
+     * Crea un árbol de decisión en base a una colección de datos, featurizer y label provider recibidos y la estrategia seleccionada
+     * @param data colección de datos
+     * @param featurizer featurizer
+     * @param labelProvider etiquetador
+     * @return DecisionTree T
+     */
+    public DecisionTree<T> learn(Collection<T> data, Featurizer<T> featurizer, LabelProvider<T, L> labelProvider){
+    	LabeledDataSet<T, L> dataset = new LabeledDataSet<>(featurizer, labelProvider);
+    	dataset.addAll(data);
+    	return learn(dataset);
     }
 
     /**
